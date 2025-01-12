@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * The different possible ranks of poker cards.
+ */
 public enum Rank {
   TWO,
   THREE,
