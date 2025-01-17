@@ -8,31 +8,37 @@ class PokerHandSimulation {
     private var pocketPairTrials = 0
     private var suitedPairTrials = 0
 
-    fun runPocketPairSimulation(trials: Int) {
-        this.pocketPairCount = 0
-        this.pocketPairTrials = trials
+    private fun simpleSimHelper(
+        trials: Int,
+        condition: (Card, Card) -> Boolean,
+        countUpdater: () -> Unit
+    ) {
+        val deck = Deck()
         for (i in 1..trials) {
-            val deck = Deck()
             deck.shuffle()
             val card1 = deck.dealCard()
             val card2 = deck.dealCard()
-            if (card1.rank == card2.rank) {
-                this.pocketPairCount++
+            if (condition(card1, card2)) {
+                countUpdater()
             }
+            deck.reset()
+        }
+    }
+
+
+    fun runPocketPairSimulation(trials: Int) {
+        this.pocketPairCount = 0
+        this.pocketPairTrials = trials
+        simpleSimHelper(trials, { card1, card2 -> card1.rank == card2.rank }) {
+            pocketPairCount++
         }
     }
 
     fun runSuitedPairSimulation(trials: Int) {
         this.suitedPairCount = 0
         this.suitedPairTrials = trials
-        for (i in 1..trials) {
-            val deck = Deck()
-            deck.shuffle()
-            val card1 = deck.dealCard()
-            val card2 = deck.dealCard()
-            if (card1.suit == card2.suit) {
-                this.suitedPairCount++
-            }
+        simpleSimHelper(trials, { card1, card2 -> card1.suit == card2.suit }) {
+            suitedPairCount++
         }
     }
 

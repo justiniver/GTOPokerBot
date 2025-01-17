@@ -8,15 +8,18 @@ import java.util.List;
  * Represents a deck in the game of poker.
  */
 public class Deck {
-  List<Card> deck;
+  private final List<Card> originalDeck;
+  private List<Card> deck;
 
   public Deck() {
-    this.deck = new ArrayList<>();
+    this.originalDeck = new ArrayList<>(52);
     for (Rank rank : Rank.values()) {
       for (Suit suit : Suit.values()) {
-        this.deck.add(new Card(rank, suit));
+        this.originalDeck.add(new Card(rank, suit));
       }
     }
+
+    this.deck = new ArrayList<>(originalDeck);
   }
 
   List<Card> getDeck() {
@@ -33,6 +36,10 @@ public class Deck {
     }
 
     return deck.remove(0);
+  }
+
+  public void reset() {
+    this.deck = new ArrayList<>(originalDeck);
   }
 
 }
