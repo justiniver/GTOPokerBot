@@ -1,7 +1,7 @@
 model/Card.class
-model/Hand.class
 model/Game.class
-model/Suit.class
 model/Rank.class
-model/Position.class
 model/Deck.class
+model/Hand.class
+model/Suit.class
+model/Position.class

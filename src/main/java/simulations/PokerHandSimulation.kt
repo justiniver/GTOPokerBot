@@ -58,4 +58,20 @@ class PokerHandSimulation {
         println("Suited Pair Probability: $suitedPairProb")
     }
 
+    fun getPocketPairTrials(): Int {
+        return pocketPairTrials;
+    }
+
+    fun getPocketPairCount(): Int {
+        return pocketPairCount;
+    }
+
+    fun getSuitedPairCount(): Int {
+        return suitedPairCount;
+    }
+
+    fun getSuitedPairTrials(): Int {
+        return suitedPairTrials;
+    }
+
 }
