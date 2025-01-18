@@ -21,4 +21,4 @@ Obviously, these are things we can prove mathematically without the use of simul
 helpful to statistics students who like poker[^1]. Also, JFreeChart and my current structure for simulations has been working decent, so I am planning on following a similar
 pattern for future additions.
 
-[^1]: For reference, the true probability of pocket pairs are 0.0588 and the probability of suited pairs are 0.2353.
+[^1]: For reference, the true probability of pocket pairs are 0.0588 and the true probability of suited pairs are 0.2353.
