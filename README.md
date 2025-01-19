@@ -1,7 +1,7 @@
 # GTO Poker Set Mining Analytics
 
 I have been interested in poker theory for a little while now, so I thought I might as well try and create something related to Poker. For now, I am specifically looking into
-a Texas Hold'em Poker variation, *Heads-Up Hold'em*.
+a Texas Hold'em Poker variation, *Heads-Up Hold'em*. I am working my way towards setting up a GTO simulator specifically for preflop heads-up.
 
 ## JFreeChart and Simuluations
 
