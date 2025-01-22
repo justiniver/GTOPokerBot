@@ -25,7 +25,6 @@ class PokerHandSimulation {
         }
     }
 
-
     fun runPocketPairSimulation(trials: Int) {
         this.pocketPairCount = 0
         this.pocketPairTrials = trials

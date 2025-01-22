@@ -3,7 +3,7 @@ import visualization.ProbabilityChart
 
 fun main() {
     val simulation = PokerHandSimulation()
-    val trialsList = (100..100000 step 100).toList()
+    val trialsList = (50..1000 step 10).toList()
     val probabilities = mutableListOf<Double>()
 
     for (trials in trialsList) {

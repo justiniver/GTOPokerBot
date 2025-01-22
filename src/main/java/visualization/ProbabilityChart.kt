@@ -9,7 +9,7 @@ import javax.swing.JFrame
 
 class ProbabilityChart : JFrame("Probability Convergence Chart") {
 
-    fun createChart(trials: List<Int>, probabilities: List<Double>, title: String): JFreeChart {
+    private fun createChart(trials: List<Int>, probabilities: List<Double>, title: String): JFreeChart {
         val series = XYSeries("Probability")
         for (i in trials.indices) {
             series.add(trials[i].toDouble(), probabilities[i])
