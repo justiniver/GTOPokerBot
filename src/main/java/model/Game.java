@@ -3,7 +3,7 @@ package model;
 public class Game {
 
 
-  private void playGame(Position pos, Hand hand) {
+  private void playGame(Position pos, HoleCards hand) {
 
   }
 
