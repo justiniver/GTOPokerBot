@@ -7,19 +7,30 @@ import java.util.List;
  * Implementation of a five-card hand in Poker.
  */
 public class PokerHand implements Hand {
-  private final List<Card> hand;
+  private final Card[] hand;
 
   public PokerHand() {
-    this.hand = new ArrayList<>(5);
+    this.hand = new Card[5];
   }
 
-  PokerHand(List<Card> hand) {
-    this.hand = hand;
+  public PokerHand(Card[] hand) {
+    if (hand == null) {
+      throw new IllegalArgumentException("Hand cannot be null");
+    }
+    if (hand.length != 5) {
+      throw new IllegalArgumentException("Poker hand must contain exactly five cards");
+    }
+    for (Card card : hand) {
+      if (card == null) {
+        throw new IllegalArgumentException("Poker hand cannot contain null cards");
+      }
+    }
+    this.hand = hand.clone();
   }
 
   @Override
-  public List<Card> getHand() {
-    return this.hand;
+  public Card[] getHand() {
+    return this.hand.clone();
   }
 
   @Override

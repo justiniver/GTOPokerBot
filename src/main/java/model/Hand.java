@@ -7,7 +7,13 @@ import java.util.List;
  */
 public interface Hand {
 
-  List<Card> getHand();
+  /**
+   * Returns the poker hand.
+   *
+   * @return the poker hand
+   * @throws IllegalStateException if hand is not size five
+   */
+  Card[] getHand();
 
   /**
    * Compares two poker hands, hand1 and hand2.
