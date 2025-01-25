@@ -1,27 +1,28 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a 5-card hand in Poker.
+ * Represents a hand in Poker.
  */
-public class Hand {
-  private final List<Card> hand;
+public interface Hand {
 
-  public Hand() {
-    this.hand = new ArrayList<>(5);
-  }
+  List<Card> getHand();
 
-  Hand(List<Card> hand) {
-    this.hand = hand;
-  }
+  /**
+   * Compares two poker hands, hand1 and hand2.
+   *
+   * @param hand1 the first hand
+   * @param hand2 the second hand
+   * @return true if hand1 is better than hand2, false if hand2 is better than hand1, null if tie
+   */
+  Boolean compareHands(Hand hand1, Hand hand2);
 
-  List<Card> getHand() {
-    return this.hand;
-  }
+  /**
+   * Returns the rank of the hand.
+   *
+   * @return the HandRank
+   */
+  HandRank getHandRank();
 
-  HandRank getHandRank() {
-
-  }
 }
