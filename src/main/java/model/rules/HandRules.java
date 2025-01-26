@@ -7,6 +7,16 @@ import model.HandRank;
  * Rules of a poker hand.
  */
 public interface HandRules {
+
+  boolean isStraightFlush(PokerHand Hand);
+  boolean isFourOAK(PokerHand Hand);
+  boolean isFullHouse(PokerHand Hand);
+  boolean isFlush(PokerHand Hand);
+  boolean isStraight(PokerHand Hand);
+  boolean isThreeOAK(PokerHand Hand);
+  boolean isTwoPair(PokerHand Hand);
+  boolean pair(PokerHand Hand);
+
   /**
    * Evaluates the poker hand and returns the rank of the hand.
    *

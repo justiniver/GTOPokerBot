@@ -18,6 +18,8 @@ public class TestHandEvaluation {
   private Card twoHeart;
   private Card fourHeart;
   private Card sixHeart;
+  HandEvaluation evaluator;
+
 
   @Before
   public void init() {
@@ -29,14 +31,30 @@ public class TestHandEvaluation {
     twoHeart = new Card(Rank.TWO, Suit.HEART);
     fourHeart = new Card(Rank.FOUR, Suit.HEART);
     sixHeart = new Card(Rank.SIX, Suit.HEART);
+    evaluator = new HandEvaluation();
   }
 
   @Test
-  public void testFlushEval() {
-    Card[] cards = new Card[]{nineHeart, queenHeart, twoHeart, fourHeart, sixHeart};
-    PokerHand myHand = new PokerHand(cards);
+  public void testIsFlush() {
+    Card[] cards1 = new Card[]{nineHeart, queenHeart, twoHeart, fourHeart, sixHeart};
+    Card[] cards2 = new Card[]{nineHeart, queenHeart, twoHeart, fourHeart, jackSpade};
+    PokerHand myHand1 = new PokerHand(cards1);
+    PokerHand myHand2 = new PokerHand(cards2);
 
-    Assert.assertEquals(HandRank.FLUSH, myHand.getHandRank());
+
+    Assert.assertTrue(evaluator.isFlush(myHand1));
+    Assert.assertFalse(evaluator.isFlush(myHand2));
+  }
+
+  @Test
+  public void testIsStraight() {
+    Card[] cards1 = new Card[]{jackSpade, nineHeart, tenClub, queenHeart, kingSpade};
+    Card[] cards2 = new Card[]{jackSpade, nineHeart, tenClub, queenHeart, twoHeart};
+    PokerHand myHand1 = new PokerHand(cards1);
+    PokerHand myHand2 = new PokerHand(cards2);
+
+    Assert.assertTrue(evaluator.isStraight(myHand1));
+    Assert.assertFalse(evaluator.isStraight(myHand2));
   }
 
 }
