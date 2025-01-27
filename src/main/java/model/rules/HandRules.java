@@ -9,12 +9,19 @@ import model.HandRank;
 public interface HandRules {
 
   boolean isStraightFlush(PokerHand Hand);
+
   boolean isFourOAK(PokerHand Hand);
+
   boolean isFullHouse(PokerHand Hand);
+
   boolean isFlush(PokerHand Hand);
+
   boolean isStraight(PokerHand Hand);
+
   boolean isThreeOAK(PokerHand Hand);
+
   boolean isTwoPair(PokerHand Hand);
+
   boolean pair(PokerHand Hand);
 
   /**

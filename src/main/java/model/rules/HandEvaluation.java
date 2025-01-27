@@ -1,10 +1,12 @@
 package model.rules;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.*;
 
 import model.*;
 
+/**
+ * Implementation of hand rules.
+ */
 public class HandEvaluation implements HandRules {
 
   @Override
@@ -24,12 +26,12 @@ public class HandEvaluation implements HandRules {
 
   @Override
   public boolean isFlush(PokerHand hand) {
-    HashSet<Suit> suitSet = new HashSet<>();
-    for (int i = 0; i < hand.getHand().length; i++) {
-      suitSet.add(hand.getHand()[i].getSuit());
+    Suit firstSuit = hand.getHand()[0].getSuit();
+    for (int i = 1; i < hand.getHand().length; i++) {
+      if (hand.getHand()[i].getSuit() != firstSuit)
+        return false;
     }
-
-    return suitSet.size() == 1;
+    return true;
   }
 
   @Override
@@ -41,7 +43,6 @@ public class HandEvaluation implements HandRules {
     Arrays.sort(ranks);
 
     for (int i = 0; i < hand.getHand().length - 1; i++) {
-      System.out.println("HandRank " + ranks[i] + " ordinal is " + ranks[i].ordinal());
       if (ranks[i].ordinal() != ranks[i + 1].ordinal() - 1) {
         return false;
       }
@@ -52,6 +53,7 @@ public class HandEvaluation implements HandRules {
 
   @Override
   public boolean isThreeOAK(PokerHand Hand) {
+
     return false;
   }
 
