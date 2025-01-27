@@ -18,6 +18,9 @@ public class TestHandEvaluation {
   private Card twoHeart;
   private Card fourHeart;
   private Card sixHeart;
+  private Card twoSpade;
+  private Card twoClub;
+  private Card twoDiamond;
   HandEvaluation evaluator;
 
 

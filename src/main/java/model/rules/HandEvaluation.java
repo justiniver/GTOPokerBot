@@ -15,12 +15,34 @@ public class HandEvaluation implements HandRules {
   }
 
   @Override
-  public boolean isFourOAK(PokerHand Hand) {
-    return false;
+  public boolean isFourOAK(PokerHand hand) {
+    HashMap<Rank, Integer> rankFreqMap = new HashMap<>();
+    Rank[] ranks = new Rank[5];
+    sortRanks(hand, ranks);
+
+    for (int i = 0; i < hand.getHand().length - 1; i++) {
+      Rank cardRank = hand.getHand()[i].getRank();
+      rankFreqMap.put(cardRank, rankFreqMap.getOrDefault(cardRank, 0) + 1);
+    }
+
+    if (rankFreqMap.size() != 2) {
+      return false;
+    }
+
+    int rankFreq = rankFreqMap.get(hand.getHand()[0].getRank());
+    return rankFreq == 4 || rankFreq == 1;
+
+  }
+
+  private void sortRanks(Hand hand, Rank[] ranks) {
+    for (int i = 0; i < hand.getHand().length; i++) {
+      ranks[i] = hand.getHand()[i].getRank();
+    }
+    Arrays.sort(ranks);
   }
 
   @Override
-  public boolean isFullHouse(PokerHand Hand) {
+  public boolean isFullHouse(PokerHand hand) {
     return false;
   }
 
@@ -37,10 +59,7 @@ public class HandEvaluation implements HandRules {
   @Override
   public boolean isStraight(PokerHand hand) {
     Rank[] ranks = new Rank[5];
-    for (int i = 0; i < hand.getHand().length; i++) {
-      ranks[i] = hand.getHand()[i].getRank();
-    }
-    Arrays.sort(ranks);
+    sortRanks(hand, ranks);
 
     for (int i = 0; i < hand.getHand().length - 1; i++) {
       if (ranks[i].ordinal() != ranks[i + 1].ordinal() - 1) {
@@ -52,18 +71,18 @@ public class HandEvaluation implements HandRules {
   }
 
   @Override
-  public boolean isThreeOAK(PokerHand Hand) {
+  public boolean isThreeOAK(PokerHand hand) {
 
     return false;
   }
 
   @Override
-  public boolean isTwoPair(PokerHand Hand) {
+  public boolean isTwoPair(PokerHand hand) {
     return false;
   }
 
   @Override
-  public boolean pair(PokerHand Hand) {
+  public boolean pair(PokerHand hand) {
     return false;
   }
 
