@@ -18,6 +18,7 @@ public class TestHandEvaluation {
   private Card twoHeart;
   private Card fourHeart;
   private Card sixHeart;
+  private Card sixClub;
   private Card twoSpade;
   private Card twoClub;
   private Card twoDiamond;
@@ -34,6 +35,10 @@ public class TestHandEvaluation {
     twoHeart = new Card(Rank.TWO, Suit.HEART);
     fourHeart = new Card(Rank.FOUR, Suit.HEART);
     sixHeart = new Card(Rank.SIX, Suit.HEART);
+    twoSpade = new Card(Rank.TWO, Suit.SPADE);
+    twoClub = new Card(Rank.TWO, Suit.CLUB);
+    twoDiamond = new Card(Rank.TWO, Suit.DIAMOND);
+    sixClub = new Card(Rank.SIX, Suit.CLUB);
     evaluator = new HandEvaluation();
   }
 
@@ -58,6 +63,31 @@ public class TestHandEvaluation {
 
     Assert.assertTrue(evaluator.isStraight(myHand1));
     Assert.assertFalse(evaluator.isStraight(myHand2));
+  }
+
+  @Test
+  public void testIsFourOAK() {
+    Card[] cards1 = new Card[]{twoDiamond, twoSpade, twoClub, twoHeart, jackSpade};
+    Card[] cards2 = new Card[]{jackSpade, nineHeart, tenClub, queenHeart, twoHeart};
+    PokerHand myHand1 = new PokerHand(cards1);
+    PokerHand myHand2 = new PokerHand(cards2);
+
+    Assert.assertTrue(evaluator.isFourOAK(myHand1));
+    Assert.assertFalse(evaluator.isFourOAK(myHand2));
+  }
+
+  @Test
+  public void testIsFullHouse() {
+    Card[] cards1 = new Card[]{twoDiamond, twoSpade, twoClub, sixClub, sixClub};
+    Card[] cards2 = new Card[]{jackSpade, nineHeart, tenClub, queenHeart, twoHeart};
+    Card[] cards3 = new Card[]{twoDiamond, twoSpade, twoClub, twoHeart, jackSpade};
+    PokerHand myHand1 = new PokerHand(cards1);
+    PokerHand myHand2 = new PokerHand(cards2);
+    PokerHand myHand3 = new PokerHand(cards3);
+
+    Assert.assertTrue(evaluator.isFullHouse(myHand1));
+    Assert.assertFalse(evaluator.isFullHouse(myHand2));
+    Assert.assertFalse(evaluator.isFullHouse(myHand3));
   }
 
 }

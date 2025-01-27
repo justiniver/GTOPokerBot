@@ -1,5 +1,7 @@
 package model.rules;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 import model.*;
@@ -16,14 +18,7 @@ public class HandEvaluation implements HandRules {
 
   @Override
   public boolean isFourOAK(PokerHand hand) {
-    HashMap<Rank, Integer> rankFreqMap = new HashMap<>();
-    Rank[] ranks = new Rank[5];
-    sortRanks(hand, ranks);
-
-    for (int i = 0; i < hand.getHand().length - 1; i++) {
-      Rank cardRank = hand.getHand()[i].getRank();
-      rankFreqMap.put(cardRank, rankFreqMap.getOrDefault(cardRank, 0) + 1);
-    }
+    HashMap<Rank, Integer> rankFreqMap = getRankIntegerHashMap(hand);
 
     if (rankFreqMap.size() != 2) {
       return false;
@@ -34,16 +29,26 @@ public class HandEvaluation implements HandRules {
 
   }
 
-  private void sortRanks(Hand hand, Rank[] ranks) {
-    for (int i = 0; i < hand.getHand().length; i++) {
-      ranks[i] = hand.getHand()[i].getRank();
-    }
-    Arrays.sort(ranks);
-  }
-
   @Override
   public boolean isFullHouse(PokerHand hand) {
-    return false;
+    HashMap<Rank, Integer> rankFreqMap = getRankIntegerHashMap(hand);
+
+    if (rankFreqMap.size() != 2) {
+      return false;
+    }
+
+    int rankFreq = rankFreqMap.get(hand.getHand()[0].getRank());
+    return rankFreq == 3 || rankFreq == 2;
+  }
+
+  private HashMap<Rank, Integer> getRankIntegerHashMap(PokerHand hand) {
+    HashMap<Rank, Integer> rankFreqMap = new HashMap<>();
+
+    for (int i = 0; i < hand.getHand().length; i++) {
+      Rank cardRank = hand.getHand()[i].getRank();
+      rankFreqMap.put(cardRank, rankFreqMap.getOrDefault(cardRank, 0) + 1);
+    }
+    return rankFreqMap;
   }
 
   @Override
@@ -68,6 +73,13 @@ public class HandEvaluation implements HandRules {
     }
 
     return true;
+  }
+
+  private void sortRanks(Hand hand, Rank[] ranks) {
+    for (int i = 0; i < hand.getHand().length; i++) {
+      ranks[i] = hand.getHand()[i].getRank();
+    }
+    Arrays.sort(ranks);
   }
 
   @Override
