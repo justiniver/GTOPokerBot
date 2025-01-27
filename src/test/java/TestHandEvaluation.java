@@ -10,18 +10,28 @@ import model.rules.*;
  */
 public class TestHandEvaluation {
 
-  private Card nineHeart;
-  private Card tenClub;
-  private Card jackSpade;
-  private Card queenHeart;
   private Card kingSpade;
-  private Card twoHeart;
-  private Card fourHeart;
-  private Card sixHeart;
+
+  private Card queenHeart;
+  private Card queenSpade;
+
+  private Card jackSpade;
+
+  private Card tenClub;
+  private Card tenSpade;
+
+  private Card nineHeart;
+  private Card nineSpade;
+
   private Card sixClub;
-  private Card twoSpade;
+  private Card sixHeart;
+
+  private Card fourHeart;
+
   private Card twoClub;
   private Card twoDiamond;
+  private Card twoHeart;
+  private Card twoSpade;
   HandEvaluation evaluator;
 
 
@@ -39,7 +49,23 @@ public class TestHandEvaluation {
     twoClub = new Card(Rank.TWO, Suit.CLUB);
     twoDiamond = new Card(Rank.TWO, Suit.DIAMOND);
     sixClub = new Card(Rank.SIX, Suit.CLUB);
+    queenSpade = new Card(Rank.QUEEN, Suit.SPADE);
+    tenSpade = new Card(Rank.TEN, Suit.SPADE);
+    nineSpade = new Card(Rank.NINE, Suit.SPADE);
+
     evaluator = new HandEvaluation();
+  }
+
+  @Test
+  public void isStraightFlush() {
+    Card[] cards1 = new Card[]{nineSpade, tenSpade, kingSpade, queenSpade, jackSpade};
+    Card[] cards2 = new Card[]{nineHeart, queenHeart, twoHeart, fourHeart, jackSpade};
+    PokerHand myHand1 = new PokerHand(cards1);
+    PokerHand myHand2 = new PokerHand(cards2);
+
+
+    Assert.assertTrue(evaluator.isStraightFlush(myHand1));
+    Assert.assertFalse(evaluator.isStraightFlush(myHand2));
   }
 
   @Test
