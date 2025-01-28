@@ -116,4 +116,15 @@ public class TestHandEvaluation {
     Assert.assertFalse(evaluator.isFullHouse(myHand3));
   }
 
+  @Test
+  public void testIsThreeOAK() {
+    Card[] cards1 = new Card[]{twoDiamond, twoSpade, twoClub, fourHeart, jackSpade};
+    Card[] cards2 = new Card[]{jackSpade, nineHeart, tenClub, queenHeart, twoHeart};
+    PokerHand myHand1 = new PokerHand(cards1);
+    PokerHand myHand2 = new PokerHand(cards2);
+
+    Assert.assertTrue(evaluator.isThreeOAK(myHand1));
+    Assert.assertFalse(evaluator.isThreeOAK(myHand2));
+  }
+
 }

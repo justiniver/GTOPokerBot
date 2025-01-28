@@ -84,6 +84,12 @@ public class HandEvaluation implements HandRules {
 
   @Override
   public boolean isThreeOAK(PokerHand hand) {
+    HashMap<Rank, Integer> rankFreqMap = getRankIntegerHashMap(hand);
+    for (int i = 0; i < hand.getHand().length; i++) {
+      if (rankFreqMap.get(hand.getHand()[i].getRank()) == 3) {
+        return true;
+      }
+    }
 
     return false;
   }
