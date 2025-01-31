@@ -67,6 +67,7 @@ public class TestHandEvaluation {
 
     Assert.assertTrue(evaluator.isStraightFlush(myHand1));
     Assert.assertFalse(evaluator.isStraightFlush(myHand2));
+    Assert.assertEquals(evaluator.evaluateHand(myHand1), HandRank.STRAIGHTFLUSH);
   }
 
   @Test
@@ -79,6 +80,7 @@ public class TestHandEvaluation {
 
     Assert.assertTrue(evaluator.isFlush(myHand1));
     Assert.assertFalse(evaluator.isFlush(myHand2));
+    Assert.assertEquals(evaluator.evaluateHand(myHand1), HandRank.FLUSH);
   }
 
   @Test
@@ -90,6 +92,7 @@ public class TestHandEvaluation {
 
     Assert.assertTrue(evaluator.isStraight(myHand1));
     Assert.assertFalse(evaluator.isStraight(myHand2));
+    Assert.assertEquals(evaluator.evaluateHand(myHand1), HandRank.STRAIGHT);
   }
 
   @Test
@@ -101,6 +104,7 @@ public class TestHandEvaluation {
 
     Assert.assertTrue(evaluator.isFourOAK(myHand1));
     Assert.assertFalse(evaluator.isFourOAK(myHand2));
+    Assert.assertEquals(evaluator.evaluateHand(myHand1), HandRank.FOUROAK);
   }
 
   @Test
@@ -115,6 +119,7 @@ public class TestHandEvaluation {
     Assert.assertTrue(evaluator.isFullHouse(myHand1));
     Assert.assertFalse(evaluator.isFullHouse(myHand2));
     Assert.assertFalse(evaluator.isFullHouse(myHand3));
+    Assert.assertEquals(evaluator.evaluateHand(myHand1), HandRank.FULLHOUSE);
   }
 
   @Test
@@ -126,6 +131,7 @@ public class TestHandEvaluation {
 
     Assert.assertTrue(evaluator.isThreeOAK(myHand1));
     Assert.assertFalse(evaluator.isThreeOAK(myHand2));
+    Assert.assertEquals(evaluator.evaluateHand(myHand1), HandRank.THREEOAK);
   }
 
   @Test
@@ -137,6 +143,7 @@ public class TestHandEvaluation {
 
     Assert.assertTrue(evaluator.isTwoPair(myHand1));
     Assert.assertFalse(evaluator.isTwoPair(myHand2));
+    Assert.assertEquals(evaluator.evaluateHand(myHand1), HandRank.TWOPAIR);
   }
 
   @Test
@@ -148,6 +155,8 @@ public class TestHandEvaluation {
 
     Assert.assertTrue(evaluator.isPair(myHand1));
     Assert.assertFalse(evaluator.isPair(myHand2));
+    Assert.assertEquals(evaluator.evaluateHand(myHand1), HandRank.PAIR);
   }
+
 
 }

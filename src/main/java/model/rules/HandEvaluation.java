@@ -120,7 +120,26 @@ public class HandEvaluation implements HandRules {
 
   @Override
   public HandRank evaluateHand(PokerHand hand) {
-    return null;
+    if (isStraightFlush(hand)) {
+      return HandRank.STRAIGHTFLUSH;
+    } else if (isFourOAK(hand)) {
+      return HandRank.FOUROAK;
+    } else if (isFullHouse(hand)) {
+      return HandRank.FULLHOUSE;
+    } else if (isFlush(hand)) {
+      return HandRank.FLUSH;
+    } else if (isStraight(hand)) {
+      return HandRank.STRAIGHT;
+    } else if (isThreeOAK(hand)) {
+      return HandRank.THREEOAK;
+    } else if (isTwoPair(hand)) {
+      return HandRank.TWOPAIR;
+    } else if (isPair(hand)) {
+      return HandRank.PAIR;
+    } else {
+      return HandRank.HIGHCARD;
+    }
   }
+
 
 }
