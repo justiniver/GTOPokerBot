@@ -139,4 +139,15 @@ public class TestHandEvaluation {
     Assert.assertFalse(evaluator.isTwoPair(myHand2));
   }
 
+  @Test
+  public void testIsPair() {
+    Card[] cards1 = new Card[]{twoDiamond, twoSpade, fourSpade, queenSpade, jackSpade};
+    Card[] cards2 = new Card[]{jackSpade, nineHeart, tenClub, queenHeart, twoHeart};
+    PokerHand myHand1 = new PokerHand(cards1);
+    PokerHand myHand2 = new PokerHand(cards2);
+
+    Assert.assertTrue(evaluator.isPair(myHand1));
+    Assert.assertFalse(evaluator.isPair(myHand2));
+  }
+
 }

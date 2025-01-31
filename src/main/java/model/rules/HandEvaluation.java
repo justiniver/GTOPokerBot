@@ -106,7 +106,7 @@ public class HandEvaluation implements HandRules {
   }
 
   @Override
-  public boolean pair(PokerHand hand) {
+  public boolean isPair(PokerHand hand) {
     HashMap<Rank, Integer> rankFreqMap = getRankIntegerHashMap(hand);
     boolean twoFreqExists = false;
     for (int i = 0; i < hand.getHand().length; i++) {

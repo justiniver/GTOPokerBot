@@ -22,7 +22,7 @@ public interface HandRules {
 
   boolean isTwoPair(PokerHand Hand);
 
-  boolean pair(PokerHand Hand);
+  boolean isPair(PokerHand Hand);
 
   /**
    * Evaluates the poker hand and returns the rank of the hand.
