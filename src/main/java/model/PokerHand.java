@@ -1,7 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import model.rules.HandEvaluation;
 
 /**
  * Implementation of a five-card hand in Poker.
@@ -20,11 +19,7 @@ public class PokerHand implements Hand {
     if (hand.length != 5) {
       throw new IllegalArgumentException("Poker hand must contain exactly five cards");
     }
-    for (Card card : hand) {
-      if (card == null) {
-        throw new IllegalArgumentException("Poker hand cannot contain null cards");
-      }
-    }
+
     this.hand = hand.clone();
   }
 
@@ -34,13 +29,14 @@ public class PokerHand implements Hand {
   }
 
   @Override
-  public Boolean compareHands(Hand hand1, Hand hand2) {
+  public PokerHand compareHands(PokerHand hand1, PokerHand hand2) {
     return null;
   }
 
   @Override
-  public HandRank getHandRank() {
-    return null;
+  public HandRank getHandRank(PokerHand hand) {
+    HandEvaluation evaluator = new HandEvaluation();
+    return evaluator.evaluateHand(hand);
   }
 
 }
