@@ -159,5 +159,18 @@ public class HandEvaluation implements HandRules {
     }
   }
 
+  @Override
+  public PokerHand compareHands(PokerHand hand1, PokerHand hand2) {
+    HandEvaluation eval = new HandEvaluation();
+    HandRank handRank1 = eval.evaluateHand(hand1);
+    HandRank handRank2 = eval.evaluateHand(hand2);
+    if (handRank1.ordinal() > handRank2.ordinal()) {
+      return hand1;
+    } else if (handRank1.ordinal() < handRank2.ordinal()) {
+      return hand2;
+    }
+    return eval.breakTie(hand1, hand2);
+  }
+
 
 }

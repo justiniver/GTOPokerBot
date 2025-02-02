@@ -29,11 +29,6 @@ public class PokerHand implements Hand {
   }
 
   @Override
-  public PokerHand compareHands(PokerHand hand1, PokerHand hand2) {
-    return null;
-  }
-
-  @Override
   public HandRank getHandRank(PokerHand hand) {
     HandEvaluation evaluator = new HandEvaluation();
     return evaluator.evaluateHand(hand);

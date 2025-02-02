@@ -40,4 +40,13 @@ public interface HandRules {
    * @return the HandRank
    */
   HandRank evaluateHand(PokerHand hand);
+
+  /**
+   * Compares two poker hands, hand1 and hand2.
+   *
+   * @param hand1 the first hand
+   * @param hand2 the second hand
+   * @return the winning poker hand, null if tie
+   */
+  PokerHand compareHands(PokerHand hand1, PokerHand hand2);
 }
