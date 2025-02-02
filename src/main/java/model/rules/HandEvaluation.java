@@ -119,6 +119,11 @@ public class HandEvaluation implements HandRules {
   }
 
   @Override
+  public PokerHand breakTie(PokerHand hand1, PokerHand hand2) {
+    return null;
+  }
+
+  @Override
   public HandRank evaluateHand(PokerHand hand) {
     if (isStraightFlush(hand)) {
       return HandRank.STRAIGHTFLUSH;
