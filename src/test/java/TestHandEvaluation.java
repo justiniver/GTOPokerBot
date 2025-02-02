@@ -158,5 +158,23 @@ public class TestHandEvaluation {
     Assert.assertEquals(evaluator.evaluateHand(myHand1), HandRank.PAIR);
   }
 
+  @Test
+  public void testBreakTie() {
+    Card[] cards1 = new Card[]{twoDiamond, twoSpade, fourSpade, fourHeart, jackSpade};
+    Card[] cards2 = new Card[]{queenSpade, twoDiamond, twoSpade, fourSpade, fourHeart};
+    Card[] cards3 = new Card[]{twoHeart, twoClub, fourSpade, queenHeart, fourHeart};
+    PokerHand myHand1 = new PokerHand(cards1);
+    PokerHand myHand2 = new PokerHand(cards2);
+    PokerHand myHand3 = new PokerHand(cards3);
+
+    Assert.assertTrue(evaluator.isTwoPair(myHand1));
+    Assert.assertTrue(evaluator.isTwoPair(myHand2));
+    Assert.assertEquals(evaluator.evaluateHand(myHand1), HandRank.TWOPAIR);
+    Assert.assertEquals(evaluator.evaluateHand(myHand2), HandRank.TWOPAIR);
+
+    Assert.assertEquals(myHand2, evaluator.breakTie(myHand1, myHand2));
+    Assert.assertNull(evaluator.breakTie(myHand2, myHand3));
+  }
+
 
 }
