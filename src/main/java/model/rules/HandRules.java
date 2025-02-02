@@ -25,11 +25,11 @@ public interface HandRules {
   boolean isPair(PokerHand Hand);
 
   /**
-   * Returns the winning hand, null if tie.
+   * Returns the winning hand, null if ties.
    *
    * @param hand1 the first hand
    * @param hand2 the second hand
-   * @return the winning hand, null if tie
+   * @return the winning hand, null if tied
    */
   PokerHand breakTie(PokerHand hand1, PokerHand hand2);
 

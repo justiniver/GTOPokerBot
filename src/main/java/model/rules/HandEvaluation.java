@@ -120,6 +120,19 @@ public class HandEvaluation implements HandRules {
 
   @Override
   public PokerHand breakTie(PokerHand hand1, PokerHand hand2) {
+    Rank[] ranks1 = new Rank[5];
+    Rank[] ranks2 = new Rank[5];
+    sortRanks(hand1, ranks1);
+    sortRanks(hand2, ranks2);
+
+    for (int i = 0; i < ranks1.length; i++) {
+      if (ranks1[i].ordinal() > ranks2[i].ordinal()) {
+        return hand1;
+      } else if (ranks1[i].ordinal() < ranks2[i].ordinal()) {
+        return hand2;
+      }
+    }
+
     return null;
   }
 
