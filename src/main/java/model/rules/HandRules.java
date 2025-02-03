@@ -4,7 +4,7 @@ import model.PokerHand;
 import model.HandRank;
 
 /**
- * Rules of a poker hand.
+ * Rules of a 5-card poker hand.
  */
 public interface HandRules {
 
