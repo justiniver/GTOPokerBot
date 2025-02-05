@@ -30,5 +30,4 @@ public interface Board {
    */
   void resetBoard();
 
-
 }

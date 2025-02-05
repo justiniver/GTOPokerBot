@@ -22,6 +22,10 @@ public class Deck {
     this.deck = new ArrayList<>(originalDeck);
   }
 
+  /**
+   * Gets the deck.
+   * @return the deck
+   */
   List<Card> getDeck() {
     return this.deck;
   }
