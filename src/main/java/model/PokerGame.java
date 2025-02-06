@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Represents a poker game.
+ * Implementation of a poker game.
  */
 public class PokerGame {
   private GameState state;
