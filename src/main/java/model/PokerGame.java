@@ -17,16 +17,19 @@ public class PokerGame implements Game {
 
   @Override
   public void dealFlop() {
-    board.addCard(deck.dealCard());
+    state = GameState.FLOP;
+    board.addCards(deck.dealCards());
   }
 
   @Override
   public void dealTurn() {
-
+    state = GameState.TURN;
+    board.addCard(deck.dealCard());
   }
 
   @Override
   public void dealRiver() {
-
+    state = GameState.RIVER;
+    board.addCard(deck.dealCard());
   }
 }
