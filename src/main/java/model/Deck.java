@@ -42,6 +42,19 @@ public class Deck {
     return deck.remove(0);
   }
 
+  public List<Card> dealCards() {
+    if (deck.isEmpty()) {
+      throw new IllegalStateException("deck cannot be empty");
+    }
+    List<Card> cards = new ArrayList<>();
+
+    for (int i = 0; i < 3; i++) {
+      cards.add(deck.remove(0));
+    }
+
+    return cards;
+  }
+
   public void reset() {
     this.deck = new ArrayList<>(originalDeck);
   }
