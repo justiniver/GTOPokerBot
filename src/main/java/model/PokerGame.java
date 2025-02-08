@@ -14,7 +14,6 @@ public class PokerGame implements Game {
     board = new PokerBoard();
   }
 
-
   @Override
   public void dealFlop() {
     state = GameState.FLOP;
