@@ -7,11 +7,15 @@ public class PokerGame implements Game {
   private GameState state;
   private PokerBoard board;
   private Deck deck;
+  private Position p1;
+  private Position p2;
 
   public void PublicGame() {
     state = GameState.PREFLOP;
     deck = new Deck();
     board = new PokerBoard();
+    p1 = Position.SMALL_BLIND;
+    p2 = Position.BIG_BLIND;
   }
 
   @Override
