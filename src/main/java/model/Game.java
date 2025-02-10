@@ -5,6 +5,8 @@ package model;
  */
 public interface Game {
 
+  void preflop();
+
   /**
    * Deals the flop (three cards to board).
    */
