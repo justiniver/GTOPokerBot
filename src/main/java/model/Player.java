@@ -9,6 +9,8 @@ public class Player {
     this.cards = cards;
   }
 
-
+  public HoleCards getHand() {
+    return this.cards;
+  }
 
 }
