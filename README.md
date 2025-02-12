@@ -17,6 +17,7 @@ Then, probability is simply $\frac{\text{num pocket pairs}}{\text{num simulation
 
 Obviously, these are things we can prove mathematically without the use of simulations. It is, however, a pretty cool example of the central limit theorem and may be
 helpful to statistics students who like poker[^1]. Also, JFreeChart and my current structure for simulations has been working decent, so I am planning on following a similar
-pattern for future additions.
+pattern for future additions[^2].
 
 [^1]: For reference, the true probability of pocket pairs is 0.0588 and the true probability of suited pairs is 0.2353.
+[^2]: Future additions includes the implementation of full game simulations as well as the implementation of counterfactual regret minimization among other useful metrics.
