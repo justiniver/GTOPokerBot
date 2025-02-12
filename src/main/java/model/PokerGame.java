@@ -16,12 +16,6 @@ public class PokerGame implements Game {
   }
 
   @Override
-  public void preflop() {
-    state = GameState.PREFLOP;
-
-  }
-
-  @Override
   public void dealFlop() {
     state = GameState.FLOP;
     board.addCards(deck.dealCards());
