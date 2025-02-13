@@ -6,13 +6,16 @@ package model;
 public class PokerGame implements Game {
   private GameState state;
   private PokerBoard board;
-  private Deck deck;
+  private PokerDeck deck;
   private Player p1;
   private Player p2;
 
   public void PublicGame() {
-    deck = new Deck();
-    board = new PokerBoard();
+    this.deck = new PokerDeck();
+    this.board = new PokerBoard();
+    this.state = GameState.PREFLOP;
+    this.p1 = new Player(Position.SMALL_BLIND);
+    this.p2 = new Player(Position.BIG_BLIND);
   }
 
   @Override

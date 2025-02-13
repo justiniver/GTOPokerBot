@@ -1,62 +1,33 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
- * Represents a deck in the game of poker.
+ * Represents a deck.
  */
-public class Deck {
-  private final List<Card> originalDeck;
-  private List<Card> deck;
+public interface Deck {
 
-  public Deck() {
-    this.originalDeck = new ArrayList<>(52);
-    for (Rank rank : Rank.values()) {
-      for (Suit suit : Suit.values()) {
-        this.originalDeck.add(new Card(rank, suit));
-      }
-    }
+  List<Card> getDeck();
 
-    this.deck = new ArrayList<>(originalDeck);
-  }
+  void shuffle();
 
   /**
-   * Gets the deck.
-   * @return the deck
+   * Deals a single card.
+   *
+   * @return the card dealt
    */
-  List<Card> getDeck() {
-    return this.deck;
-  }
+  Card dealCard();
 
-  public void shuffle() {
-    Collections.shuffle(deck);
-  }
+  /**
+   * Deals three cards.
+   *
+   * @return a list of three cards
+   */
+  List<Card> dealCards();
 
-  public Card dealCard() {
-    if (deck.isEmpty()) {
-      throw new IllegalStateException("deck cannot be empty");
-    }
-
-    return deck.remove(0);
-  }
-
-  public List<Card> dealCards() {
-    if (deck.isEmpty()) {
-      throw new IllegalStateException("deck cannot be empty");
-    }
-    List<Card> cards = new ArrayList<>();
-
-    for (int i = 0; i < 3; i++) {
-      cards.add(deck.remove(0));
-    }
-
-    return cards;
-  }
-
-  public void reset() {
-    this.deck = new ArrayList<>(originalDeck);
-  }
+  /**
+   * Resets the deck to its original 52 cards.
+   */
+  void reset();
 
 }

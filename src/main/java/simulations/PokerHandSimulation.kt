@@ -13,7 +13,7 @@ class PokerHandSimulation {
         condition: (Card, Card) -> Boolean,
         countUpdater: () -> Unit
     ) {
-        val deck = Deck()
+        val deck = PokerDeck()
         for (i in 1..trials) {
             deck.shuffle()
             val card1 = deck.dealCard()
