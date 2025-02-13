@@ -23,7 +23,7 @@ public interface Deck {
    *
    * @return a list of three cards
    */
-  List<Card> dealCards();
+  List<Card> dealCards(int n);
 
   int getDeckSize();
 

@@ -42,13 +42,13 @@ public class PokerDeck implements Deck {
   }
 
   @Override
-  public List<Card> dealCards() {
+  public List<Card> dealCards(int n) {
     if (deck.isEmpty()) {
       throw new IllegalStateException("deck cannot be empty");
     }
     List<Card> cards = new ArrayList<>();
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < n; i++) {
       cards.add(deck.remove(0));
     }
 

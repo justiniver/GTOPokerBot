@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class Player {
   private final Position position;
   private HoleCards cards;
@@ -13,8 +15,11 @@ public class Player {
     this.cards = cards;
   }
 
-  public void setHand(PokerDeck deck) {
-    this.cards = new HoleCards(deck.dealCard(), deck.dealCard());
+  public void setHand(List<Card> cards) {
+    if (cards == null || cards.size() != 2) {
+      throw new IllegalArgumentException("The hand must be exactly two cards");
+    }
+    this.cards = new HoleCards(cards.get(0), cards.get(1));
   }
 
   public HoleCards getHand() {

@@ -1,6 +1,6 @@
 package simulations
 
-import model.*
+import model.*;
 
 class PokerHandSimulation {
     private var pocketPairCount = 0;

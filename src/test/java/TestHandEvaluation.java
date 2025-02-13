@@ -19,7 +19,7 @@ public class TestHandEvaluation {
   }
 
   @Test
-  public void isStraightFlush() {
+  public void testIsStraightFlush() {
     Card[] cards1 = new Card[]{cs.nineSpade, cs.tenSpade, cs.kingSpade, cs.queenSpade, cs.jackSpade};
     Card[] cards2 = new Card[]{cs.nineHeart, cs.queenHeart, cs.twoHeart, cs.fourHeart, cs.jackSpade};
 

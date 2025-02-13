@@ -10,25 +10,24 @@ public class PokerGame implements Game {
   private Player p1;
   private Player p2;
 
-  public void PublicGame() {
+  public PokerGame() {
     this.deck = new PokerDeck();
     this.board = new PokerBoard();
-    this.state = GameState.PREFLOP;
     this.p1 = new Player(Position.SMALL_BLIND);
     this.p2 = new Player(Position.BIG_BLIND);
   }
 
-
   @Override
   public void preflopAction() {
-    p1.setHand(this.deck);
-    p2.setHand(this.deck);
+    this.state = GameState.PREFLOP;
+    p1.setHand(deck.dealCards(2));
+    p2.setHand(deck.dealCards(2));
   }
 
   @Override
   public void dealFlop() {
     state = GameState.FLOP;
-    board.addCards(deck.dealCards());
+    board.addCards(deck.dealCards(3));
   }
 
   @Override
@@ -41,5 +40,25 @@ public class PokerGame implements Game {
   public void dealRiver() {
     state = GameState.RIVER;
     board.addCard(deck.dealCard());
+  }
+
+  public Player getP1() {
+    return p1;
+  }
+
+  public Player getP2() {
+    return p2;
+  }
+
+  public GameState getState() {
+    return state;
+  }
+
+  public PokerBoard getBoard() {
+    return board;
+  }
+
+  public PokerDeck getDeck() {
+    return deck;
   }
 }
