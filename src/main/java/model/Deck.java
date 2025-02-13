@@ -25,6 +25,8 @@ public interface Deck {
    */
   List<Card> dealCards();
 
+  int getDeckSize();
+
   /**
    * Resets the deck to its original 52 cards.
    */

@@ -56,6 +56,11 @@ public class PokerDeck implements Deck {
   }
 
   @Override
+  public int getDeckSize() {
+    return deck.size();
+  }
+
+  @Override
   public void reset() {
     this.deck = new ArrayList<>(originalDeck);
   }

@@ -18,6 +18,13 @@ public class PokerGame implements Game {
     this.p2 = new Player(Position.BIG_BLIND);
   }
 
+
+  @Override
+  public void preflopAction() {
+    p1.setHand(this.deck);
+    p2.setHand(this.deck);
+  }
+
   @Override
   public void dealFlop() {
     state = GameState.FLOP;

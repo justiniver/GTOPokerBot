@@ -6,6 +6,11 @@ package model;
 public interface Game {
 
   /**
+   * The preflop action, including dealing HoleCards to the players.
+   */
+  void preflopAction();
+
+  /**
    * Deals the flop (three cards to board).
    */
   void dealFlop();
