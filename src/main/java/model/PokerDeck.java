@@ -41,10 +41,19 @@ public class PokerDeck implements Deck {
     return deck.remove(0);
   }
 
-  @Override
-  public List<Card> dealCards(int n) {
+  public Card dealSpecificCard(Card card) {
     if (deck.isEmpty()) {
       throw new IllegalStateException("deck cannot be empty");
+    }
+
+    deck.remove(card);
+    return card;
+  }
+
+  @Override
+  public List<Card> dealCards(int n) {
+    if (n > deck.size()) {
+      throw new IllegalStateException("deck must contain enough cards");
     }
     List<Card> cards = new ArrayList<>();
 
