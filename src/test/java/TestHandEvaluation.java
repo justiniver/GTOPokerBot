@@ -141,7 +141,7 @@ public class TestHandEvaluation {
     Assert.assertEquals(evaluator.evaluateHand(myHand2), HandRank.TWOPAIR);
 
     Assert.assertEquals(myHand2, evaluator.breakTie(myHand1, myHand2));
-    Assert.assertEquals(myHand2, evaluator.compareHands(myHand1, myHand2));
+    Assert.assertEquals(myHand2, evaluator.getBetterHand(myHand1, myHand2));
     Assert.assertNull(evaluator.breakTie(myHand2, myHand3));
   }
 }

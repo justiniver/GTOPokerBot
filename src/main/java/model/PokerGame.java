@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /**
  * Implementation of a poker game.
  */
@@ -15,12 +17,20 @@ public class PokerGame implements Game {
     this.board = new PokerBoard();
     this.p1 = new Player(Position.SMALL_BLIND);
     this.p2 = new Player(Position.BIG_BLIND);
+    this.state = GameState.PREFLOP;
   }
 
   @Override
-  public void preflopAction() {
+  public void dealHoleCards() {
     this.state = GameState.PREFLOP;
     p1.setHand(deck.dealCards(2));
+    p2.setHand(deck.dealCards(2));
+  }
+
+  public void dealP1SpecificCards(Card card1, Card card2) {
+    this.state = GameState.PREFLOP;
+    List<Card> p1Cards = List.of(deck.dealSpecificCard(card1), deck.dealSpecificCard(card2));
+    p1.setHand(p1Cards);
     p2.setHand(deck.dealCards(2));
   }
 
@@ -40,6 +50,24 @@ public class PokerGame implements Game {
   public void dealRiver() {
     state = GameState.RIVER;
     board.addCard(deck.dealCard());
+  }
+
+  public PokerHand getBestFiveCardHand(Player player, PokerBoard board) {
+    if (state == GameState.PREFLOP) {
+      throw new IllegalStateException("Cannot assemble five card hand preflop");
+    }
+    Card[] cards = new Card[5];
+    if (state == GameState.FLOP) {
+      for (int i = 0; i <= 2; i++) {
+        cards[i] = board.getCommunityCards().get(i);
+      }
+      cards[3] = player.getHand().getCard1();
+      cards[4] = player.getHand().getCard2();
+
+      return new PokerHand(cards);
+    }
+
+    return null;
   }
 
   public Player getP1() {

@@ -8,7 +8,7 @@ public interface Game {
   /**
    * The preflop action, including dealing HoleCards to the players.
    */
-  void preflopAction();
+  void dealHoleCards();
 
   /**
    * Deals the flop (three cards to board).

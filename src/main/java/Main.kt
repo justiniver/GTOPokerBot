@@ -1,17 +1,17 @@
-import simulations.PokerHandSimulation
+import simulations.PokerFlopSimulation
 import visualization.ProbabilityChart
 
 fun main() {
-    val simulation = PokerHandSimulation()
+    val simulation = PokerFlopSimulation()
     val trialsList = (50..1000 step 10).toList()
     val probabilities = mutableListOf<Double>()
 
     for (trials in trialsList) {
-        simulation.runPocketPairSimulation(trials)
-        val probability = simulation.getPocketPairCount().toDouble() / simulation.getPocketPairTrials()
+        simulation.runFlopDeucesSimulation(trials)
+        val probability = simulation.getWinCount().toDouble() / simulation.getTrialsCount()
         probabilities.add(probability)
     }
 
     val chart = ProbabilityChart()
-    chart.displayChart(trialsList, probabilities, "Pocket Pair Probability Convergence")
+    chart.displayChart(trialsList, probabilities, "Pocket Deuces Win Probability on Flop")
 }
