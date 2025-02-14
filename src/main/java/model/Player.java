@@ -5,6 +5,7 @@ import java.util.List;
 public class Player {
   private final Position position;
   private HoleCards cards;
+  private PokerHand hand;
 
   public Player(Position position) {
     this.position = position;
