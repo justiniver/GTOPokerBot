@@ -177,7 +177,7 @@ public class HandEvaluation implements HandRules {
     return breakTie(hand1, hand2);
   }
 
-  public boolean isHand1Better(PokerHand hand1, PokerHand hand2) {
+  public Boolean isHand1Better(PokerHand hand1, PokerHand hand2) {
     HandRank handRank1 = evaluateHand(hand1);
     HandRank handRank2 = evaluateHand(hand2);
     if (handRank1.ordinal() > handRank2.ordinal()) {
@@ -187,6 +187,9 @@ public class HandEvaluation implements HandRules {
     }
 
     PokerHand betterHand = breakTie(hand1, hand2);
+    if (betterHand == null) {
+      return null;
+    }
     return betterHand == hand1;
   }
 
