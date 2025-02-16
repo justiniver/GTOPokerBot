@@ -23,5 +23,12 @@ public class TestPokerGame {
     Assert.assertEquals(GameState.PREFLOP, pokerGame.getState());
   }
 
+  @Test
+  public void testDealingHoleCards() {
+    pokerGame.dealHoleCards();
+    Assert.assertEquals(1, pokerGame.getP1().getHand().getCard1().getRank());
+
+  }
+
 
 }

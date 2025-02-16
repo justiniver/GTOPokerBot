@@ -13,11 +13,18 @@ public class PokerGame implements Game {
   private Player p2;
 
   public PokerGame() {
+    this(true); // automatically default to a shuffled deck
+  }
+
+  public PokerGame(boolean shuffle) {
     this.deck = new PokerDeck();
     this.board = new PokerBoard();
     this.p1 = new Player(Position.SMALL_BLIND);
     this.p2 = new Player(Position.BIG_BLIND);
     this.state = GameState.PREFLOP;
+    if (shuffle) {
+      deck.shuffle();
+    }
   }
 
   @Override

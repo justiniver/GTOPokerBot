@@ -10,7 +10,7 @@ class PokerFlopSimulation {
     private var trialsCount = 0
 
     private fun simulateGameDeuces() {
-        val game = PokerGame()
+        val game = PokerGame(true)
         val eval = HandEvaluation()
         game.dealP1SpecificCards(cs.twoClub, cs.twoDiamond)
         game.dealFlop()
