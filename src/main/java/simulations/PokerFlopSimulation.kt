@@ -9,10 +9,10 @@ class PokerFlopSimulation {
     private var winCount = 0
     private var trialsCount = 0
 
-    private fun simulateGameDeuces() {
+    private fun simulateGameHelper(card1: Card, card2: Card) {
         val game = PokerGame(true)
         val eval = HandEvaluation()
-        game.dealP1SpecificCards(cs.twoClub, cs.twoDiamond)
+        game.dealP1SpecificCards(card1, card2)
         game.dealFlop()
         val hand1 = game.getBestFiveCardHand(game.p1, game.board)
         val hand2 = game.getBestFiveCardHand(game.p2, game.board)
@@ -24,12 +24,29 @@ class PokerFlopSimulation {
         }
     }
 
+    private fun simulateGameDeuces() {
+        simulateGameHelper(cs.twoClub, cs.twoDiamond)
+    }
+
+    private fun simulateGameAces() {
+        simulateGameHelper(cs.aceHeart, cs.aceClub)
+    }
+
     fun runFlopDeucesSimulation(trials: Int) {
         this.winCount = 0
         this.trialsCount = trials
 
         for (i in 1..trials) {
             simulateGameDeuces()
+        }
+    }
+
+    fun runFlopAcesSimulation(trials: Int) {
+        this.winCount = 0
+        this.trialsCount = trials
+
+        for (i in 1..trials) {
+            simulateGameAces()
         }
     }
 
