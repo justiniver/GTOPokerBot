@@ -27,7 +27,14 @@ In this simulation, I analyzed how a certain hand plays against an unrestricted 
 
 ![Aces Winning Flop Probability Chart](src/main/resources/acesflopprob.png)
 
-It seems like pocket aces are winning around **~95.5%** of the time on the flop against an unrestricted range (random hand). However, it is important to note that this probabiity vastly overestimates the equity pocket aces really has against a random hand preflop. For this we will need to simulate the entire game, not just to the flop.
+It seems like pocket aces are winning around **~95.5%** of the time on the flop against an unrestricted range (random hand). However, it is important to note that this probabiity vastly overestimates the equity[^3] pocket aces really have against a random hand preflop. For this we will need to simulate the entire game, not just to the flop. Conversely, draw heavy hands (e.g., suited hands, connectors) will have their preflop equities vastly underestimated using this flop analysis method.
+
+![56 Suited Winning Flop Probability Chart](src/main/resources/56suitedflopprob.png)
+
+It will be useful to use the hand **56 suited** to see how you can easily overvalue pocket pairs and undervalue draw heavy hands on the flop if you are not thinking in terms of equity. On the flop it seems like 56 suited is winning **~45%** of the time against an unrestricted range.
+
+
 
 [^1]: For reference, the true probability of pocket pairs is 0.0588 and the true probability of suited pairs is 0.2353.
 [^2]: Future additions includes the implementation of full game simulations as well as the implementation of counterfactual regret minimization among other useful metrics.
+[^3]: Equity refers to the probability you are to win at showdown (i.e., how often a hand wins after all five community cards are dealt). If you are trying to figure out your equity on the flop, you need to make an educated guess on the strength of your opponents hand, and then calculate how many outs you have. You will then need to estimate how often those outs will appear on the turn and/or river. This is understandably quite hard to do, which is why we have computers.
