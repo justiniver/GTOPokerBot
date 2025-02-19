@@ -7,11 +7,11 @@ fun main() {
     val probabilities = mutableListOf<Double>()
 
     for (trials in trialsList) {
-        simulation.runFlopAcesSimulation(trials)
+        simulation.run56SuitedSimulation(trials)
         val probability = simulation.getWinCount().toDouble() / simulation.getTrialsCount()
         probabilities.add(probability)
     }
 
     val chart = ProbabilityChart()
-    chart.displayChart(trialsList, probabilities, "Pocket Aces Win Probability on Flop")
+    chart.displayChart(trialsList, probabilities, "56 Suited Win Probability on Flop")
 }

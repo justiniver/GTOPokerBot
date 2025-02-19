@@ -32,6 +32,10 @@ class PokerFlopSimulation {
         simulateGameHelper(cs.aceHeart, cs.aceClub)
     }
 
+    private fun simulateGame56Suited() {
+        simulateGameHelper(cs.fiveClub, cs.sixClub)
+    }
+
     fun runFlopDeucesSimulation(trials: Int) {
         this.winCount = 0
         this.trialsCount = trials
@@ -47,6 +51,15 @@ class PokerFlopSimulation {
 
         for (i in 1..trials) {
             simulateGameAces()
+        }
+    }
+
+    fun run56SuitedSimulation(trials: Int) {
+        this.winCount = 0
+        this.trialsCount = trials
+
+        for (i in 1..trials) {
+            simulateGame56Suited()
         }
     }
 
