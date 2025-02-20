@@ -72,6 +72,10 @@ public class PokerGame implements Game {
       cards[4] = player.getHand().getCard2();
 
       return new PokerHand(cards);
+    } else if (state == GameState.TURN) {
+
+    } else if (state ==  GameState.RIVER) {
+
     }
 
     return null;
