@@ -1,6 +1,9 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import model.rules.HandEvaluation;
 
 /**
  * Implementation of a poker game.
@@ -64,8 +67,10 @@ public class PokerGame implements Game {
       throw new IllegalStateException("Cannot assemble five card hand preflop");
     }
     Card[] cards = new Card[5];
+    HandEvaluation eval = new HandEvaluation();
+
     if (state == GameState.FLOP) {
-      for (int i = 0; i <= 2; i++) {
+      for (int i = 0; i < 3; i++) {
         cards[i] = board.getCommunityCards().get(i);
       }
       cards[3] = player.getHand().getCard1();
@@ -74,8 +79,15 @@ public class PokerGame implements Game {
       return new PokerHand(cards);
     } else if (state == GameState.TURN) {
 
-    } else if (state ==  GameState.RIVER) {
 
+    } else if (state ==  GameState.RIVER) {
+      List<Card> allCards = new ArrayList<>(7);
+
+      allCards.addAll(board.getCommunityCards());
+      allCards.add(player.getHand().getCard1());
+      allCards.add(player.getHand().getCard2());
+
+      // implement 7 choose 5 logic and find best hand of the 21 combinations
     }
 
     return null;
