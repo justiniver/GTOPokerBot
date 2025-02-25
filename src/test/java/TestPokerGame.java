@@ -2,7 +2,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import model.*;
-import model.rules.*;
 import util.CardStrings;
 
 public class TestPokerGame {
