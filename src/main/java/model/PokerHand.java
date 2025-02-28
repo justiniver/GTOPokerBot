@@ -13,9 +13,6 @@ public class PokerHand implements Hand {
   }
 
   public PokerHand(Card[] hand) {
-    if (hand == null) {
-      throw new IllegalArgumentException("Hand cannot be null");
-    }
     if (hand.length != 5) {
       throw new IllegalArgumentException("Poker hand must contain exactly five cards");
     }

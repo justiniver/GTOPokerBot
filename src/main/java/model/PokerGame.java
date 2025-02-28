@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,17 +88,31 @@ public class PokerGame implements Game {
       allCards.add(player.getHand().getCard1());
       allCards.add(player.getHand().getCard2());
 
-      int sum = 0;
+      PokerHand bestHand = null;
 
       // implement 7 choose 5 logic and find best hand of the 21 combinations
       // This double for loop essentially does this, now we just need to keep track of the
       // best hand.
       for (int i = 0; i <= 6; i++) {
+        Card[] cand = new Card[5]; // candidate cards
+
         for (int j = i + 1; j <= 6; j++) {
-          sum++;
+
+          for (int k = 0; k <= 4; k++) {
+            for (int l = 0; l <= 6; l++) {
+              if (l != i && l != j) {
+                cand[k] = allCards.get(l);
+              }
+            }
+            bestHand = eval.getBetterHand(bestHand, new PokerHand(cand));
+          }
         }
       }
-      System.out.println(sum);
+
+      System.out.print(bestHand.toString());
+
+
+      return bestHand;
     }
 
     return null;
