@@ -79,6 +79,16 @@ public class TestPokerGame {
     );
   }
 
+  @Test
+  public void testGetBestFiveCardHandRiver() {
+    pokerGame.dealHoleCards();
+    pokerGame.dealFlop();
+    pokerGame.dealTurn();
+    pokerGame.dealRiver();
+    pokerGame.getBestFiveCardHand(pokerGame.getP1(), pokerGame.getBoard());
+  }
+
+
 
 
 }
