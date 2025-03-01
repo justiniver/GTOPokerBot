@@ -33,6 +33,11 @@ It seems like pocket aces are winning around **~95.5%** of the time on the flop 
 
 It will be useful to use the hand **56 suited** to see how you can easily overvalue pocket pairs and undervalue draw heavy hands on the flop if you are not thinking in terms of equity. On the flop it seems like 56 suited is winning **~45%** of the time against an unrestricted range.
 
+## Preflop Hand Equities
+
+![Deuces Preflop Equity (UR)](src/main/resources/deucesshowdownprob.png)
+![Aces Preflop Equity (UR)](src/main/resources/acesshowdownprob.png)
+![56 Suited Preflop Equity (UR)](src/main/resources/56suitedshowdownprob.png)
 
 
 [^1]: For reference, the true probability of pocket pairs is 0.0588 and the true probability of suited pairs is 0.2353.
