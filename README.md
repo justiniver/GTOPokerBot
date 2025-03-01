@@ -27,7 +27,7 @@ In this simulation, I analyzed how a certain hand plays against an unrestricted 
 
 ![Aces Winning Flop Probability Chart](src/main/resources/acesflopprob.png)
 
-It seems like pocket aces are winning around **~95.5%** of the time on the flop against an unrestricted range (random hand). However, it is important to note that this probabiity vastly overestimates the equity[^3] pocket aces really have against a random hand preflop. For this we will need to simulate the entire game, not just to the flop. Conversely, draw heavy hands (e.g., suited hands, connectors) will have their preflop equities vastly underestimated using this flop analysis method.
+It seems like pocket aces are winning around **~95.5%** of the time on the flop against an unrestricted range (random hand). However, it is important to note that this probabiity vastly overestimates the equity[^3] pocket aces really have against a random hand preflop. For this we will need to simulate the entire game, not just to the flop. Conversely, draw heavy hands (e.g., suited hands, connectors) will have their preflop equities underestimated using this flop analysis method.
 
 ![56 Suited Winning Flop Probability Chart](src/main/resources/56suitedflopprob.png)
 
