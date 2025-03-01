@@ -29,7 +29,7 @@ public interface HandRules {
    *
    * @param hand1 the first hand
    * @param hand2 the second hand
-   * @return the winning hand, null if tied
+   * @return the winning hand, the first hand if tied
    */
   PokerHand breakTie(PokerHand hand1, PokerHand hand2);
 

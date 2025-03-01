@@ -85,6 +85,7 @@ public class TestPokerGame {
     pokerGame.dealFlop();
     pokerGame.dealTurn();
     pokerGame.dealRiver();
+    Assert.assertEquals(GameState.RIVER, pokerGame.getState());
     pokerGame.getBestFiveCardHand(pokerGame.getP1(), pokerGame.getBoard());
   }
 

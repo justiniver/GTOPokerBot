@@ -133,7 +133,7 @@ public class HandEvaluation implements HandRules {
       }
     }
 
-    return null;
+    return hand1;
   }
 
   @Override

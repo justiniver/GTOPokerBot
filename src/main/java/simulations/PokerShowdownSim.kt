@@ -1,10 +1,11 @@
 package simulations
 
-import model.*;
+import model.Card
+import model.PokerGame
 import model.rules.HandEvaluation
-import util.*;
+import util.CardStrings
 
-class PokerFlopSimulation {
+class PokerShowdownSim {
     private val cs = CardStrings()
     private var winCount = 0
     private var trialsCount = 0
@@ -14,6 +15,8 @@ class PokerFlopSimulation {
         val eval = HandEvaluation()
         game.dealP1SpecificCards(card1, card2)
         game.dealFlop()
+        game.dealTurn()
+        game.dealRiver()
         val hand1 = game.getBestFiveCardHand(game.p1, game.board)
         val hand2 = game.getBestFiveCardHand(game.p2, game.board)
 
@@ -36,7 +39,7 @@ class PokerFlopSimulation {
         simulateGameHelper(cs.fiveClub, cs.sixClub)
     }
 
-    fun runFlopDeucesSimulation(trials: Int) {
+    fun runShowdownDeucesSimulation(trials: Int) {
         this.winCount = 0
         this.trialsCount = trials
 
@@ -45,7 +48,7 @@ class PokerFlopSimulation {
         }
     }
 
-    fun runFlopAcesSimulation(trials: Int) {
+    fun runShowdownAcesSimulation(trials: Int) {
         this.winCount = 0
         this.trialsCount = trials
 
@@ -54,7 +57,7 @@ class PokerFlopSimulation {
         }
     }
 
-    fun run56SuitedSimulation(trials: Int) {
+    fun runShowdown56SuitedSimulation(trials: Int) {
         this.winCount = 0
         this.trialsCount = trials
 

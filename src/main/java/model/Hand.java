@@ -16,9 +16,8 @@ public interface Hand {
   /**
    * Returns the rank of the hand.
    *
-   * @param hand the hand to evaluate
    * @return the HandRank
    */
-  HandRank getHandRank(PokerHand hand);
+  HandRank getHandRank();
 
 }

@@ -88,29 +88,26 @@ public class PokerGame implements Game {
       allCards.add(player.getHand().getCard1());
       allCards.add(player.getHand().getCard2());
 
-      PokerHand bestHand = null;
+      PokerHand bestHand = new PokerHand(new Card[]{allCards.get(1), allCards.get(2),
+              allCards.get(3), allCards.get(4), allCards.get(5)});
 
-      // implement 7 choose 5 logic and find best hand of the 21 combinations
-      // This double for loop essentially does this, now we just need to keep track of the
-      // best hand.
+      // Implement 7 choose 5 logic and find best hand of the 21 combinations.
       for (int i = 0; i <= 6; i++) {
         Card[] cand = new Card[5]; // candidate cards
 
         for (int j = i + 1; j <= 6; j++) {
 
-          for (int k = 0; k <= 4; k++) {
-            for (int l = 0; l <= 6; l++) {
-              if (l != i && l != j) {
-                cand[k] = allCards.get(l);
-              }
+          int notIorJ = 0;
+          for (int k = 0; k <= 6; k++) {
+            if (k != i && k != j) {
+              cand[notIorJ] = allCards.get(k);
+              notIorJ++;
             }
-            bestHand = eval.getBetterHand(bestHand, new PokerHand(cand));
           }
+          bestHand = eval.getBetterHand(new PokerHand(cand), bestHand);
+
         }
       }
-
-      System.out.print(bestHand.toString());
-
 
       return bestHand;
     }
