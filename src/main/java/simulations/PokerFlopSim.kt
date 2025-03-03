@@ -24,7 +24,7 @@ class PokerFlopSim {
         }
     }
 
-    fun runFlopDeucesSimulation(trials: Int, card1: Card, card2: Card) {
+    fun runFlopSimulation(trials: Int, card1: Card, card2: Card) {
         this.winCount = 0
         this.trialsCount = trials
 
