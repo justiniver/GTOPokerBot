@@ -37,12 +37,17 @@ It will be useful to use the hand **56 suited** to see how you can easily overva
 
 ![Deuces Preflop Equity (UR)](src/main/resources/deucesshowdownprob.png)
 
-I was able to figure out how to simulate games to the river. As mentioned before, simulating games to the river is a decent bit harder than just to the flop because we need to determine what the best 5-card hand is for each player (because there are 7 to choose from). Also, to make this nice graph and visually show the convergence, we are running this simulation $\sum_{n=0}^{995} 50 + 10n = 5004900$ times. This is because I start with $50$ simulations, then I simulate in increments of $10$ all the way to $10000$, which totals to $5004900$ simulations. On my computer this simulation took around three or four minutes to fully run, which I think I can improve but for now I am just happy that it actually ran. As we can see from the graph it seems like **pocket deuces** has **~41.5%** equity against an unrestricted range. 
+I was able to figure out how to simulate games to the river. As mentioned before, simulating games to the river is a decent bit harder than just to the flop because we need to determine what the best 5-card hand is for each player (because there are 7 to choose from). Also, to make this nice graph and visually show the convergence, we are running this simulation $\sum_{n=0}^{995} 50 + 10n = 5004900$ times. This is because I start with $50$ simulations, then I simulate in increments of $10$ all the way to $10000$, which totals to $5004900$ simulations. On my computer this simulation took around three or four minutes to fully run, which I think I can improve but for now I am just happy that it actually ran. As we can see from the graph, it seems like **pocket deuces** have **~51.5%** equity preflop against an unrestricted range. This is significantly less than the probability that deuces are winning on the flop.
 
 ![Aces Preflop Equity (UR)](src/main/resources/acesshowdownprob.png)
+
+We can see a similar thing with **pocket aces**. From the graph it looks like **pocket aces** have **~85%** equity preflop against an unrestricted range[^4]. As we saw from the flop analysis, the probability of **pocket aces** winning on the flop is significantly higher.
+
 ![56 Suited Preflop Equity (UR)](src/main/resources/56suitedshowdownprob.png)
 
+We see the opposite with **56 suited**. It seems like **56 suited** have **~47%** equity against an unrestricted range. Albeit small, there is a slight improvement in overall equity of **56 suited** compared to its probability winning on the flop. This is because **56 suited** is a draw heavy hand, which means that it has a higher chance of improving with the addition of cards (e.g., to a flush or a staight). 
 
 [^1]: For reference, the true probability of pocket pairs is 0.0588 and the true probability of suited pairs is 0.2353.
 [^2]: Future additions includes the implementation of full game simulations as well as the implementation of counterfactual regret minimization among other useful metrics.
 [^3]: Equity refers to the probability you are to win at showdown (i.e., how often a hand wins after all five community cards are dealt). If you are trying to figure out your equity on the flop, you need to make an educated guess on the strength of your opponents hand, and then calculate how many outs you have. You will then need to estimate how often those outs will appear on the turn and/or river. This is understandably quite hard to do, which is why we have computers.
+[^4]: I was very relieved when I saw this result from my simulation. It is well known that aces have around 85% equity preflop against an unrestricted range, so this means that most likely my simulations are fully accurate.
