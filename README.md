@@ -45,7 +45,7 @@ We can see a similar thing with **pocket aces**. From the graph it looks like **
 
 ![56 Suited Preflop Equity (UR)](src/main/resources/56suitedshowdownprob.png)
 
-We see the opposite with **56 suited**. It seems like **56 suited** have **~47%** equity against an unrestricted range. Albeit small, there is a slight improvement in overall equity of **56 suited** compared to its probability winning on the flop. This is because **56 suited** is a draw heavy hand, which means that it has a higher chance of improving with the addition of cards (e.g., to a flush or a staight). 
+We see the opposite with **56 suited**. It seems like **56 suited** has **~47%** equity against an unrestricted range. Albeit small, there is a slight improvement in overall equity of **56 suited** compared to its probability winning on the flop. This is because **56 suited** is a draw heavy hand, which means that it has a higher chance of improving with the addition of cards (e.g., to a flush or a straight). 
 
 [^1]: For reference, the true probability of pocket pairs is 0.0588 and the true probability of suited pairs is 0.2353.
 [^2]: Future additions includes the implementation of full game simulations as well as the implementation of counterfactual regret minimization among other useful metrics.
