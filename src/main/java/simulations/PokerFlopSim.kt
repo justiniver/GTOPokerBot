@@ -24,42 +24,12 @@ class PokerFlopSim {
         }
     }
 
-    private fun simulateGameDeuces() {
-        simulateGameHelper(cs.twoClub, cs.twoDiamond)
-    }
-
-    private fun simulateGameAces() {
-        simulateGameHelper(cs.aceHeart, cs.aceClub)
-    }
-
-    private fun simulateGame56Suited() {
-        simulateGameHelper(cs.fiveClub, cs.sixClub)
-    }
-
-    fun runFlopDeucesSimulation(trials: Int) {
+    fun runFlopDeucesSimulation(trials: Int, card1: Card, card2: Card) {
         this.winCount = 0
         this.trialsCount = trials
 
         for (i in 1..trials) {
-            simulateGameDeuces()
-        }
-    }
-
-    fun runFlopAcesSimulation(trials: Int) {
-        this.winCount = 0
-        this.trialsCount = trials
-
-        for (i in 1..trials) {
-            simulateGameAces()
-        }
-    }
-
-    fun run56SuitedSimulation(trials: Int) {
-        this.winCount = 0
-        this.trialsCount = trials
-
-        for (i in 1..trials) {
-            simulateGame56Suited()
+            simulateGameHelper(card1, card2)
         }
     }
 
