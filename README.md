@@ -1,7 +1,7 @@
-# GTO Poker Set Mining Analytics
+# GTO Poker Bot & Simulations
 
 I have been interested in poker theory for a little while now, so I thought I might as well try and create something related to Poker. For now, I am specifically looking into
-a Texas Hold'em Poker variation, *Heads-Up Hold'em*. I am working my way towards setting up a GTO simulator specifically looking at preflop heads-up and when either of the players are dealt pocket pairs.
+a Texas Hold'em Poker variation, *Heads-Up Hold'em*. I am working my way towards setting up a simulator and eventually creating a GTO poker bot.
 
 ## JFreeChart and Monte Carlo Simuluations
 
