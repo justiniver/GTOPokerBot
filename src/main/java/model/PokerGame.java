@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +10,10 @@ import model.rules.HandEvaluation;
  */
 public class PokerGame implements Game {
   private GameState state;
-  private PokerBoard board;
-  private PokerDeck deck;
-  private Player p1;
-  private Player p2;
+  private final PokerBoard board;
+  private final PokerDeck deck;
+  private final Player p1;
+  private final Player p2;
 
   public PokerGame() {
     this(true); // automatically default to a shuffled deck
@@ -74,19 +73,42 @@ public class PokerGame implements Game {
       for (int i = 0; i < 3; i++) {
         cards[i] = board.getCommunityCards().get(i);
       }
-      cards[3] = player.getHand().getCard1();
-      cards[4] = player.getHand().getCard2();
+      cards[3] = player.getHoleCards().getCard1();
+      cards[4] = player.getHoleCards().getCard2();
 
       return new PokerHand(cards);
     } else if (state == GameState.TURN) {
+      List<Card> allCards = new ArrayList<>(6);
 
+      allCards.addAll(board.getCommunityCards());
+      allCards.add(player.getHoleCards().getCard1());
+      allCards.add(player.getHoleCards().getCard2());
+
+      PokerHand bestHand = new PokerHand(new Card[]{allCards.get(1), allCards.get(2),
+              allCards.get(3), allCards.get(4), allCards.get(5)});
+
+      // Implement 7 choose 5 logic and find best hand of the 21 combinations.
+      for (int i = 0; i <= 6; i++) {
+        Card[] cand = new Card[5]; // candidate cards
+        int notIorJ = 0;
+        for (int k = 0; k <= 6; k++) {
+          if (k != i) {
+            cand[notIorJ] = allCards.get(k);
+            notIorJ++;
+            System.out.println(notIorJ);
+          }
+        }
+        bestHand = eval.getBetterHand(new PokerHand(cand), bestHand);
+      }
+
+      return bestHand;
 
     } else if (state ==  GameState.RIVER) {
       List<Card> allCards = new ArrayList<>(7);
 
       allCards.addAll(board.getCommunityCards());
-      allCards.add(player.getHand().getCard1());
-      allCards.add(player.getHand().getCard2());
+      allCards.add(player.getHoleCards().getCard1());
+      allCards.add(player.getHoleCards().getCard2());
 
       PokerHand bestHand = new PokerHand(new Card[]{allCards.get(1), allCards.get(2),
               allCards.get(3), allCards.get(4), allCards.get(5)});

@@ -25,4 +25,8 @@ public class HoleCards {
   public Card getCard2() {
     return card2;
   }
+
+  public String toString() {
+    return "HoleCards: " + card1 + " " + card2;
+  }
 }

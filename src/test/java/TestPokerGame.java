@@ -1,6 +1,10 @@
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import model.*;
 import util.CardStrings;
 
@@ -30,10 +34,10 @@ public class TestPokerGame {
   public void testDealHoleCards() {
     int initialDeckSize = pokerGame.getDeck().getDeckSize();
     pokerGame.dealHoleCards();
-    Assert.assertNotNull(pokerGame.getP1().getHand().getCard1());
-    Assert.assertNotNull(pokerGame.getP1().getHand().getCard2());
-    Assert.assertNotNull(pokerGame.getP2().getHand().getCard1());
-    Assert.assertNotNull(pokerGame.getP2().getHand().getCard2());
+    Assert.assertNotNull(pokerGame.getP1().getHoleCards().getCard1());
+    Assert.assertNotNull(pokerGame.getP1().getHoleCards().getCard2());
+    Assert.assertNotNull(pokerGame.getP2().getHoleCards().getCard1());
+    Assert.assertNotNull(pokerGame.getP2().getHoleCards().getCard2());
     Assert.assertEquals(GameState.PREFLOP, pokerGame.getState());
     Assert.assertEquals(initialDeckSize - 4, pokerGame.getDeck().getDeckSize());
   }
@@ -81,12 +85,19 @@ public class TestPokerGame {
 
   @Test
   public void testGetBestFiveCardHandRiver() {
-    pokerGame.dealHoleCards();
+    PokerGame pokerGame = new PokerGame(false);
+    pokerGame.dealP1SpecificCards(cs.threeHeart, cs.queenHeart);
     pokerGame.dealFlop();
     pokerGame.dealTurn();
     pokerGame.dealRiver();
     Assert.assertEquals(GameState.RIVER, pokerGame.getState());
-    pokerGame.getBestFiveCardHand(pokerGame.getP1(), pokerGame.getBoard());
+    PokerBoard board = pokerGame.getBoard();
+    Assert.assertEquals("Board: [TWOSPADE, TWOHEART, THREECLUB, THREEDIAMOND, THREESPADE]",
+            board.toString());
+    Assert.assertEquals("HoleCards: THREEHEART QUEENHEART",
+            pokerGame.getP1().getHoleCards().toString());
+    PokerHand bestP1 = pokerGame.getBestFiveCardHand(pokerGame.getP1(), pokerGame.getBoard());
+    Assert.assertEquals(bestP1.getHandRank(), HandRank.FOUROAK);
   }
 
 

@@ -23,7 +23,7 @@ public class Player {
     this.cards = new HoleCards(cards.get(0), cards.get(1));
   }
 
-  public HoleCards getHand() {
+  public HoleCards getHoleCards() {
     return this.cards;
   }
 

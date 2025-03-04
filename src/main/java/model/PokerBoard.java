@@ -34,4 +34,13 @@ public class PokerBoard implements Board {
   public void resetBoard() {
     this.communityCards.clear();
   }
+
+  @Override
+  public String toString() {
+    if (communityCards.isEmpty()) {
+      return "Board is empty";
+    }
+    return "Board: " + communityCards;
+  }
+
 }

@@ -74,4 +74,10 @@ public class PokerDeck implements Deck {
     this.deck = new ArrayList<>(originalDeck);
   }
 
+  public void removeCard(List<Card> cards) {
+    for (Card card : cards) {
+      deck.remove(card);
+    }
+  }
+
 }

@@ -31,4 +31,9 @@ public class PokerHand implements Hand {
     return evaluator.evaluateHand(new PokerHand(this.hand));
   }
 
+  @Override
+  public String toString() {
+    return "Hand: " + hand;
+  }
+
 }

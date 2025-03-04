@@ -1,5 +1,7 @@
 package model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -20,6 +22,11 @@ public class Card {
 
   public Suit getSuit() {
     return suit;
+  }
+
+  @Override
+  public String toString() {
+    return rank + "" + suit;
   }
 
   @Override
