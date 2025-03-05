@@ -100,6 +100,25 @@ public class TestPokerGame {
     Assert.assertEquals(bestP1.getHandRank(), HandRank.FOUROAK);
   }
 
+  @Test
+  public void testGetBestFiveCardHandRemoveCards() {
+    PokerGame pokerGame = new PokerGame(false);
+    List<Card> cardsToRemove = new ArrayList<>(List.of(cs.twoSpade, cs.threeSpade, cs.threeDiamond));
+    pokerGame.getDeck().removeCards(cardsToRemove);
+    pokerGame.dealP1SpecificCards(cs.aceDiamond, cs.aceClub);
+    pokerGame.dealFlop();
+    pokerGame.dealTurn();
+    pokerGame.dealRiver();
+    Assert.assertEquals(GameState.RIVER, pokerGame.getState());
+    PokerBoard board = pokerGame.getBoard();
+    Assert.assertEquals("Board: [TWOHEART, THREECLUB, THREEHEART, FOURCLUB, FOURDIAMOND]",
+            board.toString());
+    Assert.assertEquals("HoleCards: ACEDIAMOND ACECLUB",
+            pokerGame.getP1().getHoleCards().toString());
+    PokerHand bestP1 = pokerGame.getBestFiveCardHand(pokerGame.getP1(), pokerGame.getBoard());
+    Assert.assertEquals(HandRank.TWOPAIR, bestP1.getHandRank());
+  }
+
 
 
 
