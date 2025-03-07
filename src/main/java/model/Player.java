@@ -2,6 +2,9 @@ package model;
 
 import java.util.List;
 
+/**
+ * Represents a player in Poker.
+ */
 public class Player {
   private final Position position;
   private HoleCards cards;

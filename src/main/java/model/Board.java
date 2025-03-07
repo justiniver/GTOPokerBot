@@ -2,6 +2,9 @@ package model;
 
 import java.util.*;
 
+/**
+ * Represents a board in poker.
+ */
 public interface Board {
 
   /**

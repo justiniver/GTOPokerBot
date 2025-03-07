@@ -2,6 +2,9 @@ package model;
 
 import java.util.*;
 
+/**
+ * Represents a Poker board.
+ */
 public class PokerBoard implements Board {
   private final List<Card> communityCards;
 
