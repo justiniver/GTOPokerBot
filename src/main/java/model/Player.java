@@ -9,6 +9,7 @@ public class Player {
   private final Position position;
   private HoleCards cards;
   private PokerHand hand;
+  private int stack;
 
   public Player(Position position) {
     this.position = position;
@@ -17,6 +18,12 @@ public class Player {
   public Player(Position position, HoleCards cards) {
     this.position = position;
     this.cards = cards;
+  }
+
+  public Player(Position position, HoleCards cards, int stack) {
+    this.position = position;
+    this.cards = cards;
+    this.stack = stack;
   }
 
   public void setHand(List<Card> cards) {
