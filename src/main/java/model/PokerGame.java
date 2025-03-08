@@ -62,6 +62,13 @@ public class PokerGame implements Game {
     board.addCard(deck.dealCard());
   }
 
+  /**
+   * Returns the best possible 5-card hand for current player.
+   *
+   * @param player the current player
+   * @param board the current board
+   * @return the best possible 5-card hand for current player.
+   */
   public PokerHand getBestFiveCardHand(Player player, PokerBoard board) {
     if (state == GameState.PREFLOP) {
       throw new IllegalStateException("Cannot assemble five card hand preflop");
@@ -134,7 +141,7 @@ public class PokerGame implements Game {
       return bestHand;
     }
 
-    return null;
+    return new PokerHand();
   }
 
   public Player getP1() {
