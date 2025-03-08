@@ -14,6 +14,7 @@ public class PokerGame implements Game {
   private final PokerDeck deck;
   private final Player p1;
   private final Player p2;
+  private final Integer pot; // implement later
 
   public PokerGame() {
     this(true); // automatically default to a shuffled deck
@@ -28,6 +29,7 @@ public class PokerGame implements Game {
     if (shuffle) {
       deck.shuffle();
     }
+    this.pot = null;
   }
 
   @Override
