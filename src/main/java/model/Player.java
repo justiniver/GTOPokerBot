@@ -25,15 +25,29 @@ public class Player {
     this.stack = stack;
   }
 
+  public void addStack(int add) {
+    if (add <= 0) {
+      throw new IllegalArgumentException("Must add a non-zero positive number.");
+    }
+    this.stack = this.stack + add;
+  }
+
+  public void subtractStack(int subtract) {
+    if (subtract > this.stack) {
+      throw new IllegalArgumentException("Operation will result in negative stack.");
+    }
+    if (subtract <= 0) {
+      throw new IllegalArgumentException("Must subtract a non-zero positive number.");
+    }
+    this.stack = this.stack - subtract;
+  }
+
   public void setHoleCards(List<Card> cards) {
     if (cards == null || cards.size() != 2) {
       throw new IllegalArgumentException("The hand must be exactly two cards");
     }
     this.cards = new HoleCards(cards.get(0), cards.get(1));
   }
-
-
-
 
   public HoleCards getHoleCards() {
     return this.cards;
