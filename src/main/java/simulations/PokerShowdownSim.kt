@@ -17,8 +17,8 @@ class PokerShowdownSim {
         game.dealFlop()
         game.dealTurn()
         game.dealRiver()
-        val hand1 = game.getBestFiveCardHand(game.p1, game.board)
-        val hand2 = game.getBestFiveCardHand(game.p2, game.board)
+        val hand1 = game.getBestFiveCardHand(game.playerSB, game.board)
+        val hand2 = game.getBestFiveCardHand(game.playerBB, game.board)
 
         val hand1Win = eval.isHand1Better(hand1, hand2)
 

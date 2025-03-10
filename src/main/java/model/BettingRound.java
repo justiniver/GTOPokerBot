@@ -2,19 +2,23 @@ package model;
 
 public class BettingRound {
   private GameState state;
-  private final Player p1;
-  private final Player p2;
-  private final Integer pot;
+  private final Player playerSB;
+  private final Player playerBB;
+  private final int pot;
 
-  public BettingRound(Player p1, Player p2, Integer pot) {
-    this.p1 = p1;
-    this.p2 = p2;
+  public BettingRound(Player playerSB, Player playerBB, int pot, GameState state) {
+    this.playerSB = playerSB;
+    this.playerBB = playerBB;
     this.pot = pot;
+    this.state = state;
   }
 
+  public void run() {
+    boolean roundOver = false;
+    while (!roundOver) {
 
-
-
+    }
+  }
 
 
 

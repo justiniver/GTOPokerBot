@@ -12,9 +12,10 @@ public class PokerGame implements Game {
   private GameState state;
   private final PokerBoard board;
   private final PokerDeck deck;
-  private final Player p1;
-  private final Player p2;
-  private final Integer pot; // implement later
+  private final Player playerSB;
+  private final Player playerBB;
+  private final int pot; // implement later
+
 
   public PokerGame() {
     this(true); // automatically default to a shuffled deck
@@ -23,27 +24,27 @@ public class PokerGame implements Game {
   public PokerGame(boolean shuffle) {
     this.deck = new PokerDeck();
     this.board = new PokerBoard();
-    this.p1 = new Player(Position.SMALL_BLIND);
-    this.p2 = new Player(Position.BIG_BLIND);
+    this.playerSB = new Player(Position.SMALL_BLIND);
+    this.playerBB = new Player(Position.BIG_BLIND);
     this.state = GameState.PREFLOP;
     if (shuffle) {
       deck.shuffle();
     }
-    this.pot = null;
+    this.pot = 0;
   }
 
   @Override
   public void dealHoleCards() {
     this.state = GameState.PREFLOP;
-    p1.setHoleCards(deck.dealCards(2));
-    p2.setHoleCards(deck.dealCards(2));
+    playerSB.setHoleCards(deck.dealCards(2));
+    playerBB.setHoleCards(deck.dealCards(2));
   }
 
   public void dealP1SpecificCards(Card card1, Card card2) {
     this.state = GameState.PREFLOP;
     List<Card> p1Cards = List.of(deck.dealSpecificCard(card1), deck.dealSpecificCard(card2));
-    p1.setHoleCards(p1Cards);
-    p2.setHoleCards(deck.dealCards(2));
+    playerSB.setHoleCards(p1Cards);
+    playerBB.setHoleCards(deck.dealCards(2));
   }
 
   @Override
@@ -146,12 +147,12 @@ public class PokerGame implements Game {
     return new PokerHand();
   }
 
-  public Player getP1() {
-    return p1;
+  public Player getPlayerSB() {
+    return playerSB;
   }
 
-  public Player getP2() {
-    return p2;
+  public Player getPlayerBB() {
+    return playerBB;
   }
 
   public GameState getState() {
@@ -164,5 +165,9 @@ public class PokerGame implements Game {
 
   public PokerDeck getDeck() {
     return deck;
+  }
+
+  public int getPot() {
+    return this.pot;
   }
 }

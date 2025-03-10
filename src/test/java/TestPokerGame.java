@@ -20,12 +20,12 @@ public class TestPokerGame {
 
   @Test
   public void testPokerGameConstructor() {
-    Assert.assertNotNull(pokerGame.getP1());
-    Assert.assertNotNull(pokerGame.getP2());
+    Assert.assertNotNull(pokerGame.getPlayerSB());
+    Assert.assertNotNull(pokerGame.getPlayerBB());
     Assert.assertNotNull(pokerGame.getDeck());
     Assert.assertNotNull(pokerGame.getBoard());
-    Assert.assertEquals(Position.SMALL_BLIND, pokerGame.getP1().getPosition());
-    Assert.assertEquals(Position.BIG_BLIND, pokerGame.getP2().getPosition());
+    Assert.assertEquals(Position.SMALL_BLIND, pokerGame.getPlayerSB().getPosition());
+    Assert.assertEquals(Position.BIG_BLIND, pokerGame.getPlayerBB().getPosition());
     Assert.assertEquals(52, pokerGame.getDeck().getDeckSize());
     Assert.assertEquals(GameState.PREFLOP, pokerGame.getState());
   }
@@ -34,10 +34,10 @@ public class TestPokerGame {
   public void testDealHoleCards() {
     int initialDeckSize = pokerGame.getDeck().getDeckSize();
     pokerGame.dealHoleCards();
-    Assert.assertNotNull(pokerGame.getP1().getHoleCards().getCard1());
-    Assert.assertNotNull(pokerGame.getP1().getHoleCards().getCard2());
-    Assert.assertNotNull(pokerGame.getP2().getHoleCards().getCard1());
-    Assert.assertNotNull(pokerGame.getP2().getHoleCards().getCard2());
+    Assert.assertNotNull(pokerGame.getPlayerSB().getHoleCards().getCard1());
+    Assert.assertNotNull(pokerGame.getPlayerSB().getHoleCards().getCard2());
+    Assert.assertNotNull(pokerGame.getPlayerBB().getHoleCards().getCard1());
+    Assert.assertNotNull(pokerGame.getPlayerBB().getHoleCards().getCard2());
     Assert.assertEquals(GameState.PREFLOP, pokerGame.getState());
     Assert.assertEquals(initialDeckSize - 4, pokerGame.getDeck().getDeckSize());
   }
@@ -79,7 +79,7 @@ public class TestPokerGame {
   public void testGetBestFiveCardHandPreflop() {
     pokerGame.dealHoleCards();
     Assert.assertThrows(IllegalStateException.class, () ->
-            pokerGame.getBestFiveCardHand(pokerGame.getP1(), pokerGame.getBoard())
+            pokerGame.getBestFiveCardHand(pokerGame.getPlayerSB(), pokerGame.getBoard())
     );
   }
 
@@ -95,8 +95,8 @@ public class TestPokerGame {
     Assert.assertEquals("Board: [TWOSPADE, TWOHEART, THREECLUB, THREEDIAMOND, THREESPADE]",
             board.toString());
     Assert.assertEquals("HoleCards: THREEHEART QUEENHEART",
-            pokerGame.getP1().getHoleCards().toString());
-    PokerHand bestP1 = pokerGame.getBestFiveCardHand(pokerGame.getP1(), pokerGame.getBoard());
+            pokerGame.getPlayerSB().getHoleCards().toString());
+    PokerHand bestP1 = pokerGame.getBestFiveCardHand(pokerGame.getPlayerSB(), pokerGame.getBoard());
     Assert.assertEquals(bestP1.getHandRank(), HandRank.FOUROAK);
   }
 
@@ -114,8 +114,8 @@ public class TestPokerGame {
     Assert.assertEquals("Board: [TWOHEART, THREECLUB, THREEHEART, FOURCLUB, FOURDIAMOND]",
             board.toString());
     Assert.assertEquals("HoleCards: ACEDIAMOND ACECLUB",
-            pokerGame.getP1().getHoleCards().toString());
-    PokerHand bestP1 = pokerGame.getBestFiveCardHand(pokerGame.getP1(), pokerGame.getBoard());
+            pokerGame.getPlayerSB().getHoleCards().toString());
+    PokerHand bestP1 = pokerGame.getBestFiveCardHand(pokerGame.getPlayerSB(), pokerGame.getBoard());
     Assert.assertEquals(HandRank.TWOPAIR, bestP1.getHandRank());
   }
 
