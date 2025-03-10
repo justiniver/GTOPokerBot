@@ -35,15 +35,15 @@ public class PokerGame implements Game {
   @Override
   public void dealHoleCards() {
     this.state = GameState.PREFLOP;
-    p1.setHand(deck.dealCards(2));
-    p2.setHand(deck.dealCards(2));
+    p1.setHoleCards(deck.dealCards(2));
+    p2.setHoleCards(deck.dealCards(2));
   }
 
   public void dealP1SpecificCards(Card card1, Card card2) {
     this.state = GameState.PREFLOP;
     List<Card> p1Cards = List.of(deck.dealSpecificCard(card1), deck.dealSpecificCard(card2));
-    p1.setHand(p1Cards);
-    p2.setHand(deck.dealCards(2));
+    p1.setHoleCards(p1Cards);
+    p2.setHoleCards(deck.dealCards(2));
   }
 
   @Override

@@ -8,7 +8,6 @@ import java.util.List;
 public class Player {
   private final Position position;
   private HoleCards cards;
-  private PokerHand hand;
   private int stack;
 
   public Player(Position position) {
@@ -26,12 +25,15 @@ public class Player {
     this.stack = stack;
   }
 
-  public void setHand(List<Card> cards) {
+  public void setHoleCards(List<Card> cards) {
     if (cards == null || cards.size() != 2) {
       throw new IllegalArgumentException("The hand must be exactly two cards");
     }
     this.cards = new HoleCards(cards.get(0), cards.get(1));
   }
+
+
+
 
   public HoleCards getHoleCards() {
     return this.cards;
@@ -39,6 +41,10 @@ public class Player {
 
   public Position getPosition() {
     return this.position;
+  }
+
+  public int getStack() {
+    return this.stack;
   }
 
 
