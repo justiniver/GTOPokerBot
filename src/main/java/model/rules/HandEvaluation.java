@@ -5,7 +5,7 @@ import java.util.*;
 import model.*;
 
 /**
- * Implementation of hand rules.
+ * Implementation of hand rules and the evaluation logic of Poker.
  */
 public class HandEvaluation implements HandRules {
 
