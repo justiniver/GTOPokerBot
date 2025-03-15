@@ -17,13 +17,21 @@ public class BettingRound {
   }
 
   public void run() {
-
+    Player currentPlayer;
+    Player otherPlayer;
+    if (state == GameState.PREFLOP) {
+      currentPlayer = playerSB;
+      otherPlayer = playerBB;
+    } else {
+      currentPlayer = playerBB;
+      otherPlayer = playerSB;
+    }
     boolean roundOver = false;
+
     while (!roundOver) {
 
     }
+
   }
-
-
 
 }
