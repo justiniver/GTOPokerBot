@@ -16,6 +16,10 @@ public class BettingRound {
     this.state = state;
   }
 
+  /**
+   * Execution method to run the betting round.
+   * Does not terminate unless player actions indicate termination (e.g., a player folds).
+   */
   public void run() {
     Player currentPlayer;
     Player otherPlayer;
