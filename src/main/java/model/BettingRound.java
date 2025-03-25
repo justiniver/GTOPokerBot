@@ -40,4 +40,28 @@ public class BettingRound {
 
   }
 
+  private boolean processAction(Action action, Player currentPlayer) {
+    return switch (action) {
+      case FOLD -> true;
+      case CHECK -> processCheck(currentPlayer);
+      case CALL -> processCall(currentPlayer);
+      case BET, RAISE -> processBetOrRaise(currentPlayer);
+    };
+
+  }
+
+  private boolean processBetOrRaise(Player currentPlayer) {
+    return false;
+  }
+
+  private boolean processCall(Player currentPlayer) {
+    return false;
+  }
+
+  private boolean processCheck(Player currentPlayer) {
+    return false;
+  }
+
 }
+
+
