@@ -61,7 +61,7 @@ public class BettingRound {
       case FOLD -> true;
       case CHECK -> processCheck(currentPlayer); // returns false
       case CALL -> processCall(currentPlayer); // returns false
-      case BET, RAISE -> processBetOrRaise(currentPlayer); // returns false
+      case BET, RAISE -> processBetOrRaise(action, currentPlayer); // returns false
     };
 
   }
@@ -97,8 +97,12 @@ public class BettingRound {
     return false;
   }
 
-  private boolean processBetOrRaise(Player currentPlayer) {
+  private boolean processBetOrRaise(Action action, Player currentPlayer) {
     int currentPlayerBet = getCurrentPlayerBet(currentPlayer);
+    if (action == Action.BET && currentBet != 0) {
+      System.out.println("Invalid action.");
+    }
+
     return false;
   }
 
