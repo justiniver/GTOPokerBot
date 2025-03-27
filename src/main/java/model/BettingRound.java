@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 /**
@@ -58,16 +59,16 @@ public class BettingRound {
   private boolean processAction(Action action, Player currentPlayer) {
     return switch (action) {
       case FOLD -> true;
-      case CHECK -> processCheck(currentPlayer);
-      case CALL -> processCall(currentPlayer);
-      case BET, RAISE -> processBetOrRaise(currentPlayer);
+      case CHECK -> processCheck(currentPlayer); // returns false
+      case CALL -> processCall(currentPlayer); // returns false
+      case BET, RAISE -> processBetOrRaise(currentPlayer); // returns false
     };
 
   }
 
   private boolean processCheck(Player currentPlayer) {
     int currentPlayerBet = getCurrentPlayerBet(currentPlayer);
-    if (currentBet > currentPlayerBet) {
+    if (currentPlayerBet < currentBet) {
       System.out.println("Invalid action. Cannot check as current bet is " + currentBet);
     }
 
@@ -76,6 +77,23 @@ public class BettingRound {
 
   private boolean processCall(Player currentPlayer) {
     int currentPlayerBet = getCurrentPlayerBet(currentPlayer);
+    int chipsNeededToCall = currentBet - currentPlayerBet;
+    if (chipsNeededToCall <= 0) {
+      System.out.println("Nothing to call. Your current bet is " + currentPlayerBet +
+                      "and the opponent bet " + currentBet);
+
+    } else if (currentPlayer.getStack() < chipsNeededToCall) {
+      System.out.println("Invalid action. Not enough chips in stack to call.");
+    } else {
+      currentPlayer.subtractStack(chipsNeededToCall);
+      pot += chipsNeededToCall;
+      if (currentPlayer == playerSB) {
+        betSB += chipsNeededToCall;
+      } else {
+        betBB += chipsNeededToCall;
+      }
+      System.out.println(currentPlayer.getPosition() + " calls for " + chipsNeededToCall);
+    }
     return false;
   }
 
