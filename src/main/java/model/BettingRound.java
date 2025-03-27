@@ -48,6 +48,13 @@ public class BettingRound {
 
   }
 
+  /**
+   * Processes the actions and prints out useful information to users regarding their action.
+   *
+   * @param action the current action (FOLD, CALL, CHECK, BET, RAISE)
+   * @param currentPlayer the current player (small blind or big blind)
+   * @return true if the betting round should end, false otherwise
+   */
   private boolean processAction(Action action, Player currentPlayer) {
     return switch (action) {
       case FOLD -> true;
@@ -59,17 +66,31 @@ public class BettingRound {
   }
 
   private boolean processCheck(Player currentPlayer) {
+    int currentPlayerBet = getCurrentPlayerBet(currentPlayer);
+    if (currentBet > currentPlayerBet) {
+      System.out.println("Invalid action. Cannot check as current bet is " + currentBet);
+    }
+
     return false;
   }
 
   private boolean processCall(Player currentPlayer) {
+    int currentPlayerBet = getCurrentPlayerBet(currentPlayer);
     return false;
   }
 
   private boolean processBetOrRaise(Player currentPlayer) {
+    int currentPlayerBet = getCurrentPlayerBet(currentPlayer);
     return false;
   }
 
+  private int getCurrentPlayerBet(Player currentPlayer) {
+    if (currentPlayer == playerSB) {
+      return betSB;
+    } else {
+      return betBB;
+    }
+  }
 
 
 
