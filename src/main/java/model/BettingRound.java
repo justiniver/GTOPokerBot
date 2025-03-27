@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Scanner;
+
 /**
  * Represents the betting round that occurs four times during a game of poker.
  */
@@ -8,6 +10,10 @@ public class BettingRound {
   private final Player playerSB;
   private final Player playerBB;
   private int pot;
+
+  private int betSB = 0;
+  private int betBB = 0;
+  private int currentBet = 0;
 
   public BettingRound(Player playerSB, Player playerBB, int pot, GameState state) {
     this.playerSB = playerSB;
@@ -30,9 +36,11 @@ public class BettingRound {
       currentPlayer = playerBB;
       otherPlayer = playerSB;
     }
-    boolean roundOver = false;
 
-    while (!roundOver) {
+    Scanner scanner = new Scanner(System.in);
+    boolean bettingComplete = false;
+
+    while (!bettingComplete) {
       // Need to come up with all conditions that should end the round as well as
       // the game flow for betting.
 
@@ -50,7 +58,7 @@ public class BettingRound {
 
   }
 
-  private boolean processBetOrRaise(Player currentPlayer) {
+  private boolean processCheck(Player currentPlayer) {
     return false;
   }
 
@@ -58,9 +66,12 @@ public class BettingRound {
     return false;
   }
 
-  private boolean processCheck(Player currentPlayer) {
+  private boolean processBetOrRaise(Player currentPlayer) {
     return false;
   }
+
+
+
 
 }
 
