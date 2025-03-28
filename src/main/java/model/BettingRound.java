@@ -11,7 +11,6 @@ public class BettingRound {
   private final Player playerSB;
   private final Player playerBB;
   private int pot;
-
   private int betSB = 0;
   private int betBB = 0;
   private int currentBet = 0;
@@ -61,7 +60,8 @@ public class BettingRound {
       case FOLD -> true;
       case CHECK -> processCheck(currentPlayer); // returns false
       case CALL -> processCall(currentPlayer); // returns false
-      case BET, RAISE -> processBetOrRaise(action, currentPlayer); // returns false
+      case BET -> processBet(action, currentPlayer); // returns false
+      case RAISE -> processRaise(action, currentPlayer); // returns false
     };
 
   }
@@ -83,7 +83,7 @@ public class BettingRound {
                       "and the opponent bet " + currentBet);
 
     } else if (currentPlayer.getStack() < chipsNeededToCall) {
-      System.out.println("Invalid action. Not enough chips in stack to call.");
+      System.out.println("Invalid action. Not enough chips in stack to call");
     } else {
       currentPlayer.subtractStack(chipsNeededToCall);
       pot += chipsNeededToCall;
@@ -97,10 +97,30 @@ public class BettingRound {
     return false;
   }
 
-  private boolean processBetOrRaise(Action action, Player currentPlayer) {
+  private boolean processBet(Action action, Player currentPlayer) {
+    Scanner scanner = new Scanner(System.in);
+    int currentPlayerBet = getCurrentPlayerBet(currentPlayer);
+    if (currentBet != 0) {
+      System.out.println("Invalid action. Current bet is " + currentBet);
+    } else {
+      int amount = scanner.nextInt();
+      int required = currentBet - currentPlayerBet;
+
+    }
+
+    return false;
+  }
+
+  private boolean processRaise(Action action, Player currentPlayer) {
+    Scanner scanner = new Scanner(System.in);
     int currentPlayerBet = getCurrentPlayerBet(currentPlayer);
     if (action == Action.BET && currentBet != 0) {
-      System.out.println("Invalid action.");
+      System.out.println("Invalid action. Current bet is " + currentBet);
+    } else if  (action == Action.RAISE && currentBet == 0) {
+      System.out.println("Invalid action. Nothing to raise. Current bet is 0");
+    } else {
+      int amount = scanner.nextInt();
+      if
     }
 
     return false;

@@ -15,6 +15,8 @@ public class PokerGame implements Game {
   private final Player playerSB;
   private final Player playerBB;
   private int pot; // implement later
+  private int smallBlindAmount;
+  private int bigBlindAmount;
 
 
   public PokerGame() {
