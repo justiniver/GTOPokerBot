@@ -15,15 +15,19 @@ public class PokerGame implements Game {
   private final Player playerSB;
   private final Player playerBB;
   private int pot; // implement later
-  private int smallBlindAmount;
-  private int bigBlindAmount;
+  private final int smallBlindAmount;
+  private final int bigBlindAmount;
 
 
   public PokerGame() {
-    this(true); // automatically default to a shuffled deck
+    this(true, 0); // automatically default to a shuffled deck
   }
 
   public PokerGame(boolean shuffle) {
+    this(shuffle, 0);
+  }
+
+  public PokerGame(boolean shuffle, int smallBlindAmount) {
     this.deck = new PokerDeck();
     this.board = new PokerBoard();
     this.playerSB = new Player(Position.SMALL_BLIND);
@@ -33,6 +37,8 @@ public class PokerGame implements Game {
       deck.shuffle();
     }
     this.pot = 0;
+    this.smallBlindAmount = smallBlindAmount;
+    this.bigBlindAmount = smallBlindAmount * 2;
   }
 
   @Override
@@ -171,5 +177,9 @@ public class PokerGame implements Game {
 
   public int getPot() {
     return this.pot;
+  }
+
+  public int getSmallBlindAmount() {
+    return this.smallBlindAmount;
   }
 }

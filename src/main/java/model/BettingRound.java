@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 /**
@@ -15,11 +14,17 @@ public class BettingRound {
   private int betBB = 0;
   private int currentBet = 0;
 
-  public BettingRound(Player playerSB, Player playerBB, int pot, GameState state) {
+  private int smallBlindAmount;
+  private int bigBlindAmount;
+
+  public BettingRound(Player playerSB, Player playerBB, int pot, GameState state,
+                      int smallBlindAmount, int bigBlindAmount) {
     this.playerSB = playerSB;
     this.playerBB = playerBB;
     this.pot = pot;
     this.state = state;
+    this.smallBlindAmount = smallBlindAmount;
+    this.bigBlindAmount = bigBlindAmount;
   }
 
   /**
@@ -120,7 +125,13 @@ public class BettingRound {
       System.out.println("Invalid action. Nothing to raise. Current bet is 0");
     } else {
       int amount = scanner.nextInt();
-      if
+      if (amount < currentBet) {
+        System.out.println("Invalid action. Must raise by at least " + currentBet);
+      } else if (amount < bigBlindAmount) {
+        System.out.println("Invalid action. Must raise by at least one big blind " + bigBlindAmount);
+      }
+
+
     }
 
     return false;
