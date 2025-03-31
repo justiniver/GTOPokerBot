@@ -129,6 +129,8 @@ public class BettingRound {
         System.out.println("Invalid action. Must raise by at least " + currentBet);
       } else if (amount < bigBlindAmount) {
         System.out.println("Invalid action. Must raise by at least one big blind " + bigBlindAmount);
+      } else {
+        // logic for when raise is valid
       }
 
 
