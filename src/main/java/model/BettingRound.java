@@ -131,6 +131,7 @@ public class BettingRound {
         System.out.println("Invalid action. Must raise by at least one big blind " + bigBlindAmount);
       } else {
         // logic for when raise is valid
+        // update pot, and update the betSB or betBB
       }
 
 
