@@ -214,7 +214,9 @@ public class BettingRound {
     }
   }
 
-
+  public int getPot() {
+    return this.pot;
+  }
 
 }
 
