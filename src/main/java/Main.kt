@@ -5,10 +5,10 @@ import visualization.ProbabilityChart
 import util.CardStrings
 
 fun main() {
-    var sb  = Player(Position.SMALL_BLIND)
-    var bb = Player(Position.BIG_BLIND)
-
-
+    val sb  = Player(Position.SMALL_BLIND)
+    val bb = Player(Position.BIG_BLIND)
+    val bettingRound = BettingRound(sb, bb, 0, GameState.PREFLOP, 10)
+    bettingRound.run()
 }
 
 /**
