@@ -1,9 +1,13 @@
+import model.*
 import simulations.PokerFlopSim
 import simulations.PokerShowdownSim
 import visualization.ProbabilityChart
 import util.CardStrings
 
 fun main() {
+    var sb  = Player(Position.SMALL_BLIND)
+    var bb = Player(Position.BIG_BLIND)
+
 
 }
 
