@@ -48,7 +48,7 @@ public class BettingRound {
       System.out.println("Current bet to call: " + currentBet);
       System.out.println("Your current bet: " + getCurrentPlayerBet(currentPlayer) +
               " | Your stack: " + currentPlayer.getStack());
-      System.out.println("Enter action (FOLD, CHECK, CALL, BET, RAISE):");
+      System.out.println("Enter action (FOLD, CHECK, CALL, BET, RAISE):\n");
 
       String input = scanner.nextLine().trim().toUpperCase();
 
