@@ -56,7 +56,7 @@ public class BettingRound {
       try {
         action = Action.valueOf(input);
       } catch (IllegalArgumentException e) {
-        System.out.println("Invalid action. Please enter a valid action.");
+        System.out.println("Invalid action. Please enter a valid action (FOLD, CHECK, CALL, BET, RAISE).");
         continue;
       }
 
