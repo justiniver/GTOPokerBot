@@ -10,19 +10,23 @@ public class BettingRound {
   private final Player playerSB;
   private final Player playerBB;
   private int pot;
-  private int betSB = 0;
-  private int betBB = 0;
+  private int betSB;
+  private int betBB;
   private int currentBet = 0;
   private int lastRaiseIncrement = 0;
+  private final int smallBlindAmount;
   private final int bigBlindAmount;
 
   public BettingRound(Player playerSB, Player playerBB, int pot, GameState state,
-                      int bigBlindAmount) {
+                      int smallBlindAmount, int bigBlindAmount) {
     this.playerSB = playerSB;
     this.playerBB = playerBB;
     this.pot = pot;
     this.state = state;
+    this.smallBlindAmount = smallBlindAmount;
     this.bigBlindAmount = bigBlindAmount;
+    this.betSB = smallBlindAmount;
+    this.betBB = bigBlindAmount;
   }
 
   /**
@@ -48,7 +52,7 @@ public class BettingRound {
       System.out.println("Current bet to call: " + currentBet);
       System.out.println("Your current bet: " + getCurrentPlayerBet(currentPlayer) +
               " | Your stack: " + currentPlayer.getStack());
-      System.out.println("Enter action (FOLD, CHECK, CALL, BET, RAISE):\n");
+      System.out.println("Enter action (FOLD, CHECK, CALL, BET, RAISE): \n");
 
       String input = scanner.nextLine().trim().toUpperCase();
 

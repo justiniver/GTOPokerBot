@@ -14,14 +14,9 @@ public class Player {
     this.position = position;
   }
 
-  public Player(Position position, HoleCards cards) {
-    this.position = position;
-    this.cards = cards;
-  }
 
-  public Player(Position position, HoleCards cards, int stack) {
+  public Player(Position position, int stack) {
     this.position = position;
-    this.cards = cards;
     this.stack = stack;
   }
 

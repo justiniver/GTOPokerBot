@@ -47,7 +47,7 @@ public class PokerGame implements Game {
     this.smallBlindAmount = smallBlindAmount;
     this.bigBlindAmount = bigBlindAmount;
     if (isBet) {
-      br = new BettingRound(playerSB, playerBB, pot, state, bigBlindAmount);
+      br = new BettingRound(playerSB, playerBB, pot, state, smallBlindAmount, bigBlindAmount);
     }
   }
 

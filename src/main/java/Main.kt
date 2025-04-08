@@ -6,8 +6,8 @@ import util.CardStrings
 
 fun main() {
     val cs = CardStrings()
-    val sb  = Player(Position.SMALL_BLIND, HoleCards(cs.sixHeart, cs.sixDiamond), 1000)
-    val bb = Player(Position.BIG_BLIND, HoleCards(cs.aceClub, cs.fiveSpade), 1000)
+    val sb  = Player(Position.SMALL_BLIND, 1000)
+    val bb = Player(Position.BIG_BLIND, 1000)
     val pokerGame = PokerGame(true, 5, 10, true)
     pokerGame.dealHoleCards()
 }
