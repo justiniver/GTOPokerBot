@@ -9,6 +9,8 @@ import model.rules.HandEvaluation;
  * Implementation of a poker game.
  */
 public class PokerGame implements Game {
+  private BettingRound br;
+  private final boolean isBet;
   private GameState state;
   private final PokerBoard board;
   private final PokerDeck deck;
@@ -20,14 +22,19 @@ public class PokerGame implements Game {
 
 
   public PokerGame() {
-    this(true, 0); // automatically default to a shuffled deck
+    this(true, 0, 0); // automatically default to a shuffled deck
   }
 
   public PokerGame(boolean shuffle) {
-    this(shuffle, 0);
+    this(shuffle, 0, 0);
   }
 
-  public PokerGame(boolean shuffle, int smallBlindAmount) {
+  public PokerGame(boolean shuffle, int smallBlindAmount, int bigBlindAmount) {
+    this(shuffle, smallBlindAmount, bigBlindAmount, false);
+  }
+
+  public PokerGame(boolean shuffle, int smallBlindAmount, int bigBlindAmount, boolean isBet) {
+    this.isBet = isBet;
     this.deck = new PokerDeck();
     this.board = new PokerBoard();
     this.playerSB = new Player(Position.SMALL_BLIND);
@@ -38,7 +45,10 @@ public class PokerGame implements Game {
     }
     this.pot = 0;
     this.smallBlindAmount = smallBlindAmount;
-    this.bigBlindAmount = smallBlindAmount * 2;
+    this.bigBlindAmount = bigBlindAmount;
+    if (isBet) {
+      br = new BettingRound(playerSB, playerBB, pot, state, bigBlindAmount);
+    }
   }
 
   @Override
@@ -46,6 +56,9 @@ public class PokerGame implements Game {
     this.state = GameState.PREFLOP;
     playerSB.setHoleCards(deck.dealCards(2));
     playerBB.setHoleCards(deck.dealCards(2));
+    if (isBet) {
+      br.run();
+    }
   }
 
   public void dealP1SpecificCards(Card card1, Card card2) {
@@ -53,24 +66,36 @@ public class PokerGame implements Game {
     List<Card> p1Cards = List.of(deck.dealSpecificCard(card1), deck.dealSpecificCard(card2));
     playerSB.setHoleCards(p1Cards);
     playerBB.setHoleCards(deck.dealCards(2));
+    if (isBet) {
+      br.run();
+    }
   }
 
   @Override
   public void dealFlop() {
     state = GameState.FLOP;
     board.addCards(deck.dealCards(3));
+    if (isBet) {
+      br.run();
+    }
   }
 
   @Override
   public void dealTurn() {
     state = GameState.TURN;
     board.addCard(deck.dealCard());
+    if (isBet) {
+      br.run();
+    }
   }
 
   @Override
   public void dealRiver() {
     state = GameState.RIVER;
     board.addCard(deck.dealCard());
+    if (isBet) {
+      br.run();
+    }
   }
 
   /**

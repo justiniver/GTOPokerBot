@@ -8,8 +8,8 @@ fun main() {
     val cs = CardStrings()
     val sb  = Player(Position.SMALL_BLIND, HoleCards(cs.sixHeart, cs.sixDiamond), 1000)
     val bb = Player(Position.BIG_BLIND, HoleCards(cs.aceClub, cs.fiveSpade), 1000)
-    val bettingRound = BettingRound(sb, bb, 0, GameState.PREFLOP, 10)
-    bettingRound.run()
+    val pokerGame = PokerGame(true, 5, 10, true)
+    pokerGame.dealHoleCards()
 }
 
 /**
