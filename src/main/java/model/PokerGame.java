@@ -26,7 +26,7 @@ public class PokerGame implements Game {
   }
 
   public PokerGame(boolean shuffle) {
-    this(shuffle, 0, 0);
+    this(shuffle, 0, 0, false);
   }
 
   public PokerGame(boolean shuffle, int smallBlindAmount, int bigBlindAmount) {
@@ -34,11 +34,17 @@ public class PokerGame implements Game {
   }
 
   public PokerGame(boolean shuffle, int smallBlindAmount, int bigBlindAmount, boolean isBet) {
+    this(shuffle, smallBlindAmount, bigBlindAmount, isBet,
+            new Player(Position.SMALL_BLIND), new Player(Position.BIG_BLIND));
+  }
+
+  public PokerGame(boolean shuffle, int smallBlindAmount, int bigBlindAmount, boolean isBet,
+                   Player playerSB, Player playerBB) {
     this.isBet = isBet;
     this.deck = new PokerDeck();
     this.board = new PokerBoard();
-    this.playerSB = new Player(Position.SMALL_BLIND);
-    this.playerBB = new Player(Position.BIG_BLIND);
+    this.playerSB = playerSB;
+    this.playerBB = playerBB;
     this.state = GameState.PREFLOP;
     if (shuffle) {
       deck.shuffle();

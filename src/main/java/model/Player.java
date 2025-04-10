@@ -11,7 +11,7 @@ public class Player {
   private int stack;
 
   public Player(Position position) {
-    this.position = position;
+    this(position, 0);
   }
 
 
