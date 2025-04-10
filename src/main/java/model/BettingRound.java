@@ -12,8 +12,8 @@ public class BettingRound {
   private int pot;
   private int betSB;
   private int betBB;
-  private int currentBet = 0;
-  private int lastRaiseIncrement = 0;
+  private int currentBet;
+  private int lastRaiseIncrement;
   private final int smallBlindAmount;
   private final int bigBlindAmount;
 
@@ -37,12 +37,15 @@ public class BettingRound {
     Player currentPlayer;
     Player otherPlayer;
     if (state == GameState.PREFLOP) {
+      currentBet = bigBlindAmount;
       currentPlayer = playerSB;
       otherPlayer = playerBB;
     } else {
+      currentBet = 0;
       currentPlayer = playerBB;
       otherPlayer = playerSB;
     }
+
 
     Scanner scanner = new Scanner(System.in);
     boolean bettingComplete = false;
@@ -115,7 +118,7 @@ public class BettingRound {
     int chipsNeededToCall = currentBet - currentPlayerBet;
     if (chipsNeededToCall <= 0) {
       System.out.println("Nothing to call--Your current bet is " + currentPlayerBet +
-                      "and the opponent bet " + currentBet);
+                      " and the opponent bet " + currentBet);
       return false;
     }
     if (currentPlayer.getStack() < chipsNeededToCall) {

@@ -43,7 +43,7 @@ public class PokerGame implements Game {
     if (shuffle) {
       deck.shuffle();
     }
-    this.pot = 0;
+    this.pot = smallBlindAmount + bigBlindAmount;
     this.smallBlindAmount = smallBlindAmount;
     this.bigBlindAmount = bigBlindAmount;
     if (isBet) {
