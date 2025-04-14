@@ -20,7 +20,7 @@ public class PokerGame implements Game {
   private final int smallBlindAmount;
   private final int bigBlindAmount;
 
-
+  // May want to enforce certain constructors, having five constructors is probably a bad idea
   public PokerGame() {
     this(true, 0, 0); // automatically default to a shuffled deck
   }
