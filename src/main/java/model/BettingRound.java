@@ -17,7 +17,7 @@ public class BettingRound {
   private final int smallBlindAmount;
   private final int bigBlindAmount;
 
-  // might consider fixing up this constructor so it is easier to use?
+  // might consider fixing up this constructor, so it is easier to use
   public BettingRound(Player playerSB, Player playerBB, int pot, GameState state,
                       int smallBlindAmount, int bigBlindAmount) {
     this.playerSB = playerSB;
