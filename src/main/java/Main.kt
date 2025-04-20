@@ -13,7 +13,8 @@ fun main() {
     pokerGame.dealHoleCards()
 }
 
-
+// create "how to use" section for README and add the code below as an example on how to run
+// equities
 
 //    val cs = CardStrings()
 //    val simulation = PokerShowdownSim()
