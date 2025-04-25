@@ -74,6 +74,13 @@ public class PokerDeck implements Deck {
     this.deck = new ArrayList<>(originalDeck);
   }
 
+  /**
+   * Removes a list of cards from the deck.
+   * Useful for when you want to simulate with assumption of certain cards not in the deck or
+   * possibly to remove certain cards at a frequency (putting opponent on a "range").
+   *
+   * @param cards the list of cards to remove
+   */
   public void removeCards(List<Card> cards) {
     for (Card card : cards) {
       deck.remove(card);
