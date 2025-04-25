@@ -5,6 +5,9 @@ import model.PokerGame
 import model.rules.HandEvaluation
 import util.CardStrings
 
+/**
+ * Simulates hand equities using a Monte Carlo simulation method (assigns a random hand to opponent).
+ */
 class PokerShowdownSim {
     private val cs = CardStrings()
     private var winCount = 0
