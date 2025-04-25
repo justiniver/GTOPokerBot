@@ -6,7 +6,7 @@ import java.util.List;
 import model.rules.HandEvaluation;
 
 /**
- * Implementation of a poker game.
+ * Implementation of a poker game with betting logic.
  */
 public class PokerGame implements Game {
   private BettingRound br;
