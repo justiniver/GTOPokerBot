@@ -21,20 +21,8 @@ public class PokerGame implements Game {
   private final int bigBlindAmount;
 
   // may want to enforce certain constructors, having five constructors is probably a bad idea
-  public PokerGame() {
-    this(true, 0, 0); // automatically default to a shuffled deck
-  }
-
   public PokerGame(boolean shuffle) {
-    this(shuffle, 0, 0, false);
-  }
-
-  public PokerGame(boolean shuffle, int smallBlindAmount, int bigBlindAmount) {
-    this(shuffle, smallBlindAmount, bigBlindAmount, false);
-  }
-
-  public PokerGame(boolean shuffle, int smallBlindAmount, int bigBlindAmount, boolean isBet) {
-    this(shuffle, smallBlindAmount, bigBlindAmount, isBet,
+    this(shuffle, 0, 0, false,
             new Player(Position.SMALL_BLIND), new Player(Position.BIG_BLIND));
   }
 

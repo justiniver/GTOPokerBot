@@ -15,7 +15,7 @@ public class TestPokerGame {
   @Before
   public void init() {
     cs = new CardStrings();
-    pokerGame = new PokerGame();
+    pokerGame = new PokerGame(false);
   }
 
   @Test
