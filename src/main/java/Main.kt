@@ -11,6 +11,11 @@ fun main() {
     val bb = Player(Position.BIG_BLIND, 1000)
     val pokerGame = PokerGame(true, 5, 10, true, sb, bb)
     pokerGame.dealHoleCards()
+    println(pokerGame.playerBB.holeCards.toString())
+    println(pokerGame.playerSB.holeCards.toString())
+    pokerGame.dealFlop()
+    pokerGame.dealTurn()
+    pokerGame.dealRiver()
 }
 
 // create "how to use" section for README and add the code below as an example on how to run
