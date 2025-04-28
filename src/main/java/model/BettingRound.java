@@ -51,9 +51,10 @@ public class BettingRound {
     boolean bettingComplete = false;
 
     while (!bettingComplete) {
-      System.out.println("\nPot: " + pot);
+      System.out.println("Pot: " + pot);
       System.out.println("Current bet to call: " + currentBet);
-      System.out.println("Your current bet: " + getCurrentPlayerBet(currentPlayer) +
+      System.out.println("Your (" + currentPlayer.getPosition() + ") current bet: "
+              + getCurrentPlayerBet(currentPlayer) +
               " | Your stack: " + currentPlayer.getStack());
       System.out.println("Enter action (FOLD, CHECK, CALL, BET, RAISE): \n");
 
@@ -116,8 +117,8 @@ public class BettingRound {
 
   private boolean processCall(Player currentPlayer) {
     int currentPlayerBet = getCurrentPlayerBet(currentPlayer);
-    int chipsNeededToCall = currentBet - currentPlayerBet;
-    if (chipsNeededToCall <= 0) {
+    int chipsNeededToCall = currentPlayerBet - currentBet;
+    if (chipsNeededToCall >= 0) {
       System.out.println("Nothing to call--Your current bet is " + currentPlayerBet +
                       " and the opponent bet " + currentBet);
       return false;
