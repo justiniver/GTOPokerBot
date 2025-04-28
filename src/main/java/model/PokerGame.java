@@ -50,9 +50,6 @@ public class PokerGame implements Game {
     this.state = GameState.PREFLOP;
     playerSB.setHoleCards(deck.dealCards(2));
     playerBB.setHoleCards(deck.dealCards(2));
-    if (isBet) {
-      br.run();
-    }
   }
 
   public void dealP1SpecificCards(Card card1, Card card2) {
@@ -60,36 +57,24 @@ public class PokerGame implements Game {
     List<Card> p1Cards = List.of(deck.dealSpecificCard(card1), deck.dealSpecificCard(card2));
     playerSB.setHoleCards(p1Cards);
     playerBB.setHoleCards(deck.dealCards(2));
-    if (isBet) {
-      br.run();
-    }
   }
 
   @Override
   public void dealFlop() {
     state = GameState.FLOP;
     board.addCards(deck.dealCards(3));
-    if (isBet) {
-      br.run();
-    }
   }
 
   @Override
   public void dealTurn() {
     state = GameState.TURN;
     board.addCard(deck.dealCard());
-    if (isBet) {
-      br.run();
-    }
   }
 
   @Override
   public void dealRiver() {
     state = GameState.RIVER;
     board.addCard(deck.dealCard());
-    if (isBet) {
-      br.run();
-    }
   }
 
   /**
@@ -176,6 +161,10 @@ public class PokerGame implements Game {
   }
 
   public int getSmallBlindAmount() {
+    return this.smallBlindAmount;
+  }
+
+  public int getBigBlindAmount() {
     return this.smallBlindAmount;
   }
 }

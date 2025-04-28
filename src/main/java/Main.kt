@@ -1,3 +1,4 @@
+import controller.*
 import model.*
 import simulations.PokerFlopSim
 import simulations.PokerShowdownSim
@@ -10,12 +11,9 @@ fun main() {
     val sb  = Player(Position.SMALL_BLIND, 1000)
     val bb = Player(Position.BIG_BLIND, 1000)
     val pokerGame = PokerGame(true, 5, 10, true, sb, bb)
-    pokerGame.dealHoleCards()
-    println(pokerGame.playerBB.holeCards.toString())
-    println(pokerGame.playerSB.holeCards.toString())
-    pokerGame.dealFlop()
-    pokerGame.dealTurn()
-    pokerGame.dealRiver()
+    val pokerController = PokerController()
+    pokerController.playHand(pokerGame)
+
 }
 
 // create "how to use" section for README and add the code below as an example on how to run

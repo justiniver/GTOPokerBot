@@ -17,7 +17,6 @@ public class BettingRound {
   private final int smallBlindAmount;
   private final int bigBlindAmount;
 
-  // might consider fixing up this constructor, so it is easier to use
   public BettingRound(Player playerSB, Player playerBB, int pot, GameState state,
                       int smallBlindAmount, int bigBlindAmount) {
     this.playerSB = playerSB;
@@ -34,7 +33,7 @@ public class BettingRound {
    * Execution method to run the betting round.
    * Does not terminate unless player actions indicate termination (e.g., a player folds).
    */
-  public void run() {
+  public boolean run() {
     Player currentPlayer;
     Player otherPlayer;
     if (state == GameState.PREFLOP) {
@@ -71,7 +70,7 @@ public class BettingRound {
       boolean endRound = processAction(action, currentPlayer);
       if (endRound) {
         System.out.println("Betting round ended due to action: " + action);
-        break;
+        return false;
       }
 
       if (betSB == betBB && currentBet != 0) {
@@ -85,6 +84,7 @@ public class BettingRound {
     }
 
     System.out.println("Final pot: " + pot);
+    return true;
   }
 
   /**
