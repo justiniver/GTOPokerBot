@@ -1,7 +1,14 @@
 package controller;
 
+import model.PokerBoard;
+import model.GameState;
+import model.Player;
 import model.PokerGame;
 import model.BettingRound;
+import model.PokerHand;
+import model.Position;
+import model.RoundCondition;
+import model.rules.HandEvaluation;
 
 public class PokerController implements Controller {
   public PokerController() {
@@ -9,56 +16,125 @@ public class PokerController implements Controller {
 
   @Override
   public void playHand(PokerGame pokerGame) {
-    System.out.println("Current state " + pokerGame.getState());
+    System.out.println("\n----------Current state: " + GameState.PREFLOP + "----------");
     pokerGame.dealHoleCards();
     BettingRound preflopBR = new BettingRound(pokerGame.getPlayerSB(), pokerGame.getPlayerBB(),
-            pokerGame.getPot(), pokerGame.getState(), pokerGame.getSmallBlindAmount(),
+            pokerGame.getPot(), GameState.PREFLOP, pokerGame.getSmallBlindAmount(),
             pokerGame.getBigBlindAmount());
-    if (!preflopBR.run()) {
 
+    if (checkRoundCondition(pokerGame, preflopBR)) {
       return;
     }
 
-    System.out.println("Current state " + pokerGame.getState());
+    System.out.println("\n----------Current state: " + GameState.FLOP + "----------");
     pokerGame.dealFlop();
+    System.out.println(pokerGame.getBoard());
     BettingRound flopBR = new BettingRound(pokerGame.getPlayerSB(), pokerGame.getPlayerBB(),
-            pokerGame.getPot(), pokerGame.getState(), pokerGame.getSmallBlindAmount(),
+            pokerGame.getPot(), GameState.FLOP, pokerGame.getSmallBlindAmount(),
             pokerGame.getBigBlindAmount());
-    if (!flopBR.run()) {
-      playerFoldLogic();
+
+    if (checkRoundCondition(pokerGame, flopBR)) {
       return;
     }
 
-    System.out.println("Current state " + pokerGame.getState());
+    System.out.println("\n----------Current state: " + GameState.TURN + "----------");
     pokerGame.dealTurn();
+    System.out.println(pokerGame.getBoard());
     BettingRound turnBR = new BettingRound(pokerGame.getPlayerSB(), pokerGame.getPlayerBB(),
-            pokerGame.getPot(), pokerGame.getState(), pokerGame.getSmallBlindAmount(),
+            pokerGame.getPot(), GameState.TURN, pokerGame.getSmallBlindAmount(),
             pokerGame.getBigBlindAmount());
 
-    if (!turnBR.run()) {
-      playerFoldLogic();
+    if (checkRoundCondition(pokerGame, turnBR)) {
       return;
     }
 
-    System.out.println("Current state " + pokerGame.getState());
+    System.out.println("\n----------Current state: " + GameState.RIVER + "----------");
     pokerGame.dealRiver();
+    System.out.println(pokerGame.getBoard());
     BettingRound riverBR = new BettingRound(pokerGame.getPlayerSB(), pokerGame.getPlayerBB(),
-            pokerGame.getPot(), pokerGame.getState(), pokerGame.getSmallBlindAmount(),
+            pokerGame.getPot(), GameState.RIVER, pokerGame.getSmallBlindAmount(),
             pokerGame.getBigBlindAmount());
 
-    if (!riverBR.run()) {
-      playerFoldLogic();
+    checkRoundCondition(pokerGame, riverBR);
+  }
+
+  /**
+   *
+   * @param pokerGame the poker game
+   * @param bettingRound the current betting round
+   * @return true if hand is over, false otherwise
+   */
+  private boolean checkRoundCondition(PokerGame pokerGame, BettingRound bettingRound) {
+    RoundCondition flopRoundCondition = bettingRound.run();
+    if (flopRoundCondition == RoundCondition.FOLD) {
+      playerFoldLogic(pokerGame, bettingRound);
+      return true;
+    } else if (flopRoundCondition == RoundCondition.SHOWDOWN) {
+      pokerGame.setPot(bettingRound.getPot());
+      showdownLogic(pokerGame);
+      return true;
     } else {
-      showdownLogic();
+      pokerGame.setPot(bettingRound.getPot());
     }
+    return false;
   }
 
-  private void playerFoldLogic() {
+  private void playerFoldLogic(PokerGame pokerGame, BettingRound bettingRound) {
+    Player playerSB = pokerGame.getPlayerSB();
+    Player playerBB = pokerGame.getPlayerBB();
+    if (bettingRound.getCurrPlayer().getPosition() == Position.SMALL_BLIND) {
+      playerBB.addStack(pokerGame.getPot());
+    } else {
+      playerSB.addStack(pokerGame.getPot());
+    }
 
+    System.out.println("New SMALL_BLIND stack: " + playerSB.getStack());
+    System.out.println("New BIG_BLIND stack: " + playerBB.getStack());
   }
 
-  private void showdownLogic() {
+  private void showdownLogic(PokerGame pokerGame) {
+    if (pokerGame.getState() == GameState.PREFLOP) {
+      pokerGame.dealFlop();
+      System.out.println(pokerGame.getBoard());
+      pokerGame.dealTurn();
+      System.out.println(pokerGame.getBoard());
+      pokerGame.dealRiver();
+      System.out.println(pokerGame.getBoard());
+    } else if (pokerGame.getState() == GameState.FLOP) {
+      pokerGame.dealTurn();
+      System.out.println(pokerGame.getBoard());
+      pokerGame.dealRiver();
+      System.out.println(pokerGame.getBoard());
+    } else if (pokerGame.getState() == GameState.TURN) {
+      pokerGame.dealRiver();
+      System.out.println(pokerGame.getBoard());
+    }
 
+
+    HandEvaluation eval = new HandEvaluation();
+    Player playerSB = pokerGame.getPlayerSB();
+    Player playerBB = pokerGame.getPlayerBB();
+    PokerBoard board = pokerGame.getBoard();
+    PokerHand handSB = pokerGame.getBestFiveCardHand(playerSB, board);
+    PokerHand handBB = pokerGame.getBestFiveCardHand(playerBB, board);
+
+
+    System.out.println("\n----------SHOWDOWN----------\n");
+    System.out.println(pokerGame.getBoard().toString());
+    System.out.println("SMALL_BLIND " + playerSB.getHoleCards().toString());
+    System.out.println("BIG_BLIND " + playerBB.getHoleCards().toString());
+    if (eval.isHand1Better(handSB, handBB)) {
+      System.out.println("SMALL_BLIND wins with: " + handSB.getHandRank()
+              + " (" + handSB.toString() + ")");
+      playerSB.addStack(pokerGame.getPot());
+    } else {
+      System.out.println("BIG_BLIND wins with: " + handBB.getHandRank()
+              + " (" + handBB.toString() + ")");
+      playerBB.addStack(pokerGame.getPot());
+    }
+
+    System.out.println("New SMALL_BLIND stack: " + playerSB.getStack());
+    System.out.println("New BIG_BLIND stack: " + playerBB.getStack());
   }
 
 }

@@ -8,7 +8,7 @@ import util.CardStrings
 /**
  * Simulates hand equities using a Monte Carlo simulation method (assigns a random hand to opponent).
  */
-class PokerShowdownSim {
+class PokerEquitySim {
     private val cs = CardStrings()
     private var winCount = 0
     private var trialsCount = 0

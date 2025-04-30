@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 import model.rules.HandEvaluation;
 
 /**
@@ -33,7 +35,7 @@ public class PokerHand implements Hand {
 
   @Override
   public String toString() {
-    return "Hand: " + hand;
+    return "Hand: " + Arrays.toString(hand);
   }
 
 }

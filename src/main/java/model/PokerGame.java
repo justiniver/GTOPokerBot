@@ -9,8 +9,6 @@ import model.rules.HandEvaluation;
  * Implementation of a poker game with betting logic.
  */
 public class PokerGame implements Game {
-  private BettingRound br;
-  private final boolean isBet;
   private GameState state;
   private final PokerBoard board;
   private final PokerDeck deck;
@@ -22,13 +20,12 @@ public class PokerGame implements Game {
 
   // may want to enforce certain constructors, having five constructors is probably a bad idea
   public PokerGame(boolean shuffle) {
-    this(shuffle, 0, 0, false,
+    this(shuffle, 0, 0,
             new Player(Position.SMALL_BLIND), new Player(Position.BIG_BLIND));
   }
 
-  public PokerGame(boolean shuffle, int smallBlindAmount, int bigBlindAmount, boolean isBet,
+  public PokerGame(boolean shuffle, int smallBlindAmount, int bigBlindAmount,
                    Player playerSB, Player playerBB) {
-    this.isBet = isBet;
     this.deck = new PokerDeck();
     this.board = new PokerBoard();
     this.playerSB = playerSB;
@@ -37,12 +34,11 @@ public class PokerGame implements Game {
     if (shuffle) {
       deck.shuffle();
     }
-    this.pot = smallBlindAmount + bigBlindAmount;
+    if (state == GameState.PREFLOP) {
+      this.pot = smallBlindAmount + bigBlindAmount;
+    }
     this.smallBlindAmount = smallBlindAmount;
     this.bigBlindAmount = bigBlindAmount;
-    if (isBet) {
-      br = new BettingRound(playerSB, playerBB, pot, state, smallBlindAmount, bigBlindAmount);
-    }
   }
 
   @Override
@@ -156,6 +152,10 @@ public class PokerGame implements Game {
     return deck;
   }
 
+  public void setPot(int potAmount) {
+    this.pot = potAmount;
+  }
+
   public int getPot() {
     return this.pot;
   }
@@ -165,6 +165,6 @@ public class PokerGame implements Game {
   }
 
   public int getBigBlindAmount() {
-    return this.smallBlindAmount;
+    return this.bigBlindAmount;
   }
 }

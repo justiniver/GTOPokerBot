@@ -1,19 +1,13 @@
 import controller.*
 import model.*
-import simulations.PokerFlopSim
-import simulations.PokerShowdownSim
-import visualization.ProbabilityChart
-import util.CardStrings
 
 
 fun main() {
-    val cs = CardStrings()
     val sb  = Player(Position.SMALL_BLIND, 1000)
     val bb = Player(Position.BIG_BLIND, 1000)
-    val pokerGame = PokerGame(true, 5, 10, true, sb, bb)
+    val pokerGame = PokerGame(true, 5, 10, sb, bb)
     val pokerController = PokerController()
     pokerController.playHand(pokerGame)
-
 }
 
 // create "how to use" section for README and add the code below as an example on how to run
