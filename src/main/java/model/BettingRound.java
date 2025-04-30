@@ -72,13 +72,7 @@ public class BettingRound {
 
       Action action = getAction();
 
-      RoundCondition roundCondition;
-      try {
-        roundCondition = processAction(action, currentPlayer);
-      } catch (IllegalStateException illegalStateExceptions) {
-        System.out.println(illegalStateExceptions.getLocalizedMessage());
-        continue;
-      }
+      RoundCondition roundCondition = getRoundCondition(action, currentPlayer);
 
       if (roundCondition == RoundCondition.FOLD) {
         System.out.println("Betting round ended due to " + currentPlayer.getPosition() + " folding.");
@@ -139,6 +133,28 @@ public class BettingRound {
     return action;
   }
 
+  /**
+   * Returns the round condition the chosen action yields.
+   * Re-prompts getAction if a bet or raise size is invalid
+   *
+   * @param action the action
+   * @param currentPlayer the current player
+   * @return the round condition
+   */
+  private RoundCondition getRoundCondition(Action action, Player currentPlayer) {
+    RoundCondition roundCondition = null;
+    while (roundCondition == null) {
+      try {
+        roundCondition = processAction(action, currentPlayer);
+      } catch (IllegalStateException illegalStateExceptions) {
+        System.out.println(illegalStateExceptions.getLocalizedMessage());
+        action = getAction();
+      }
+    }
+
+    return roundCondition;
+  }
+
 
   /**
    * Processes the actions and prints out useful information to users regarding their action.
@@ -164,7 +180,7 @@ public class BettingRound {
   private RoundCondition processCheck(Player currentPlayer) {
     int currentPlayerBet = getCurrentPlayerBet(currentPlayer);
     if (currentPlayerBet < currentBet) {
-      throw new IllegalArgumentException("Invalid action. Cannot check as current bet is " + currentBet);
+      throw new IllegalStateException("Invalid action. Cannot check as current bet is " + currentBet);
     }
 
     return RoundCondition.CONTINUE;
