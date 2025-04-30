@@ -70,19 +70,11 @@ public class BettingRound {
         System.out.println("Amount to call is: " + (currentBet - getCurrentPlayerBet(currentPlayer)));
       }
 
-      RoundCondition roundCondition;
-      System.out.println("Enter action (FOLD, CHECK, CALL, BET, RAISE): ");
-      String input = scanner.nextLine().trim().toUpperCase();
+      Action action = getAction();
 
-      Action action;
+      RoundCondition roundCondition;
       try {
-        action = Action.valueOf(input);
         roundCondition = processAction(action, currentPlayer);
-      } catch (IllegalArgumentException illegalArgumentException) {
-        System.out.println(illegalArgumentException.getLocalizedMessage());
-        System.out.println("Invalid action (check spelling). " +
-                "Please enter a valid action (FOLD, CHECK, CALL, BET, RAISE).");
-        continue;
       } catch (IllegalStateException illegalStateExceptions) {
         System.out.println(illegalStateExceptions.getLocalizedMessage());
         continue;
@@ -123,6 +115,28 @@ public class BettingRound {
 
     System.out.println("Final pot: " + pot);
     return RoundCondition.CONTINUE;
+  }
+
+  /**
+   * Prompts and returns player action.
+   * Will continue prompting until valid action is inputted.
+   *
+   * @return the inputted action
+   */
+  private Action getAction() {
+    System.out.println("Enter action (FOLD, CHECK, CALL, BET, RAISE): ");
+    Action action = null;
+    while (action == null) {
+      String input = scanner.nextLine().trim().toUpperCase();
+      try {
+        action = Action.valueOf(input);
+      } catch (IllegalArgumentException e){
+        System.out.println("Invalid action (check spelling). " +
+                "Please enter a valid action (FOLD, CHECK, CALL, BET, RAISE).");
+      }
+    }
+
+    return action;
   }
 
 
