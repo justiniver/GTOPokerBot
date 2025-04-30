@@ -71,10 +71,8 @@ public class BettingRound {
       }
 
       RoundCondition roundCondition;
-      String input;
       System.out.println("Enter action (FOLD, CHECK, CALL, BET, RAISE): ");
-      input = scanner.nextLine().trim().toUpperCase();
-
+      String input = scanner.nextLine().trim().toUpperCase();
 
       Action action;
       try {
@@ -135,6 +133,8 @@ public class BettingRound {
    * @param currentPlayer the current player (small blind or big blind)
    * @return FOLD if someone folded, SHOWDOWN if someone calls for all their chips or action
    * is checked/called down on river, CONTINUE if betting round is not over.
+   *
+   * @throws IllegalStateException if action violates poker rules (e.g., raise size too small)
    */
   private RoundCondition processAction(Action action, Player currentPlayer) {
     return switch (action) {
