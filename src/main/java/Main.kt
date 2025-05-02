@@ -1,4 +1,4 @@
-import bots.SimpleCheckCallBot
+import bots.*;
 import controller.*
 import model.*
 
@@ -8,7 +8,7 @@ fun main() {
     val bb = Player(Position.BIG_BLIND, 1000)
 
     sb.strategy = SimpleCheckCallBot()
-    bb.strategy = SimpleCheckCallBot()
+    bb.strategy = SimpleCheckFoldBot()
 
     val pokerGame = PokerGame(true, 5, 10, sb, bb)
     val pokerController = PokerController()
