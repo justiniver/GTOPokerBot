@@ -1,5 +1,6 @@
 package model;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -17,7 +18,6 @@ public class BettingRound {
   private final int smallBlindAmount;
   private final int bigBlindAmount;
   private Player currPlayer;
-  Scanner scanner;
 
   public BettingRound(Player playerSB, Player playerBB, int pot, GameState state,
                       int smallBlindAmount, int bigBlindAmount) {
@@ -34,8 +34,6 @@ public class BettingRound {
       this.betSB = 0;
       this.betBB = 0;
     }
-    this.scanner = new Scanner(System.in);
-
   }
 
   /**
@@ -70,9 +68,23 @@ public class BettingRound {
         System.out.println("Amount to call is: " + (currentBet - getCurrentPlayerBet(currentPlayer)));
       }
 
-      Action action = getAction();
+      GameView view = new GameView(
+              state,
+              pot,
+              currentBet - getCurrentPlayerBet(currentPlayer),
+              bigBlindAmount,
+              currentPlayer.getStack(),
+              List.of(),
+              currentPlayer.getHoleCards());
 
-      RoundCondition roundCondition = getRoundCondition(action, currentPlayer);
+      Decision decision = currentPlayer.getStrategy().decide(view);
+      RoundCondition roundCondition;
+      try {
+        roundCondition = processAction(decision.action(), decision.amount(), currentPlayer);
+      } catch (IllegalStateException e) {
+        System.out.println(e.getMessage());
+        continue;
+      }
 
       if (roundCondition == RoundCondition.FOLD) {
         System.out.println("Betting round ended due to " + currentPlayer.getPosition() + " folding.");
@@ -112,51 +124,6 @@ public class BettingRound {
   }
 
   /**
-   * Prompts and returns player action.
-   * Will continue prompting until valid action is inputted.
-   *
-   * @return the inputted action
-   */
-  private Action getAction() {
-    System.out.println("Enter action (FOLD, CHECK, CALL, BET, RAISE): ");
-    Action action = null;
-    while (action == null) {
-      String input = scanner.nextLine().trim().toUpperCase();
-      try {
-        action = Action.valueOf(input);
-      } catch (IllegalArgumentException e){
-        System.out.println("Invalid action (check spelling). " +
-                "Please enter a valid action (FOLD, CHECK, CALL, BET, RAISE).");
-      }
-    }
-
-    return action;
-  }
-
-  /**
-   * Returns the round condition the chosen action yields.
-   * Re-prompts getAction if a bet or raise size is invalid
-   *
-   * @param action the action
-   * @param currentPlayer the current player
-   * @return the round condition
-   */
-  private RoundCondition getRoundCondition(Action action, Player currentPlayer) {
-    RoundCondition roundCondition = null;
-    while (roundCondition == null) {
-      try {
-        roundCondition = processAction(action, currentPlayer);
-      } catch (IllegalStateException illegalStateExceptions) {
-        System.out.println(illegalStateExceptions.getLocalizedMessage());
-        action = getAction();
-      }
-    }
-
-    return roundCondition;
-  }
-
-
-  /**
    * Processes the actions and prints out useful information to users regarding their action.
    *
    * @param action the current action (FOLD, CALL, CHECK, BET, RAISE)
@@ -166,13 +133,13 @@ public class BettingRound {
    *
    * @throws IllegalStateException if action violates poker rules (e.g., raise size too small)
    */
-  private RoundCondition processAction(Action action, Player currentPlayer) {
+  private RoundCondition processAction(Action action, int amount, Player currentPlayer) {
     return switch (action) {
       case FOLD -> RoundCondition.FOLD;
       case CHECK -> processCheck(currentPlayer);
       case CALL -> processCall(currentPlayer);
-      case BET -> processBet(currentPlayer);
-      case RAISE -> processRaise(currentPlayer);
+      case BET -> processBet(currentPlayer, amount);
+      case RAISE -> processRaise(currentPlayer, amount);
     };
 
   }
@@ -207,13 +174,10 @@ public class BettingRound {
     return RoundCondition.CONTINUE;
   }
 
-  private RoundCondition processBet(Player currentPlayer) {
+  private RoundCondition processBet(Player currentPlayer, int amount) {
     if (currentBet != 0) {
       throw new IllegalStateException("Invalid action. Current bet is " + currentBet + ". Use RAISE instead");
     }
-    System.out.println("Enter amount to bet: ");
-    Scanner scanInt = new Scanner(System.in);
-    int amount = scanInt.nextInt();
 
     if (amount < bigBlindAmount) {
       throw new IllegalStateException("Invalid action. You must bet at least " + bigBlindAmount);
@@ -237,15 +201,12 @@ public class BettingRound {
     return RoundCondition.CONTINUE;
   }
 
-  private RoundCondition processRaise(Player currentPlayer) {
-    int currentPlayerBet = getCurrentPlayerBet(currentPlayer);
+  private RoundCondition processRaise(Player currentPlayer, int raiseIncrement) {
     if (currentBet == 0) {
       throw new IllegalStateException("Invalid action. Nothing to raise. Current bet is 0");
     }
-    System.out.println("Enter amount to raise by: ");
-    Scanner scanInt = new Scanner(System.in);
-    int raiseIncrement = scanInt.nextInt();
-    int newTotalBet = currentPlayerBet + raiseIncrement;
+
+    int newTotalBet = getCurrentPlayerBet(currentPlayer) + raiseIncrement;
 
     if (raiseIncrement < lastRaiseIncrement) {
       throw new IllegalStateException("Invalid action. You must raise by at least " + lastRaiseIncrement);
