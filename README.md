@@ -1,7 +1,7 @@
 # GTO Poker Bot & Simulations
 
 I have been interested in poker theory for a little while now, so I thought I might as well try and create something related to Poker. For now, I am specifically looking into
-a Texas Hold'em Poker variation, *Heads-Up Hold'em*. I am working my way towards setting up a simulator and eventually creating a GTO poker bot.
+a Texas Hold'em Poker variation, *Heads-Up Hold'em*. So far, I have set up the simulations and now am working towards creating a GTO poker bot.
 
 ## JFreeChart and Monte Carlo Simuluations
 
@@ -51,3 +51,24 @@ We see the opposite with **56 suited**. It seems like **56 suited** has **~47%**
 [^2]: Future additions includes the implementation of full game simulations as well as the implementation of counterfactual regret minimization among other useful metrics.
 [^3]: Equity refers to the probability you are to win at showdown (i.e., how often a hand wins after all five community cards are dealt). If you are trying to figure out your equity on the flop, you need to make an educated guess on the strength of your opponents hand, and then calculate how many outs you have. You will then need to estimate how often those outs will appear on the turn and/or river. This is understandably quite hard to do, which is why we have computers.
 [^4]: I was very relieved when I saw this result from my simulation. It is well known that aces have around 85% equity preflop against an unrestricted range, so this means that most likely my simulations are functioning correctly.
+
+## Running Equity Simulations
+
+The code needed to create and run these equity convergence calculationns and create the graph is given below. You can run this in ````Main.kt```` and it should take ~5 minutes though you can modify this by running less or more simulations.
+
+````java
+val cs = CardStrings()
+val simulation = PokerShowdownSim()
+val trialsList = (50..10000 step 10).toList()
+val probabilities = mutableListOf<Double>()
+
+for (trials in trialsList) {
+  simulation.runShowdownSimulation(trials, cs.queenDiamond, cs.tenDiamond)
+  val probability = simulation.getWinCount().toDouble() / simulation.getTrialsCount()
+  probabilities.add(probability)
+}
+
+val chart = ProbabilityChart()
+chart.displayChart(trialsList, probabilities, "Queen-Ten Suited Equity")
+
+````
