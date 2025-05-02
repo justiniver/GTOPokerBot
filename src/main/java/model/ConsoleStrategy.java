@@ -12,14 +12,24 @@ public class ConsoleStrategy implements PlayerStrategy {
       String action = in.nextLine().trim().toUpperCase();
       try {
         Action a = Action.valueOf(action);
+
+        if (a == Action.BET && view.currentBet() > 0) {
+          System.out.println("Invalid action. Cannot BET when there's already a bet. Use RAISE instead.");
+          continue;
+        }
+        if (a == Action.RAISE && view.currentBet() == 0) {
+          System.out.println("Invalid action. Cannot RAISE when there's no bet. Use BET instead.");
+          continue;
+        }
+
         int amt = 0;
         if (a == Action.BET || a == Action.RAISE) {
           System.out.print("Enter amount: ");
           amt = Integer.parseInt(in.nextLine().trim());
         }
         return new Decision(a, amt);
-      } catch (Exception ex) {
-        System.out.println("Invalid input – try again.");
+      } catch (IllegalArgumentException e) {
+        System.out.println("Invalid action (check spelling).");
       }
     }
   }

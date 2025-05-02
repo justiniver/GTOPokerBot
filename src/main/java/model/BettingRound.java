@@ -59,31 +59,31 @@ public class BettingRound {
     boolean bettingComplete = false;
 
     while (!bettingComplete) {
-      System.out.println("\nPot: " + pot);
-      System.out.println("Your opponents (" + otherPlayer.getPosition() + ") current bet this round: " + currentBet);
-      System.out.println("Your (" + currentPlayer.getPosition() + ") current bet: "
-              + getCurrentPlayerBet(currentPlayer) +
-              " | Your stack: " + currentPlayer.getStack());
-      if (currentBet - getCurrentPlayerBet(currentPlayer) > 0) {
-        System.out.println("Amount to call is: " + (currentBet - getCurrentPlayerBet(currentPlayer)));
-      }
+      printGameState(currentPlayer, otherPlayer);
 
       GameView view = new GameView(
               state,
               pot,
               currentBet - getCurrentPlayerBet(currentPlayer),
+              currentBet,
               bigBlindAmount,
               currentPlayer.getStack(),
               List.of(),
               currentPlayer.getHoleCards());
 
-      Decision decision = currentPlayer.getStrategy().decide(view);
-      RoundCondition roundCondition;
-      try {
-        roundCondition = processAction(decision.action(), decision.amount(), currentPlayer);
-      } catch (IllegalStateException e) {
-        System.out.println(e.getMessage());
-        continue;
+      Decision decision;
+      RoundCondition roundCondition = null;
+      boolean validAction = false;
+
+      while (!validAction) {
+        decision = currentPlayer.getStrategy().decide(view);
+
+        try {
+          roundCondition = processAction(decision.action(), decision.amount(), currentPlayer);
+          validAction = true;
+        } catch (IllegalStateException e) {
+          System.out.println(e.getMessage());
+        }
       }
 
       if (roundCondition == RoundCondition.FOLD) {
@@ -121,6 +121,17 @@ public class BettingRound {
 
     System.out.println("Final pot: " + pot);
     return RoundCondition.CONTINUE;
+  }
+
+  private void printGameState(Player currentPlayer, Player otherPlayer) {
+    System.out.println("\nPot: " + pot);
+    System.out.println("Your opponents (" + otherPlayer.getPosition() + ") current bet this round: " + currentBet);
+    System.out.println("Your (" + currentPlayer.getPosition() + ") current bet: "
+            + getCurrentPlayerBet(currentPlayer) +
+            " | Your stack: " + currentPlayer.getStack());
+    if (currentBet - getCurrentPlayerBet(currentPlayer) > 0) {
+      System.out.println("Amount to call is: " + (currentBet - getCurrentPlayerBet(currentPlayer)));
+    }
   }
 
   /**

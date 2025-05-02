@@ -6,6 +6,7 @@ public record GameView(
         GameState street,
         int pot,
         int toCall,
+        int currentBet,
         int minRaise,
         int myStack,
         List<Card> board,
