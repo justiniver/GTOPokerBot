@@ -9,15 +9,23 @@ public class Player {
   private final Position position;
   private HoleCards cards;
   private int stack;
+  private PlayerStrategy strategy = new ConsoleStrategy();
 
   public Player(Position position) {
     this(position, 0);
   }
 
-
   public Player(Position position, int stack) {
     this.position = position;
     this.stack = stack;
+  }
+
+  public void setStrategy(PlayerStrategy strategy) {
+    this.strategy = strategy;
+  }
+
+  public PlayerStrategy getStrategy() {
+    return strategy;
   }
 
   public void addStack(int add) {
