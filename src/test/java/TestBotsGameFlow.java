@@ -12,7 +12,7 @@ import util.CardStrings;
  * Tests game flow and makes sure the model and controller are working together and correctly.
  * Will implement after creating some rule-based bots.
  */
-public class TestGameFlow {
+public class TestBotsGameFlow {
   private HandEvaluation eval;
   private Player playerSB;
   private Player playerBB;
