@@ -33,6 +33,8 @@ public class TestGameFlow {
   public void testCheckingItDown() {
     playerSB.setStrategy(new SimpleCheckCallBot());
     playerBB.setStrategy(new SimpleCheckCallBot());
+    Assert.assertEquals(1000, playerSB.getStack());
+    Assert.assertEquals(1000, playerBB.getStack());
     pokerController.playHand(pokerGame);
     Assert.assertEquals(2000, playerSB.getStack() + playerBB.getStack());
     Assert.assertNotEquals(1000, playerSB.getStack());
