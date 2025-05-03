@@ -8,7 +8,7 @@ import java.util.List;
 import model.*;
 import util.CardStrings;
 
-public class TestPokerGame {
+public class TestPokerGameClass {
   private CardStrings cs;
   private PokerGame pokerGame;
 
