@@ -2,6 +2,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import bots.SimpleCheckCallBot;
 import controller.PokerController;
 import model.*;
 import model.rules.*;
@@ -30,7 +31,12 @@ public class TestGameFlow {
 
   @Test
   public void testCheckingItDown() {
+    playerSB.setStrategy(new SimpleCheckCallBot());
+    playerBB.setStrategy(new SimpleCheckCallBot());
     pokerController.playHand(pokerGame);
+    Assert.assertEquals(2000, playerSB.getStack() + playerBB.getStack());
+    Assert.assertNotEquals(1000, playerSB.getStack());
+    Assert.assertNotEquals(1000, playerBB.getStack());
   }
 
 }
