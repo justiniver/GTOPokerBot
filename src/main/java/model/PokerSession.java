@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public class PokerSession {
-  private PokerGame pokerGame;
   private Map<HandRank, Integer> winningHandRankFreq;
   private final int smallBlindAmount;
   private final int bigBlindAmount;
@@ -22,17 +21,14 @@ public class PokerSession {
     this.winningHandRankFreq = new HashMap<>();
   }
 
-  public void startNewGame(PokerGame pokerGame) {
+  public void runGames() {
 
   }
+
+
 
   public List<Integer> getWinningHandRankFreq() {
     return new ArrayList<>(winningHandRankFreq.values());
-  }
-
-
-  public PokerGame getPokerGame() {
-    return pokerGame;
   }
 
 }
