@@ -38,15 +38,29 @@ public class PokerSession {
       controller.playHand(currentGame);
       continuePlay = promptContinueGame();
     }
-    System.out.println("\n----------POKER SESSION HAS CONCLUDED----------\n");
-    System.out.println("SMALL_BLIND stack: " + playerSB.getStack());
-    System.out.println("BIG_BLIND stack: " + playerBB.getStack());
+    concludedGameOutput();
+  }
+
+  public void runNumberOfGames(int numberOfGames) {
+    for (int i = 0; i < numberOfGames; i++) {
+      currentGame = new PokerGame(true, smallBlindAmount, bigBlindAmount,
+              playerSB, playerBB);
+      PokerController controller = new PokerController();
+      controller.playHand(currentGame);
+    }
+    concludedGameOutput();
   }
 
   private boolean promptContinueGame() {
     Scanner scanner = new Scanner(System.in);
-    System.out.println("Would you like to continue playing? Enter YES to continue");
+    System.out.println("\nWould you like to continue playing (YES or NO)? \n");
     return scanner.next().trim().equalsIgnoreCase("YES");
+  }
+
+  public void concludedGameOutput() {
+    System.out.println("\n----------POKER SESSION HAS CONCLUDED----------\n");
+    System.out.println("SMALL_BLIND stack: " + playerSB.getStack());
+    System.out.println("BIG_BLIND stack: " + playerBB.getStack());
   }
 
 
