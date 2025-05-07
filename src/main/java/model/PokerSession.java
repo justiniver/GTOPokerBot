@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Represents a poker session (i.e., multiple poker games).
@@ -27,16 +28,31 @@ public class PokerSession {
   }
 
   public void runGames() {
-    while (true) {
+    boolean continuePlay = true;
+    while (continuePlay) {
       currentGame = new PokerGame(true, smallBlindAmount, bigBlindAmount,
               playerSB, playerBB);
+      continuePlay = promptContinueGame();
     }
+    System.out.println("\n----------POKER SESSION HAS CONCLUDED----------\n");
+    System.out.println("SMALL_BLIND stack: " + playerSB.getStack());
+    System.out.println("BIG_BLIND stack: " + playerBB.getStack());
+  }
+
+  private boolean promptContinueGame() {
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Would you like to continue playing? Enter YES to continue");
+    return scanner.next().trim().equalsIgnoreCase("YES");
   }
 
 
 
   public List<Integer> getWinningHandRankFreq() {
     return new ArrayList<>(winningHandRankFreq.values());
+  }
+
+  public PokerGame getCurrentGame() {
+    return currentGame;
   }
 
 }
