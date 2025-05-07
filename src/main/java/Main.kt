@@ -10,8 +10,7 @@ fun main() {
     sb.strategy = SimpleCheckCallBot()
     bb.strategy = SimpleCheckFoldBot()
 
-    val pokerGame = PokerGame(true, 5, 10, sb, bb)
-    val pokerController = PokerController()
-    pokerController.playHand(pokerGame)
+    val pokerSession = PokerSession(5, 10, sb, bb)
+    pokerSession.runGames()
 }
 

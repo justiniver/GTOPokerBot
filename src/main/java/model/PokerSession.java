@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import controller.PokerController;
+
 /**
  * Represents a poker session (i.e., multiple poker games).
  * Updates player stack sizes, tracks buy-ins and buy-outs, and calculates poker statistics.
@@ -32,6 +34,8 @@ public class PokerSession {
     while (continuePlay) {
       currentGame = new PokerGame(true, smallBlindAmount, bigBlindAmount,
               playerSB, playerBB);
+      PokerController controller = new PokerController();
+      controller.playHand(currentGame);
       continuePlay = promptContinueGame();
     }
     System.out.println("\n----------POKER SESSION HAS CONCLUDED----------\n");
