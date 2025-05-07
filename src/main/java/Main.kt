@@ -8,9 +8,9 @@ fun main() {
     val bb = Player(Position.BIG_BLIND, 1000)
 
     sb.strategy = SimpleCheckCallBot()
-    bb.strategy = SimpleCheckFoldBot()
+    bb.strategy = SimpleCheckCallBot()
 
     val pokerSession = PokerSession(5, 10, sb, bb)
-    pokerSession.runGames()
+    pokerSession.runNumberOfGames(1000)
 }
 
