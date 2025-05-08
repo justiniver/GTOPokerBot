@@ -72,15 +72,19 @@ public class PokerSession {
   }
 
   public void concludedGameOutput() {
+    int endStackSB = playerSB.getStack();
+    int endStackBB = playerBB.getStack();
+    playerSB.buyOut(playerSB.getStack());
+    playerBB.buyOut(playerBB.getStack());
     System.out.println("\n----------POKER SESSION HAS CONCLUDED----------\n");
-    System.out.println("SMALL_BLIND stack: " + playerSB.getStack());
+    System.out.println("SMALL_BLIND end stack: " + endStackSB);
     System.out.println("SMALL_BLIND net profit: " + (playerSB.getBuyIn() - playerSB.getBuyOut()));
-    System.out.println("BIG_BLIND stack: " + playerBB.getStack());
+    System.out.println("BIG_BLIND end stack: " + endStackBB);
     System.out.println("BIG_BLIND net profit: " + (playerBB.getBuyIn() - playerBB.getBuyOut()));
   }
 
 
-  public Map winningRankMap() {
+  public Map getWinningRankMap() {
     return winningRankMap;
   }
 
