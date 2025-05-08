@@ -10,7 +10,7 @@ fun main() {
     bb.strategy = SimpleCheckCallBot()
 
     val pokerSession = PokerSession(5, 10, sb, bb)
-    pokerSession.runNumberOfGamesAutoRebuy(10000000)
+    pokerSession.runNumberOfGamesAutoRebuy(0000000)
     pokerSession.printRankAnalytics()
 
     val chart = HandFrequencyChart()
