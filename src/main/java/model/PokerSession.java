@@ -67,12 +67,27 @@ public class PokerSession {
 
 
 
-  public List<Integer> getWinningHandRankFreq() {
-    return new ArrayList<>(winningRankMap.values());
+  public Map winningRankMap() {
+    return winningRankMap;
   }
 
-  public void printWinningHandFreqAnalytics() {
+  public void printRankAnalytics() {
+    System.out.println("\n----------POKER SESSION HAND RANK FREQUENCIES----------\n");
 
+    int entryCount = winningRankMap.size();
+    int currentEntry = 0;
+
+    StringBuilder builder = new StringBuilder();
+    for (Map.Entry<HandRank, Integer> entry : winningRankMap.entrySet()) {
+      currentEntry++;
+      builder.append(entry.getKey()).append(" ").append(entry.getValue());
+
+      if (currentEntry < entryCount) {
+        builder.append("\n");
+      }
+    }
+
+    System.out.println(builder);
   }
 
   public PokerGame getCurrentGame() {
