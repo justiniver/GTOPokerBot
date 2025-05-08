@@ -13,7 +13,7 @@ import controller.PokerController;
  * Updates player stack sizes, tracks buy-ins and buy-outs, and calculates poker statistics.
  */
 public class PokerSession {
-  private Map<HandRank, Integer> winningHandRankFreq;
+  private final Map<HandRank, Integer> winningRankMap;
   private PokerGame currentGame;
   private final int smallBlindAmount;
   private final int bigBlindAmount;
@@ -26,7 +26,7 @@ public class PokerSession {
     this.bigBlindAmount = bigBlindAmount;
     this.playerSB = playerSB;
     this.playerBB = playerBB;
-    this.winningHandRankFreq = new HashMap<>();
+    this.winningRankMap = new HashMap<>();
   }
 
   public void runGames() {
@@ -45,9 +45,10 @@ public class PokerSession {
     for (int i = 0; i < numberOfGames; i++) {
       currentGame = new PokerGame(true, smallBlindAmount, bigBlindAmount,
               playerSB, playerBB);
-      PokerController controller = new PokerController();
-      controller.playHand(currentGame);
-      if (winningHandRankFreq.containsKey(controller.getBestHandRank()));
+      PokerController c = new PokerController();
+      c.playHand(currentGame);
+      HandRank bestHandRank = c.getBestHandRank();
+      winningRankMap.put(bestHandRank, winningRankMap.getOrDefault(bestHandRank, 0) + 1);
     }
     concludedGameOutput();
   }
@@ -67,7 +68,11 @@ public class PokerSession {
 
 
   public List<Integer> getWinningHandRankFreq() {
-    return new ArrayList<>(winningHandRankFreq.values());
+    return new ArrayList<>(winningRankMap.values());
+  }
+
+  public void printWinningHandFreqAnalytics() {
+
   }
 
   public PokerGame getCurrentGame() {

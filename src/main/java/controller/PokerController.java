@@ -126,6 +126,7 @@ public class PokerController implements Controller {
     System.out.println(pokerGame.getBoard().toString());
     System.out.println("SMALL_BLIND " + playerSB.getHoleCards().toString());
     System.out.println("BIG_BLIND " + playerBB.getHoleCards().toString());
+
     if (eval.isHand1Better(handSB, handBB)) {
       bestHand = handSB;
       System.out.println("SMALL_BLIND wins with: " + handSB.getHandRank()

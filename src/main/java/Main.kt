@@ -12,5 +12,6 @@ fun main() {
 
     val pokerSession = PokerSession(5, 10, sb, bb)
     pokerSession.runNumberOfGames(1000)
+    print(pokerSession.winningHandRankFreq.toString())
 }
 
