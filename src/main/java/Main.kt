@@ -1,5 +1,4 @@
 import bots.*
-import controller.*
 import model.*
 
 
@@ -11,7 +10,7 @@ fun main() {
     bb.strategy = SimpleCheckCallBot()
 
     val pokerSession = PokerSession(5, 10, sb, bb)
-    pokerSession.runNumberOfGamesAutoRebuy(1000)
+    pokerSession.runNumberOfGamesAutoRebuy(10000000)
     pokerSession.printRankAnalytics()
 
     val chart = HandFrequencyChart()

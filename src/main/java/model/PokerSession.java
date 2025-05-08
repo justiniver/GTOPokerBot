@@ -41,6 +41,7 @@ public class PokerSession {
 
   public void runNumberOfGames(int numberOfGames) {
     for (int i = 0; i < numberOfGames; i++) {
+      System.out.println("\n----------Game Number: " + (i + 1) + "----------");
       currentGame = new PokerGame(true, smallBlindAmount, bigBlindAmount,
               playerSB, playerBB);
       PokerController c = new PokerController();
@@ -53,6 +54,7 @@ public class PokerSession {
 
   public void runNumberOfGamesAutoRebuy(int numberOfGames) {
     for (int i = 0; i < numberOfGames; i++) {
+      System.out.println("\n----------Game Number: " + (i + 1) + "----------");
       setBackToInitialStack(playerSB);
       setBackToInitialStack(playerBB);
       currentGame = new PokerGame(true, smallBlindAmount, bigBlindAmount,
