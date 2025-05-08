@@ -1,5 +1,6 @@
 package controller;
 
+import model.HandRank;
 import model.PokerBoard;
 import model.GameState;
 import model.Player;
@@ -11,6 +12,8 @@ import model.RoundCondition;
 import model.rules.HandEvaluation;
 
 public class PokerController implements Controller {
+  PokerHand bestHand;
+
   public PokerController() {
   }
 
@@ -124,10 +127,12 @@ public class PokerController implements Controller {
     System.out.println("SMALL_BLIND " + playerSB.getHoleCards().toString());
     System.out.println("BIG_BLIND " + playerBB.getHoleCards().toString());
     if (eval.isHand1Better(handSB, handBB)) {
+      bestHand = handSB;
       System.out.println("SMALL_BLIND wins with: " + handSB.getHandRank()
               + " (" + handSB.toString() + ")");
       playerSB.addStack(pokerGame.getPot());
     } else {
+      bestHand = handBB;
       System.out.println("BIG_BLIND wins with: " + handBB.getHandRank()
               + " (" + handBB.toString() + ")");
       playerBB.addStack(pokerGame.getPot());
@@ -135,6 +140,14 @@ public class PokerController implements Controller {
 
     System.out.println("New SMALL_BLIND stack: " + playerSB.getStack());
     System.out.println("New BIG_BLIND stack: " + playerBB.getStack());
+  }
+
+  public PokerHand getBestHand() {
+    return bestHand;
+  }
+
+  public HandRank getBestHandRank() {
+    return bestHand.getHandRank();
   }
 
 }

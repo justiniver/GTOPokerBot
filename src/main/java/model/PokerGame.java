@@ -18,6 +18,7 @@ public class PokerGame implements Game {
   private int pot;
   private final int smallBlindAmount;
   private final int bigBlindAmount;
+  private PokerHand bestHand;
 
   // may want to enforce certain constructors, having five constructors is probably a bad idea
   public PokerGame(boolean shuffle) {
@@ -72,6 +73,14 @@ public class PokerGame implements Game {
   public void dealRiver() {
     state = GameState.RIVER;
     board.addCard(deck.dealCard());
+  }
+
+  public void runRiverAnalytics() {
+    if (state != GameState.RIVER) {
+      throw new IllegalStateException("State must be RIVER. Current state is: " + state);
+    }
+    HandEvaluation eval = new HandEvaluation();
+
   }
 
   /**

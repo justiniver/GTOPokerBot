@@ -1,4 +1,4 @@
-import bots.*;
+import bots.*
 import controller.*
 import model.*
 

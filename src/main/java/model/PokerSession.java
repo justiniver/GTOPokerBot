@@ -47,6 +47,7 @@ public class PokerSession {
               playerSB, playerBB);
       PokerController controller = new PokerController();
       controller.playHand(currentGame);
+      if (winningHandRankFreq.containsKey(controller.getBestHandRank()));
     }
     concludedGameOutput();
   }
