@@ -9,7 +9,10 @@ public class Player {
   private final Position position;
   private HoleCards cards;
   private int stack;
+  private final int initialStack;
   private PlayerStrategy strategy = new ConsoleStrategy();
+  private int buyIn;
+  private int buyOut;
 
   public Player(Position position) {
     this(position, 0);
@@ -18,6 +21,9 @@ public class Player {
   public Player(Position position, int stack) {
     this.position = position;
     this.stack = stack;
+    this.initialStack = stack;
+    this.buyIn = stack;
+    this.buyOut = 0;
   }
 
   public void setStrategy(PlayerStrategy strategy) {
@@ -32,7 +38,7 @@ public class Player {
     if (add <= 0) {
       throw new IllegalArgumentException("Must add a non-zero positive number.");
     }
-    this.stack = this.stack + add;
+    this.stack += add;
   }
 
   public void subtractStack(int subtract) {
@@ -42,7 +48,7 @@ public class Player {
     if (subtract <= 0) {
       throw new IllegalArgumentException("Must subtract a non-zero positive number.");
     }
-    this.stack = this.stack - subtract;
+    this.stack -= subtract;
   }
 
   public void setHoleCards(List<Card> cards) {
@@ -50,6 +56,20 @@ public class Player {
       throw new IllegalArgumentException("The hand must be exactly two cards");
     }
     this.cards = new HoleCards(cards.get(0), cards.get(1));
+  }
+
+  public void addToBuyIn(int amount) {
+    addStack(amount);
+    this.buyIn += amount;
+  }
+
+  public void buyOut(int amount) {
+    subtractStack(amount);
+    this.buyOut += amount;
+  }
+
+  public int getInitialStack() {
+    return this.initialStack;
   }
 
   public HoleCards getHoleCards() {
@@ -64,5 +84,12 @@ public class Player {
     return this.stack;
   }
 
+  public int getBuyIn() {
+    return this.buyIn;
+  }
+
+  public int getBuyOut() {
+    return this.buyOut;
+  }
 
 }

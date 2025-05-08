@@ -1,10 +1,8 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import controller.PokerController;
 
@@ -26,7 +24,7 @@ public class PokerSession {
     this.bigBlindAmount = bigBlindAmount;
     this.playerSB = playerSB;
     this.playerBB = playerBB;
-    this.winningRankMap = new HashMap<>();
+    this.winningRankMap = new TreeMap<>();
   }
 
   public void runGames() {
@@ -43,6 +41,20 @@ public class PokerSession {
 
   public void runNumberOfGames(int numberOfGames) {
     for (int i = 0; i < numberOfGames; i++) {
+      currentGame = new PokerGame(true, smallBlindAmount, bigBlindAmount,
+              playerSB, playerBB);
+      PokerController c = new PokerController();
+      c.playHand(currentGame);
+      HandRank bestHandRank = c.getBestHandRank();
+      winningRankMap.put(bestHandRank, winningRankMap.getOrDefault(bestHandRank, 0) + 1);
+    }
+    concludedGameOutput();
+  }
+
+  public void runNumberOfGamesAutoRebuy(int numberOfGames) {
+    for (int i = 0; i < numberOfGames; i++) {
+      setBackToInitialStack(playerSB);
+      setBackToInitialStack(playerBB);
       currentGame = new PokerGame(true, smallBlindAmount, bigBlindAmount,
               playerSB, playerBB);
       PokerController c = new PokerController();
@@ -88,6 +100,15 @@ public class PokerSession {
     }
 
     System.out.println(builder);
+  }
+
+  public void setBackToInitialStack(Player player) {
+    int diff = player.getInitialStack() - player.getStack();
+    if (diff > 0) {
+      player.addToBuyIn(diff);
+    } else if (diff < 0) {
+      player.buyOut(Math.abs(diff));
+    }
   }
 
   public PokerGame getCurrentGame() {

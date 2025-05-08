@@ -11,7 +11,7 @@ fun main() {
     bb.strategy = SimpleCheckCallBot()
 
     val pokerSession = PokerSession(5, 10, sb, bb)
-    pokerSession.runNumberOfGames(1000)
+    pokerSession.runNumberOfGamesAutoRebuy(100000)
     pokerSession.printRankAnalytics()
 }
 
