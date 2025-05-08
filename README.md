@@ -47,11 +47,6 @@ We can see a similar thing with **pocket aces**. From the graph it looks like **
 
 We see the opposite with **56 suited**. It seems like **56 suited** has **~47%** equity against an unrestricted range. Albeit small, there is a slight improvement in overall equity of **56 suited** compared to its probability winning on the flop. This is because **56 suited** is a draw heavy hand, which means that it has a higher chance of improving with the addition of cards (e.g., to a flush or a straight). 
 
-[^1]: For reference, the true probability of pocket pairs is 0.0588 and the true probability of suited pairs is 0.2353.
-[^2]: Future additions includes the implementation of full game simulations as well as the implementation of counterfactual regret minimization among other useful metrics.
-[^3]: Equity refers to the probability you are to win at showdown (i.e., how often a hand wins after all five community cards are dealt). If you are trying to figure out your equity on the flop, you need to make an educated guess on the strength of your opponents hand, and then calculate how many outs you have. You will then need to estimate how often those outs will appear on the turn and/or river. This is understandably quite hard to do, which is why we have computers.
-[^4]: As some poker players may already know, this probability checks out. It is well known that aces have around 85% equity preflop against an unrestricted range, so this means that most likely my simulations are functioning correctly.
-
 ## Running Equity Simulations
 
 The code needed to create and run these equity convergence calculationns and create the graph is given below. You can run this in ````Main.kt```` and it should take ~5 minutes though you can modify this by running less or more simulations.
@@ -72,3 +67,16 @@ val chart = ProbabilityChart()
 chart.displayChart(trialsList, probabilities, "Queen-Ten Suited Equity")
 
 ````
+
+## 10 Million Hands Winning Hand Rank Frequency
+
+I set up a simulation where two poker bots play 10 million hands against each other. I set up both bots to use the check or call strategy, so all the bot does is check or call depending on what action is available. I kept a record of the winning hand ranks for each poker game. Note that because these bots check or call these poker games always go to the river.
+
+![10 Million Hands Winning Hand Rank Frequency Barchart](src/main/resources/handrankfreqbarchart1000000000.png)
+
+
+
+[^1]: For reference, the true probability of pocket pairs is 0.0588 and the true probability of suited pairs is 0.2353.
+[^2]: Future additions includes the implementation of full game simulations as well as the implementation of counterfactual regret minimization among other useful metrics.
+[^3]: Equity refers to the probability you are to win at showdown (i.e., how often a hand wins after all five community cards are dealt). If you are trying to figure out your equity on the flop, you need to make an educated guess on the strength of your opponents hand, and then calculate how many outs you have. You will then need to estimate how often those outs will appear on the turn and/or river. This is understandably quite hard to do, which is why we have computers.
+[^4]: As some poker players may already know, this probability checks out. It is well known that aces have around 85% equity preflop against an unrestricted range, so this means that most likely my simulations are functioning correctly.
