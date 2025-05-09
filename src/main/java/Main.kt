@@ -1,18 +1,17 @@
-import bots.*
-import model.*
+import simulations.PokerEquitySim
+import util.CardStrings
 
 
 fun main() {
-    val sb = Player(Position.SMALL_BLIND, 1000)
-    val bb = Player(Position.BIG_BLIND, 1000)
+    val cardStrings = CardStrings()
+    val simulator = PokerEquitySim()
 
-    sb.strategy = SimpleCheckCallBot()
-    bb.strategy = SimpleCheckCallBot()
-
-    val pokerSession = PokerSession(5, 10, sb, bb)
-    pokerSession.runNumberOfGamesAutoRebuy(100000)
-    pokerSession.printRankAnalytics()
-
-//    val chart = HandFrequencyChart()
-//    chart.displayChart(pokerSession, "Poker HandRank Frequencies")
+    simulator.runProgressiveSimulation(
+        startTrials = 10,
+        endTrials = 1000,
+        step = 10,
+        card1 = cardStrings.queenDiamond,
+        card2 = cardStrings.tenDiamond,
+        chartTitle = "Queen-Ten Suited Equity"
+    )
 }
