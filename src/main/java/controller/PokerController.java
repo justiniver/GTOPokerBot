@@ -132,11 +132,13 @@ public class PokerController implements Controller {
       System.out.println("SMALL_BLIND wins with: " + handSB.getHandRank()
               + " (" + handSB.toString() + ")");
       playerSB.addStack(pokerGame.getPot());
-    } else {
+    } else if (!eval.isHand1Better(handSB, handBB)) {
       bestHand = handBB;
       System.out.println("BIG_BLIND wins with: " + handBB.getHandRank()
               + " (" + handBB.toString() + ")");
       playerBB.addStack(pokerGame.getPot());
+    } else if (eval.isHand1Better(handSB, handBB) == null) {
+      throw new IllegalStateException("IMPLEMENT LATER");
     }
 
     System.out.println("New SMALL_BLIND stack: " + playerSB.getStack());
