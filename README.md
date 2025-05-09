@@ -72,7 +72,7 @@ chart.displayChart(trialsList, probabilities, "Queen-Ten Suited Equity")
 
 I set up a simulation where two poker bots play 10 million hands against each other. I set up both bots to use the check or call strategy, so all the bot does is check or call depending on what action is available. I kept a record of the winning hand ranks for each poker game. Note that because these bots check or call these poker games always go to the river.
 
-![10 Million Hands Winning Hand Rank Frequency Barchart](src/main/resources/handrankfreqbarchart1000000000.png)
+![10 Million Hands Winning Hand Rank Frequency Barchart](src/main/resources/handrankfreqbarchart10000000.png)
 
 
 
