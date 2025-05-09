@@ -70,9 +70,28 @@ chart.displayChart(trialsList, probabilities, "Queen-Ten Suited Equity")
 
 ## 10 Million Hands Winning Hand Rank Frequency
 
-I set up a simulation where two poker bots play 10 million hands against each other. I set up both bots to use the check or call strategy, so all the bot does is check or call depending on what action is available. I kept a record of the winning hand ranks for each poker game. Note that because these bots check or call these poker games always go to the river.
+I set up a simulation where two poker bots play 10 million hands against each other. I set up both bots to use the check or call strategy, so all the bot does is check or call depending on what action is available (i.e., these hands always go to the river no matter what). I kept a record of the winning hand ranks for each poker game.
+
+### Winning Hand Rank Frequency Table
+
+| Winning Hand     | Frequency | Percentage |
+|------------------|-----------|------------|
+| High Card        | 610,362   | **6.10 %** |
+| One Pair         | 3,754,871 | **37.55 %**|
+| Two Pair         | 3,158,235 | **31.58 %**|
+| Three of a Kind  | 721,952   | **7.22 %** |
+| Straight         | 723,701   | **7.24 %** |
+| Flush            | 524,394   | **5.24 %** |
+| Full House       | 470,303   | **4.70 %** |
+| Four of a Kind   | 30,903    | **0.31 %** |
+| Straight Flush   | 5,279     | **0.05 %** |
+
+### Winning Hand Rank Frequency Barchart
 
 ![10 Million Hands Winning Hand Rank Frequency Barchart](src/main/resources/handrankfreqbarchart10000000.png)
+
+This data is somewhat useful if you are playing heads-up and want to know what the winning hand rank looks like on average. So, for example, the winning hand rank for heads-up is less strong than multiway poker, and roughly **~75%** of hands are won with a two pair or worse. If you are playing against someone who seems to never fold, than this is a useful statistic to keep in mind.
+
 
 
 
