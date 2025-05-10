@@ -52,20 +52,17 @@ We see the opposite with **56 suited**. It seems like **56 suited** has **~47%**
 The code needed to create and run these equity convergence calculationns and create the graph is given below. You can run this in ````Main.kt```` and it should take ~5 minutes though you can modify this by running less or more simulations.
 
 ````java
-val cs = CardStrings()
-val simulation = PokerShowdownSim()
-val trialsList = (50..10000 step 10).toList()
-val probabilities = mutableListOf<Double>()
+    val cardStrings = CardStrings()
+    val simulator = PokerEquitySim()
 
-for (trials in trialsList) {
-  simulation.runShowdownSimulation(trials, cs.queenDiamond, cs.tenDiamond)
-  val probability = simulation.getWinCount().toDouble() / simulation.getTrialsCount()
-  probabilities.add(probability)
-}
-
-val chart = ProbabilityChart()
-chart.displayChart(trialsList, probabilities, "Queen-Ten Suited Equity")
-
+    simulator.runProgressiveSimulation(
+        startTrials = 10,
+        endTrials = 1000,
+        step = 10,
+        card1 = cardStrings.queenDiamond,
+        card2 = cardStrings.tenDiamond,
+        chartTitle = "Queen-Ten Suited Equity"
+    )
 ````
 
 ## 10 Million Hands Winning Hand Rank Frequency
