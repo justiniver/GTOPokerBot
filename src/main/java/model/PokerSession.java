@@ -18,6 +18,8 @@ public class PokerSession {
   private final Player playerSB;
   private final Player playerBB;
 
+  private boolean trackWinningHands = false;
+
   public PokerSession(int smallBlindAmount, int bigBlindAmount,
                       Player playerSB, Player playerBB) {
     this.smallBlindAmount = smallBlindAmount;
@@ -25,6 +27,10 @@ public class PokerSession {
     this.playerSB = playerSB;
     this.playerBB = playerBB;
     this.winningRankMap = new TreeMap<>();
+  }
+
+  public void setTrackWinningHands(boolean bool) {
+    trackWinningHands = bool;
   }
 
   public void runGames() {
@@ -46,8 +52,11 @@ public class PokerSession {
               playerSB, playerBB);
       PokerController c = new PokerController();
       c.playHand(currentGame);
-      HandRank bestHandRank = c.getBestHandRank();
-      winningRankMap.put(bestHandRank, winningRankMap.getOrDefault(bestHandRank, 0) + 1);
+
+      if (trackWinningHands) {
+        HandRank bestHandRank = c.getBestHandRank();
+        winningRankMap.put(bestHandRank, winningRankMap.getOrDefault(bestHandRank, 0) + 1);
+      }
     }
     concludedGameOutput();
   }
@@ -61,8 +70,11 @@ public class PokerSession {
               playerSB, playerBB);
       PokerController c = new PokerController();
       c.playHand(currentGame);
-      HandRank bestHandRank = c.getBestHandRank();
-      winningRankMap.put(bestHandRank, winningRankMap.getOrDefault(bestHandRank, 0) + 1);
+
+      if (trackWinningHands) {
+        HandRank bestHandRank = c.getBestHandRank();
+        winningRankMap.put(bestHandRank, winningRankMap.getOrDefault(bestHandRank, 0) + 1);
+      }
     }
     concludedGameOutput();
   }

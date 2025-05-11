@@ -85,6 +85,7 @@ public class PokerController implements Controller {
   private void playerFoldLogic(PokerGame pokerGame, BettingRound bettingRound) {
     Player playerSB = pokerGame.getPlayerSB();
     Player playerBB = pokerGame.getPlayerBB();
+
     if (bettingRound.getCurrPlayer().getPosition() == Position.SMALL_BLIND) {
       playerBB.addStack(pokerGame.getPot());
     } else {
