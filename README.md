@@ -56,8 +56,8 @@ The code needed to create and run these equity convergence calculationns and cre
     val simulator = PokerEquitySim()
 
     simulator.runProgressiveSimulation(
-        startTrials = 10,
-        endTrials = 1000,
+        startTrials = 50,
+        endTrials = 10000,
         step = 10,
         card1 = cardStrings.queenDiamond,
         card2 = cardStrings.tenDiamond,
