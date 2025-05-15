@@ -110,6 +110,7 @@ public class PokerGame implements Game {
               allCards.get(3), allCards.get(4), allCards.get(5)});
 
       // Implement 7 choose 5 logic and find best hand of the 21 combinations.
+      // Decided to use the slightly more intuitive exclude 2 card approach instead of choosing 5
       for (int i = 0; i <= 6; i++) {
         Card[] cand = new Card[5]; // candidate cards
 
