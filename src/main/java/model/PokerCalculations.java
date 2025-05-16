@@ -12,7 +12,7 @@ public class PokerCalculations {
    * @param callAmount the amount needed to call
    * @return the pot odds as a decimal (e.g., 0.25 means 4:1 odds)
    */
-  public static double potOdds(int potSize, int callAmount) {
+  public double potOdds(int potSize, int callAmount) {
     if (callAmount == 0) {
       return 0.0;
     }
