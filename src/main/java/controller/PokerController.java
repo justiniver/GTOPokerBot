@@ -11,6 +11,9 @@ import model.Position;
 import model.RoundCondition;
 import model.rules.HandEvaluation;
 
+/**
+ * Controller to run through individual poker games.
+ */
 public class PokerController implements Controller {
   PokerHand bestHand;
 

@@ -7,7 +7,6 @@ import model.rules.HandEvaluation;
 
 /**
  * Implementation of a poker game with betting logic.
- *
  */
 public class PokerGame implements Game {
   private GameState state;
