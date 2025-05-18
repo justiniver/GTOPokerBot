@@ -8,7 +8,7 @@ import java.util.Random;
  * It adjusts its play style based on hand strength, position, stack size,
  * and adapts its aggression levels throughout the hand.
  */
-public class HybridBot implements PlayerStrategy {
+public class RuleBasedBot implements PlayerStrategy {
   private final Random random = new Random();
 
   private final double tightness = 0.7;
