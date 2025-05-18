@@ -77,15 +77,23 @@ public class RuleBasedBot implements PlayerStrategy {
     }
 
     if (decisionScore > 0.5 - (aggression * 0.1)) {
-      int betAmount = PokerCalculations.calculateBetSize(
+      int amount = PokerCalculations.calculateBetSize(
               view.pot(),
               view.street(),
               decisionScore,
               view.myStack()
       );
 
-      if (betAmount >= view.minRaise()) {
-        return new Decision(Action.BET, betAmount);
+      amount = Math.max(amount, view.minRaise());
+
+      if (view.currentBet() == 0) {
+        if (amount <= view.myStack()) {
+          return new Decision(Action.BET, amount);
+        }
+      } else {
+        if (amount <= view.myStack()) {
+          return new Decision(Action.RAISE, amount);
+        }
       }
     }
 
