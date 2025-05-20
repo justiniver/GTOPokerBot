@@ -9,6 +9,8 @@ import controller.PokerController;
 /**
  * Represents a poker session (i.e., multiple poker games).
  * Updates player stack sizes, tracks buy-ins and buy-outs, and calculates poker statistics.
+ *
+ * NOTE: SOLVE THE NON-ZERO-SUM MYSTERY WHEN RUNNING RULE BASED BOTS AGAINST EACH-OTHER
  */
 public class PokerSession {
   private final Map<HandRank, Integer> winningRankMap;
@@ -138,15 +140,15 @@ public class PokerSession {
 
   public void setBackToInitialStack(Player player) {
     int initialStack = player.getInitialStack();
+    System.out.println(player.getPosition() + " " + initialStack);
     int currentStack = player.getStack();
+    System.out.println(player.getPosition() + " " + currentStack);
 
     if (currentStack < initialStack) {
       int buyinAmount = initialStack - currentStack;
-      player.addStack(buyinAmount);
       player.addToBuyIn(buyinAmount);
     } else if (currentStack > initialStack) {
       int cashoutAmount = currentStack - initialStack;
-      player.subtractStack(cashoutAmount);
       player.buyOut(cashoutAmount);
     }
   }
