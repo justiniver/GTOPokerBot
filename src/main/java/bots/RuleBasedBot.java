@@ -219,7 +219,7 @@ public class RuleBasedBot implements PlayerStrategy {
    */
   public void updateOpponentModel(Action opponentAction, int betSize, int potSize) {
     if (opponentAction == Action.RAISE || opponentAction == Action.BET) {
-      double betSizeToPotRatio = (double)betSize / potSize;
+      double betSizeToPotRatio = (double) betSize / potSize;
       if (betSizeToPotRatio > 0.7) {
         opponentAggressive = true;
       } else if (betSizeToPotRatio < 0.3) {
