@@ -142,12 +142,12 @@ public class PokerSession {
 
     if (currentStack < initialStack) {
       int buyinAmount = initialStack - currentStack;
-      player.addToBuyIn(buyinAmount);
       player.addStack(buyinAmount);
+      player.addToBuyIn(buyinAmount);
     } else if (currentStack > initialStack) {
       int cashoutAmount = currentStack - initialStack;
-      player.buyOut(cashoutAmount);
       player.subtractStack(cashoutAmount);
+      player.buyOut(cashoutAmount);
     }
   }
 
