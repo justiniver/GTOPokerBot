@@ -4,8 +4,8 @@ import model.Position
 import model.PokerSession
 
 fun main() {
-    val aggressiveBot = RuleBasedBot()
-    val conservativeBot = RuleBasedBot()
+    val aggressiveBot = RuleBasedBot(0.5,0.2)
+    val conservativeBot = RuleBasedBot(0.5, 0.8)
 
     val playerSB = Player(Position.SMALL_BLIND, 1000)
     val playerBB = Player(Position.BIG_BLIND, 1000)

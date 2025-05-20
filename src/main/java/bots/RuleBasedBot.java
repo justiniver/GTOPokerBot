@@ -88,11 +88,13 @@ public class RuleBasedBot implements PlayerStrategy {
 
       amount = Math.max(amount, view.minRaise());
 
-      if (view.toCall() == 0) {
+      if (view.currentBet() == 0) {
         if (amount <= view.myStack()) {
           return new Decision(Action.BET, amount);
         }
-      } else {
+      }
+
+      else {
         if (amount <= view.myStack()) {
           return new Decision(Action.RAISE, amount);
         }

@@ -123,11 +123,17 @@ public class PokerSession {
   }
 
   public void setBackToInitialStack(Player player) {
-    int diff = player.getInitialStack() - player.getStack();
-    if (diff > 0) {
-      player.addToBuyIn(diff);
-    } else if (diff < 0) {
-      player.buyOut(Math.abs(diff));
+    int initialStack = player.getInitialStack();
+    int currentStack = player.getStack();
+
+    if (currentStack < initialStack) {
+      int buyinAmount = initialStack - currentStack;
+      player.addToBuyIn(buyinAmount);
+      player.addStack(buyinAmount);
+    } else if (currentStack > initialStack) {
+      int cashoutAmount = currentStack - initialStack;
+      player.buyOut(cashoutAmount);
+      player.subtractStack(cashoutAmount);
     }
   }
 
