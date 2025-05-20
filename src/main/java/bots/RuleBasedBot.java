@@ -110,7 +110,7 @@ public class RuleBasedBot implements PlayerStrategy {
     int maxRaise = view.myStack();
 
     double raiseRatio = 0.5 + (decisionScore * 0.5);
-    int targetRaise = (int)(view.pot() * raiseRatio);
+    int targetRaise = (int) (view.pot() * raiseRatio);
 
     targetRaise = Math.max(targetRaise, minRaise);
     targetRaise = Math.min(targetRaise, maxRaise);
