@@ -4,19 +4,21 @@ import model.*;
 import java.util.Random;
 
 /**
- * A hybrid poker bot that combines multiple strategies based on game state.
- * It adjusts its play style based on hand strength, position, stack size,
- * and adapts its aggression levels throughout the hand.
+ * A rule-based bot that follows a set of rules to make decisions.
  */
 public class RuleBasedBot implements PlayerStrategy {
   private final Random random = new Random();
 
-  private final double tightness = 0.7;
-  private final double aggression = 0.6;
-  private final double adaptability = 0.5;
+  private final double tightness;
+  private final double aggression;
   private int consecutiveFolds = 0;
   private boolean opponentAggressive = false;
   private int roundsPlayed = 0;
+
+  public RuleBasedBot(double tightness, double aggression) {
+    this.tightness = tightness;
+    this.aggression = aggression;
+  }
 
   @Override
   public Decision decide(GameView view) {
@@ -49,7 +51,7 @@ public class RuleBasedBot implements PlayerStrategy {
 
     if (decisionScore > raiseThreshold && view.myStack() > view.toCall() * 3) {
       int raiseAmount = calculateRaiseAmount(view, decisionScore);
-      if (raiseAmount > 0 && view.currentBet() > 0) {
+      if (raiseAmount > 0 && view.toCall() > 0) {
         return new Decision(Action.RAISE, raiseAmount);
       }
     }
@@ -86,7 +88,7 @@ public class RuleBasedBot implements PlayerStrategy {
 
       amount = Math.max(amount, view.minRaise());
 
-      if (view.currentBet() == 0) {
+      if (view.toCall() == 0) {
         if (amount <= view.myStack()) {
           return new Decision(Action.BET, amount);
         }
