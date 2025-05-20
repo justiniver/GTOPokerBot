@@ -63,19 +63,28 @@ public class PokerSession {
 
   public void runNumberOfGamesAutoRebuy(int numberOfGames) {
     for (int i = 0; i < numberOfGames; i++) {
-      System.out.println("\n----------Game Number: " + (i + 1) + "----------");
+      System.out.println("\n----------Game Number: " + (i + 1) + "----------"); // 0 -> 1-indexed
+
       setBackToInitialStack(playerSB);
       setBackToInitialStack(playerBB);
+
       currentGame = new PokerGame(true, smallBlindAmount, bigBlindAmount,
               playerSB, playerBB);
       PokerController c = new PokerController();
       c.playHand(currentGame);
 
       if (trackWinningHands) {
-        HandRank bestHandRank = c.getBestHandRank();
-        winningRankMap.put(bestHandRank, winningRankMap.getOrDefault(bestHandRank, 0) + 1);
+        try {
+          HandRank bestHandRank = c.getBestHandRank();
+          if (bestHandRank != null) {
+            winningRankMap.put(bestHandRank, winningRankMap.getOrDefault(bestHandRank, 0) + 1);
+          }
+        } catch (Exception e) {
+          System.out.println("Note: Could not track winning hand for this game.");
+        }
       }
     }
+
     concludedGameOutput();
   }
 
