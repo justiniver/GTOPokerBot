@@ -118,7 +118,6 @@ public class PokerSession {
     return winningRankMap;
   }
 
-  // Traversing unordered hashmap results in random hand rank ordering--fix later
   public void printRankAnalytics() {
     System.out.println("\n----------POKER SESSION HAND RANK FREQUENCIES----------\n");
 
