@@ -108,9 +108,9 @@ public class PokerSession {
 
     System.out.println("\n----------POKER SESSION HAS CONCLUDED----------\n");
     System.out.println("SMALL_BLIND end stack: " + endStackSB);
-    System.out.println("SMALL_BLIND net profit: " + (playerSB.getBuyOut() - playerSB.getBuyIn()));
+    System.out.println("SMALL_BLIND net profit: " + (playerSB.getBuyOut() - playerSB.getBuyIn()) + endStackSB);
     System.out.println("BIG_BLIND end stack: " + endStackBB);
-    System.out.println("BIG_BLIND net profit: " + (playerBB.getBuyOut() - playerBB.getBuyIn()));
+    System.out.println("BIG_BLIND net profit: " + (playerBB.getBuyOut() - playerBB.getBuyIn()) + endStackBB); // FIX NET PROFIT
   }
 
 
