@@ -98,18 +98,20 @@ public class PokerSession {
   public void concludedGameOutput() {
     int endStackSB = playerSB.getStack();
     int endStackBB = playerBB.getStack();
+
+    System.out.println("\n----------POKER SESSION HAS CONCLUDED----------\n");
+
+    System.out.println("SMALL_BLIND end stack: " + endStackSB);
     if (endStackSB > 0) {
       playerSB.buyOut(endStackSB);
     }
+    System.out.println("SMALL_BLIND net profit: " + (playerSB.getBuyOut() - playerSB.getBuyIn()));
+
+    System.out.println("BIG_BLIND end stack: " + endStackBB);
     if (endStackBB > 0) {
       playerBB.buyOut(endStackBB);
     }
-
-    System.out.println("\n----------POKER SESSION HAS CONCLUDED----------\n");
-    System.out.println("SMALL_BLIND end stack: " + endStackSB);
-    System.out.println("SMALL_BLIND net profit: " + (playerSB.getBuyOut() - playerSB.getBuyIn()) + endStackSB);
-    System.out.println("BIG_BLIND end stack: " + endStackBB);
-    System.out.println("BIG_BLIND net profit: " + (playerBB.getBuyOut() - playerBB.getBuyIn()) + endStackBB); // FIX NET PROFIT
+    System.out.println("BIG_BLIND net profit: " + (playerBB.getBuyOut() - playerBB.getBuyIn())); // FIX NET PROFIT
   }
 
 
