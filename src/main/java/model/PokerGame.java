@@ -18,7 +18,6 @@ public class PokerGame implements Game {
   private final int smallBlindAmount;
   private final int bigBlindAmount;
 
-  // may want to enforce certain constructors, having five constructors is probably a bad idea
   public PokerGame(boolean shuffle) {
     this(shuffle, 0, 0,
             new Player(Position.SMALL_BLIND), new Player(Position.BIG_BLIND));

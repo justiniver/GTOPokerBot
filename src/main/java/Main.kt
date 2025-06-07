@@ -1,11 +1,12 @@
 import bots.RuleBasedBot
+import bots.SimpleCheckCallBot
 import model.Player
 import model.Position
 import model.PokerSession
 
 fun main() {
-    val aggressiveBot = RuleBasedBot(0.5,0.2)
-    val conservativeBot = RuleBasedBot(0.5, 0.8)
+    val aggressiveBot = SimpleCheckCallBot()
+    val conservativeBot = SimpleCheckCallBot()
 
     val playerSB = Player(Position.SMALL_BLIND, 1000)
     val playerBB = Player(Position.BIG_BLIND, 1000)
@@ -14,6 +15,6 @@ fun main() {
 
     val session = PokerSession(5, 10, playerSB, playerBB)
 
-    session.runNumberOfGamesAutoRebuy(100)
+    session.runNumberOfGamesAutoRebuy(1)
     session.printRankAnalytics()
 }
