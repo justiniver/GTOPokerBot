@@ -65,10 +65,7 @@ public class PokerSession {
 
   public void runNumberOfGamesAutoRebuy(int numberOfGames) {
     for (int i = 0; i < numberOfGames; i++) {
-      System.out.println("\n----------Game Number: " + (i + 1) + "----------"); // 0 -> 1-indexed
-
-      setBackToInitialStack(playerSB);
-      setBackToInitialStack(playerBB);
+      System.out.println("\n----------Game Number: " + (i + 1) + "----------\n"); // 0 -> 1-indexed
 
       currentGame = new PokerGame(true, smallBlindAmount, bigBlindAmount,
               playerSB, playerBB);
@@ -88,6 +85,8 @@ public class PokerSession {
     }
 
     concludedGameOutput();
+    setBackToInitialStack(playerSB);
+    setBackToInitialStack(playerBB);
   }
 
   private boolean promptContinueGame() {
@@ -139,9 +138,7 @@ public class PokerSession {
 
   public void setBackToInitialStack(Player player) {
     int initialStack = player.getInitialStack();
-    System.out.println(player.getPosition() + " " + initialStack);
     int currentStack = player.getStack();
-    System.out.println(player.getPosition() + " " + currentStack);
 
     if (currentStack < initialStack) {
       int buyinAmount = initialStack - currentStack;

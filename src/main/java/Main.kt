@@ -15,6 +15,6 @@ fun main() {
 
     val session = PokerSession(5, 10, playerSB, playerBB)
 
-    session.runNumberOfGamesAutoRebuy(1)
+    session.runNumberOfGamesAutoRebuy(10)
     session.printRankAnalytics()
 }
