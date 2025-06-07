@@ -65,7 +65,7 @@ public class PokerSession {
 
   public void runNumberOfGamesAutoRebuy(int numberOfGames) {
     for (int i = 0; i < numberOfGames; i++) {
-      System.out.println("\n----------Game Number: " + (i + 1) + "----------\n"); // 0 -> 1-indexed
+      System.out.println("\n----------Game Number: " + (i + 1) + "----------"); // 0 -> 1-indexed
 
       currentGame = new PokerGame(true, smallBlindAmount, bigBlindAmount,
               playerSB, playerBB);
