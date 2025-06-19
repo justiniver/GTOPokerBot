@@ -4,6 +4,8 @@ import model.Player
 import model.Position
 import model.PokerSession
 
+
+// SEEMS LIKE RERAISING CAUSES MONEY TO GO MISSING --FIX
 fun main() {
     val aggressiveBot = RuleBasedBot(0.5, 0.5)
     val conservativeBot = RuleBasedBot(0.5, 0.5)
