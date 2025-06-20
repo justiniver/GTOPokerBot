@@ -51,19 +51,34 @@ public class RuleBasedBot implements PlayerStrategy {
 
     if (decisionScore > raiseThreshold && view.myStack() > view.toCall() * 3) {
       int raiseAmount = calculateRaiseAmount(view, decisionScore);
-      if (raiseAmount > 0 && view.toCall() > 0) {
+
+      int minRaise = view.minRaise();
+      int maxRaise = view.myStack();
+
+      raiseAmount = Math.max(raiseAmount, minRaise);
+      raiseAmount = Math.min(raiseAmount, maxRaise);
+
+      if (raiseAmount >= minRaise && raiseAmount <= maxRaise && raiseAmount > view.toCall()) {
         return new Decision(Action.RAISE, raiseAmount);
       }
     }
 
     if (decisionScore > potOdds - (random.nextDouble() * 0.1)) {
       consecutiveFolds = 0;
-      return Decision.call();
+      if (view.myStack() >= view.toCall()) {
+        return Decision.call();
+      } else {
+        return Decision.fold();
+      }
     }
 
     if (random.nextDouble() < 0.1 - (tightness * 0.05)) {
       consecutiveFolds = 0;
-      return Decision.call();
+      if (view.myStack() >= view.toCall()) {
+        return Decision.call();
+      } else {
+        return Decision.fold();
+      }
     }
 
     consecutiveFolds++;
@@ -86,17 +101,23 @@ public class RuleBasedBot implements PlayerStrategy {
               view.myStack()
       );
 
-      amount = Math.max(amount, view.minRaise());
+      int minRaise = view.minRaise();
+      int maxBet = view.myStack();
+
+      amount = Math.max(amount, minRaise);
+      amount = Math.min(amount, maxBet);
 
       if (view.currentBet() == 0) {
-        if (amount <= view.myStack()) {
+        if (amount >= minRaise && amount <= maxBet) {
           return new Decision(Action.BET, amount);
+        } else if (maxBet > 0 && maxBet < minRaise) {
+          return new Decision(Action.BET, maxBet);
         }
-      }
-
-      else {
-        if (amount <= view.myStack()) {
+      } else {
+        if (amount >= minRaise && amount <= maxBet && amount > view.toCall()) {
           return new Decision(Action.RAISE, amount);
+        } else if (maxBet > view.toCall() && maxBet < minRaise) {
+          return new Decision(Action.RAISE, maxBet);
         }
       }
     }
@@ -144,7 +165,6 @@ public class RuleBasedBot implements PlayerStrategy {
     if (card2.getRank().ordinal() >= 10) highCardCount++;
 
     boolean hasPair = card1.getRank() == card2.getRank();
-
     boolean suited = card1.getSuit() == card2.getSuit();
 
     double strength = 0.3;

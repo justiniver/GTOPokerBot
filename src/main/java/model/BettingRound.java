@@ -212,41 +212,45 @@ public class BettingRound {
     return RoundCondition.CONTINUE;
   }
 
-  private RoundCondition processRaise(Player currentPlayer, int raiseIncrement) {
+  private RoundCondition processRaise(Player currentPlayer, int raiseToAmount) {
+    int playerCurrentBet = getCurrentPlayerBet(currentPlayer);
+    int callAmount = currentBet - playerCurrentBet;
+    int raiseAmount = raiseToAmount - currentBet;
+    int totalAmountRequired = callAmount + raiseAmount;
+
     if (currentBet == 0) {
       throw new IllegalStateException("Invalid action. Nothing to raise. Current bet is 0");
     }
 
-    int newTotalBet = getCurrentPlayerBet(currentPlayer) + raiseIncrement;
-
-    if (raiseIncrement < lastRaiseIncrement) {
+    if (raiseAmount < lastRaiseIncrement) {
       throw new IllegalStateException("Invalid action. You must raise by at least " + lastRaiseIncrement);
     }
 
-    if (newTotalBet <= currentBet) {
+    if (raiseToAmount <= currentBet) {
       throw new IllegalStateException("Invalid action. Your total bet must exceed the current bet of " + currentBet);
     }
 
-    if (currentPlayer.getStack() < raiseIncrement) {
-      throw new IllegalStateException("Invalid action. Not enough chips to raise by that amount.");
+    if (currentPlayer.getStack() < totalAmountRequired) {
+      throw new IllegalStateException("Invalid action. Not enough chips to raise to " + raiseToAmount);
     }
 
-    currentPlayer.subtractStack(raiseIncrement);
-    pot += raiseIncrement;
+    currentPlayer.subtractStack(totalAmountRequired);
+    pot += totalAmountRequired;
 
     if (currentPlayer == playerSB) {
-      betSB = newTotalBet;
+      betSB = raiseToAmount;
       currentBet = betSB;
     } else {
-      betBB = newTotalBet;
+      betBB = raiseToAmount;
       currentBet = betBB;
     }
 
-    lastRaiseIncrement = raiseIncrement;
+    lastRaiseIncrement = raiseAmount;
 
-    System.out.println(currentPlayer.getPosition() + " raises to " + newTotalBet);
+    System.out.println(currentPlayer.getPosition() + " raises to " + raiseToAmount);
     return RoundCondition.CONTINUE;
   }
+
 
 
   private int getCurrentPlayerBet(Player currentPlayer) {
