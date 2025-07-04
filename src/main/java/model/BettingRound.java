@@ -189,15 +189,13 @@ public class BettingRound {
     if (currentBet != 0) {
       throw new IllegalStateException("Invalid action. Current bet is " + currentBet + ". Use RAISE instead");
     }
-
-    if (amount < bigBlindAmount) {
-      throw new IllegalStateException("Invalid action. You must bet at least " + bigBlindAmount);
-    }
-
     if (currentPlayer.getStack() < amount) {
       throw new IllegalStateException("Invalid action. Not enough chips to bet " + amount);
     }
-
+    // Allow all-in bets below minimum
+    if (amount < bigBlindAmount && amount < currentPlayer.getStack()) {
+      throw new IllegalStateException("Invalid action. You must bet at least " + bigBlindAmount + ", unless you are going all-in.");
+    }
     currentPlayer.subtractStack(amount);
     pot += amount;
     if (currentPlayer == playerSB) {
@@ -207,7 +205,6 @@ public class BettingRound {
       betBB += amount;
       currentBet = betBB;
     }
-
     System.out.println(currentPlayer.getPosition() + " bets " + amount);
     return RoundCondition.CONTINUE;
   }
@@ -221,22 +218,17 @@ public class BettingRound {
     if (currentBet == 0) {
       throw new IllegalStateException("Invalid action. Nothing to raise. Current bet is 0");
     }
-
-    if (raiseAmount < lastRaiseIncrement) {
-      throw new IllegalStateException("Invalid action. You must raise by at least " + lastRaiseIncrement);
-    }
-
     if (raiseToAmount <= currentBet) {
       throw new IllegalStateException("Invalid action. Your total bet must exceed the current bet of " + currentBet);
     }
-
     if (currentPlayer.getStack() < totalAmountRequired) {
       throw new IllegalStateException("Invalid action. Not enough chips to raise to " + raiseToAmount);
     }
-
+    if (raiseAmount < lastRaiseIncrement && totalAmountRequired < currentPlayer.getStack()) {
+      throw new IllegalStateException("Invalid action. You must raise by at least " + lastRaiseIncrement + ", unless you are going all-in.");
+    }
     currentPlayer.subtractStack(totalAmountRequired);
     pot += totalAmountRequired;
-
     if (currentPlayer == playerSB) {
       betSB = raiseToAmount;
       currentBet = betSB;
@@ -244,12 +236,11 @@ public class BettingRound {
       betBB = raiseToAmount;
       currentBet = betBB;
     }
-
     lastRaiseIncrement = raiseAmount;
-
     System.out.println(currentPlayer.getPosition() + " raises to " + raiseToAmount);
     return RoundCondition.CONTINUE;
   }
+
 
 
 
