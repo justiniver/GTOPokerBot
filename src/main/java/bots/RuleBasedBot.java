@@ -46,26 +46,19 @@ public class RuleBasedBot implements PlayerStrategy {
    */
   private Decision handleFacingBet(GameView view, double decisionScore) {
     double potOdds = PokerCalculations.potOdds(view.pot(), view.toCall());
+    int minRaise = view.minRaise();
+    int stack = view.myStack();
 
     double raiseThreshold = 0.7 - (aggression * 0.2);
 
-    if (decisionScore > raiseThreshold && view.myStack() > view.toCall() * 3) {
-      int raiseAmount = calculateRaiseAmount(view, decisionScore);
-
-      int minRaise = view.minRaise();
-      int maxRaise = view.myStack();
-
-      raiseAmount = Math.max(raiseAmount, minRaise);
-      raiseAmount = Math.min(raiseAmount, maxRaise);
-
-      if (raiseAmount >= minRaise && raiseAmount <= maxRaise && raiseAmount > view.toCall()) {
-        return new Decision(Action.RAISE, raiseAmount);
-      }
+    if (decisionScore > raiseThreshold && stack >= view.toCall() + minRaise) {
+      int raiseTo = Math.min(stack, view.toCall() + minRaise);
+      return new Decision(Action.RAISE, raiseTo);
     }
 
     if (decisionScore > potOdds - (random.nextDouble() * 0.1)) {
       consecutiveFolds = 0;
-      if (view.myStack() >= view.toCall()) {
+      if (stack >= view.toCall()) {
         return Decision.call();
       } else {
         return Decision.fold();
@@ -74,7 +67,7 @@ public class RuleBasedBot implements PlayerStrategy {
 
     if (random.nextDouble() < 0.1 - (tightness * 0.05)) {
       consecutiveFolds = 0;
-      if (view.myStack() >= view.toCall()) {
+      if (stack >= view.toCall()) {
         return Decision.call();
       } else {
         return Decision.fold();
@@ -89,60 +82,31 @@ public class RuleBasedBot implements PlayerStrategy {
    * Determines what to do when checking or betting is an option
    */
   private Decision handleOpenAction(GameView view, double decisionScore) {
+    int minRaise = view.minRaise();
+    int stack = view.myStack();
+
     if (decisionScore < 0.3 + (tightness * 0.1)) {
       return Decision.check();
     }
 
     if (decisionScore > 0.5 - (aggression * 0.1)) {
-      int amount = PokerCalculations.calculateBetSize(
-              view.pot(),
-              view.street(),
-              decisionScore,
-              view.myStack()
-      );
-
-      int minRaise = view.minRaise();
-      int maxBet = view.myStack();
-
-      amount = Math.max(amount, minRaise);
-      amount = Math.min(amount, maxBet);
-
-      if (view.currentBet() == 0) {
-        if (amount >= minRaise && amount <= maxBet) {
-          return new Decision(Action.BET, amount);
-        } else if (maxBet > 0 && maxBet < minRaise) {
-          return new Decision(Action.BET, maxBet);
+      if (stack >= minRaise) {
+        if (view.currentBet() == 0) {
+          return new Decision(Action.BET, minRaise);
+        } else if (stack >= view.toCall() + minRaise) {
+          return new Decision(Action.RAISE, view.toCall() + minRaise);
         }
-      } else {
-        if (amount >= minRaise && amount <= maxBet && amount > view.toCall()) {
-          return new Decision(Action.RAISE, amount);
-        } else if (maxBet > view.toCall() && maxBet < minRaise) {
-          return new Decision(Action.RAISE, maxBet);
+      } else if (stack > 0) {
+        // Not enough for min bet/raise, go all-in if possible
+        if (view.currentBet() == 0) {
+          return new Decision(Action.BET, stack);
+        } else if (stack > view.toCall()) {
+          return new Decision(Action.RAISE, stack);
         }
       }
     }
 
     return Decision.check();
-  }
-
-  /**
-   * Calculates an appropriate raise amount based on hand strength and game state
-   */
-  private int calculateRaiseAmount(GameView view, double decisionScore) {
-    int minRaise = view.minRaise();
-    int maxRaise = view.myStack();
-
-    double raiseRatio = 0.5 + (decisionScore * 0.5);
-    int targetRaise = (int) (view.pot() * raiseRatio);
-
-    targetRaise = Math.max(targetRaise, minRaise);
-    targetRaise = Math.min(targetRaise, maxRaise);
-
-    if (decisionScore > 0.9 && random.nextDouble() < 0.3) {
-      return maxRaise;
-    }
-
-    return targetRaise;
   }
 
   /**
