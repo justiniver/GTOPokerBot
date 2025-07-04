@@ -169,10 +169,10 @@ public class BettingRound {
     int chipsNeededToCall = currentBet - currentPlayerBet;
     if (chipsNeededToCall <= 0) {
       throw new IllegalStateException("Nothing to call. Your current bet is " + currentPlayerBet +
-                      " and the opponent bet " + currentBet);
+              " and the opponent bet " + currentBet);
     }
     if (currentPlayer.getStack() < chipsNeededToCall) {
-      throw new IllegalStateException("Invalid action. Not enough chips in stack to call");
+      chipsNeededToCall = currentPlayer.getStack();
     }
     currentPlayer.subtractStack(chipsNeededToCall);
     pot += chipsNeededToCall;
@@ -184,6 +184,7 @@ public class BettingRound {
     System.out.println(currentPlayer.getPosition() + " calls for " + chipsNeededToCall);
     return RoundCondition.CONTINUE;
   }
+
 
   private RoundCondition processBet(Player currentPlayer, int amount) {
     if (currentBet != 0) {
