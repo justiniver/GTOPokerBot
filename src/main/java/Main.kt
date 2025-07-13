@@ -15,5 +15,5 @@ fun main() {
 
     val session = PokerSession(5, 10, playerSB, playerBB)
 
-    session.runNumberOfGames(10)
+    session.runNumberOfGames(100)
 }
