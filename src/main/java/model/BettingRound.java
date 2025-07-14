@@ -100,12 +100,12 @@ public class BettingRound {
         Player temp = currentPlayer;
         currentPlayer = otherPlayer;
         otherPlayer = temp;
-      } else if (betSB == betBB && currentBet != 0) { // Betting (or raising) gets called
+      } else if (betSB == betBB && currentBet != 0) { // Both have matched bets
         System.out.println("Both players have matched bets. Betting round complete.");
         if (currentPlayer.getStack() == 0 || otherPlayer.getStack() == 0 || state == GameState.RIVER) {
           return RoundCondition.SHOWDOWN;
         }
-        bettingComplete = true;
+        return RoundCondition.CONTINUE;
       } else if (betSB == 0 && betBB == 0 && currentPlayer == playerSB) { // Both players check
         System.out.println("Both players have checked. Betting round complete.");
         if (state == GameState.RIVER) {
