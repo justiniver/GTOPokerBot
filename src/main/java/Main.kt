@@ -5,8 +5,8 @@ import model.Position
 import model.PokerSession
 
 fun main() {
-    val aggressiveBot = RuleBasedBot(0.5, 0.5)
-    val conservativeBot = RuleBasedBot(0.5, 0.5)
+    // val aggressiveBot = RuleBasedBot(0.5, 0.5)
+    // val conservativeBot = RuleBasedBot(0.5, 0.5)
 
     // ^ results in 'Invalid action. Not enough chips to call' -- FIX
 
