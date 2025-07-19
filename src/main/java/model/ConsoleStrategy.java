@@ -24,7 +24,7 @@ public class ConsoleStrategy implements PlayerStrategy {
 
         int amt = 0;
         if (a == Action.BET || a == Action.RAISE) {
-          System.out.print("Enter amount: ");
+          System.out.print("Enter amount (total): ");
           amt = Integer.parseInt(in.nextLine().trim());
         }
         return new Decision(a, amt);
