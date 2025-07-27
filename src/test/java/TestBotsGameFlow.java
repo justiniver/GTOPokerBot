@@ -3,6 +3,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import bots.SimpleCheckCallBot;
+import bots.SimpleCheckFoldBot;
 import controller.PokerController;
 import model.*;
 import model.rules.*;
@@ -39,6 +40,23 @@ public class TestBotsGameFlow {
     Assert.assertEquals(2000, playerSB.getStack() + playerBB.getStack());
     Assert.assertNotEquals(1000, playerSB.getStack());
     Assert.assertNotEquals(1000, playerBB.getStack());
+  }
+
+  @Test
+  public void testCheckingItDownWithFoldBots() {
+    playerSB.setStrategy(new SimpleCheckFoldBot());
+    playerBB.setStrategy(new SimpleCheckFoldBot());
+    Assert.assertEquals(1000, playerSB.getStack());
+    Assert.assertEquals(1000, playerBB.getStack());
+    pokerController.playHand(pokerGame);
+    Assert.assertEquals(2000, playerSB.getStack() + playerBB.getStack());
+    Assert.assertNotEquals(1000, playerSB.getStack());
+    Assert.assertNotEquals(1000, playerBB.getStack());
+  }
+
+  @Test
+  public void testRaisingManualGame() {
+    pokerController.playHand(pokerGame);
   }
 
 }

@@ -16,5 +16,5 @@ fun main() {
 
     val session = PokerSession(5, 10, playerSB, playerBB)
 
-    session.runNumberOfGamesAutoRebuy(1000)
+    session.runNumberOfGamesAutoRebuy(1)
 }

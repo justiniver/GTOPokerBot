@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 /**
  * Represents the betting round that occurs four times during a game of poker.
+ * Prints relevant information to players.
  */
 public class BettingRound {
   private final GameState state;
@@ -128,7 +129,9 @@ public class BettingRound {
     System.out.println("Your opponents (" + otherPlayer.getPosition() + ") current bet this round: " + currentBet);
     System.out.println("Your (" + currentPlayer.getPosition() + ") current bet: "
             + getCurrentPlayerBet(currentPlayer) +
-            " | Your stack: " + currentPlayer.getStack());
+            " | Your stack: " + currentPlayer.getStack() + "\n" +
+            "Your hole cards: " + currentPlayer.getHoleCards());
+
     if (currentBet - getCurrentPlayerBet(currentPlayer) > 0) {
       System.out.println("Amount to call is: " + (currentBet - getCurrentPlayerBet(currentPlayer)));
     }

@@ -65,7 +65,6 @@ public class PokerController implements Controller {
   }
 
   /**
-   *
    * @param pokerGame the poker game
    * @param bettingRound the current betting round
    * @return true if hand is over, false otherwise
