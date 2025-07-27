@@ -1,5 +1,6 @@
 import bots.RuleBasedBot
 import bots.SimpleCheckCallBot
+import bots.SimpleCheckFoldBot
 import model.Player
 import model.Position
 import model.PokerSession
@@ -11,7 +12,7 @@ fun main() {
     val playerBB = Player(Position.BIG_BLIND, 1000)
 
     playerSB.strategy = SimpleCheckCallBot()
-    playerBB.strategy = SimpleCheckCallBot()
+    playerBB.strategy = SimpleCheckFoldBot()
 
     val session = PokerSession(5, 10, playerSB, playerBB)
 
