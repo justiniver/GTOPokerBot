@@ -1,4 +1,3 @@
-import bots.RuleBasedBot
 import bots.SimpleCheckCallBot
 import bots.SimpleCheckFoldBot
 import model.Player
