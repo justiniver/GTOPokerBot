@@ -126,11 +126,11 @@ public class BettingRound {
 
   private void printGameState(Player currentPlayer, Player otherPlayer) {
     System.out.println("\nPot: " + pot);
+    System.out.println("Your (" + currentPlayer.getPosition() + ") " + currentPlayer.getHoleCards());
     System.out.println("Your opponents (" + otherPlayer.getPosition() + ") current bet this round: " + currentBet);
-    System.out.println("Your (" + currentPlayer.getPosition() + ") current bet: "
+    System.out.println("Your current bet: "
             + getCurrentPlayerBet(currentPlayer) +
-            " | Your stack: " + currentPlayer.getStack() + "\n" +
-            "Your hole cards: " + currentPlayer.getHoleCards());
+            " | Your stack: " + currentPlayer.getStack());
 
     if (currentBet - getCurrentPlayerBet(currentPlayer) > 0) {
       System.out.println("Amount to call is: " + (currentBet - getCurrentPlayerBet(currentPlayer)));
