@@ -5,6 +5,8 @@ a Texas Hold'em Poker variation, *Heads-Up Hold'em*. So far, I have set up the s
 
 ## JFreeChart and Monte Carlo Simuluations
 
+> **_NOTE:_**  The term "Suited Pair" here refers to a pair of two cards that the same suit. It means the same thing as suited hole cards.
+
 To test out JFreeChart and how I want to run simulations, I created a couple charts:
 
 ![Pocket Pair Probability Chart](src/main/resources/pktpairprob.png)
