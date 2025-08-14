@@ -2,8 +2,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Scanner;
-
 import bots.SimpleCheckCallBot;
 import bots.SimpleCheckFoldBot;
 import controller.PokerController;
@@ -15,7 +13,7 @@ import util.CardStrings;
  * Tests game flow and makes sure the model and controller are working together and correctly.
  * Will implement after creating some rule-based bots.
  */
-public class TestGameFlow {
+public class TestBotGameFlow {
   private HandEvaluation eval;
   private Player playerSB;
   private Player playerBB;
@@ -58,10 +56,7 @@ public class TestGameFlow {
 
   @Test
   public void testRaisingManualGame() {
-    String simulatedInput = "RAISE";
-    System.setIn(new java.io.ByteArrayInputStream(simulatedInput.getBytes()));
     pokerController.playHand(pokerGame);
-    System.setIn(System.in);
   }
 
 }
