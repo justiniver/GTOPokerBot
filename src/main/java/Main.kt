@@ -1,19 +1,16 @@
-import bots.SimpleCheckCallBot
-import bots.SimpleCheckFoldBot
+import controller.PokerController
 import model.Player
+import model.PokerGame
 import model.Position
-import model.PokerSession
+import util.CardStrings
 
 fun main() {
 
-    // ^ results in 'Invalid action. Not enough chips to call' -- FIX
-    val playerSB = Player(Position.SMALL_BLIND, 1000)
-    val playerBB = Player(Position.BIG_BLIND, 1000)
+    var cs = CardStrings()
+    var playerSB = Player(Position.SMALL_BLIND, 1000)
+    var playerBB = Player(Position.BIG_BLIND, 1000)
+    var pokerGame = PokerGame(true, 5, 10, playerSB, playerBB)
+    var pokerController = PokerController()
 
-    playerSB.strategy = SimpleCheckCallBot()
-    playerBB.strategy = SimpleCheckFoldBot()
-
-    val session = PokerSession(5, 10, playerSB, playerBB)
-
-    session.runNumberOfGamesAutoRebuy(1)
+    pokerController.playHand(pokerGame)
 }
