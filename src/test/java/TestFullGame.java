@@ -1,4 +1,5 @@
 import org.junit.Before;
+import org.junit.Test;
 
 import controller.PokerController;
 import model.BettingRound;
@@ -13,21 +14,36 @@ import util.CardStrings;
  */
 public class TestFullGame {
   private HandEvaluation eval;
-  private Player playerSB;
-  private Player playerBB;
   private PokerGame pokerGame;
-  private PokerController pokerController;
   private CardStrings cs;
-  private BettingRound br;
+
 
   @Before
   public void init() {
     this.cs = new CardStrings();
-    this.playerSB  = new Player(Position.SMALL_BLIND, 1000);
-    this.playerBB = new Player(Position.BIG_BLIND, 1000);
+    Player playerSB  = new Player(Position.SMALL_BLIND, 1000);
+    Player playerBB = new Player(Position.BIG_BLIND, 1000);
     this.pokerGame = new PokerGame(true, 5, 10, playerSB, playerBB);
-    this.pokerController = new PokerController();
-    // this.br = new BettingRound(playerSB, playerBB)
+  }
+
+  private BettingRound getBR() {
+    return new BettingRound(
+            pokerGame.getPlayerSB(),
+            pokerGame.getPlayerBB(),
+            pokerGame.getPot(),
+            pokerGame.getState(),
+            pokerGame.getSmallBlindAmount(),
+            pokerGame.getBigBlindAmount()
+            );
+  }
+
+  @Test
+  public void testRaisingManualGame() {
+    pokerGame.dealHoleCards();
+    BettingRound brPre =
+
+    pokerGame.dealFlop();
+
   }
 
 

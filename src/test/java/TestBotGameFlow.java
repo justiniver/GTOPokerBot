@@ -54,9 +54,5 @@ public class TestBotGameFlow {
     Assert.assertNotEquals(1000, playerBB.getStack());
   }
 
-  @Test
-  public void testRaisingManualGame() {
-    pokerController.playHand(pokerGame);
-  }
 
 }
