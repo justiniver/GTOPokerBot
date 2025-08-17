@@ -1,7 +1,6 @@
 package model;
 
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Represents the betting round that occurs four times during a game of poker.
@@ -18,8 +17,8 @@ public class BettingRound {
   private int lastRaiseIncrement;
   private final int smallBlindAmount;
   private final int bigBlindAmount;
-  private Player currentPlayer;
-  private Player otherPlayer;
+  private Player currentPlayer; // AKA "out of position"
+  private Player otherPlayer; // "AKA in position"
 
   public BettingRound(PokerGame pokerGame) {
     this.playerSB = pokerGame.getPlayerSB();
@@ -39,8 +38,8 @@ public class BettingRound {
     if (state == GameState.PREFLOP) {
       playerBB.subtractStack(bigBlindAmount);
       playerSB.subtractStack(smallBlindAmount);
-      this.currentPlayer = playerBB;
-      this.otherPlayer = playerSB;
+      this.currentPlayer = playerSB;
+      this.otherPlayer = playerBB;
       currentBet = bigBlindAmount;
     } else {
       currentBet = 0;
@@ -250,7 +249,7 @@ public class BettingRound {
     }
   }
 
-  public Player getCurrPlayer() {
+  public Player getCurrentPlayer() {
     return this.currentPlayer;
   }
 

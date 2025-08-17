@@ -2,7 +2,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import controller.PokerController;
 import model.BettingRound;
 import model.Player;
 import model.PokerGame;
@@ -18,7 +17,6 @@ public class TestFullGame {
   private PokerGame pokerGame;
   private CardStrings cs;
 
-
   @Before
   public void init() {
     this.cs = new CardStrings();
@@ -32,7 +30,7 @@ public class TestFullGame {
     pokerGame.dealHoleCards();
     BettingRound brPre = new BettingRound(pokerGame);
     Assert.assertEquals(15, brPre.getPot());
-    Assert.assertEquals(Position.BIG_BLIND, brPre.getCurrPlayer().getPosition()); // I THINK THIS IS CORRECT, BUT DOUBLE CHECK
+    Assert.assertEquals(Position.BIG_BLIND, brPre.getCurrentPlayer().getPosition()); // I THINK THIS IS CORRECT, BUT DOUBLE CHECK
 
     pokerGame.dealFlop();
 
