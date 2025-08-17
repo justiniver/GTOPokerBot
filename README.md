@@ -3,19 +3,17 @@
 I have been interested in poker theory for a little while now, so I thought I might as well try and create something related to Poker. For now, I am specifically looking into
 a Texas Hold'em Poker variation, *Heads-Up Hold'em*. So far, I have set up the simulations and now am working towards creating a GTO poker bot.
 
-## JFreeChart and Monte Carlo Simuluations
-
-> **_NOTE:_**  The term "Suited Pair" here refers to a pair of two cards that the same suit. It means the same thing as suited hole cards.
+## JFreeChart and Monte Carlo Simulations
 
 To test out JFreeChart and how I want to run simulations, I created a couple charts:
 
 ![Pocket Pair Probability Chart](src/main/resources/pktpairprob.png)
-![Suited Pair Probability Chart](src/main/resources/suitpairprob.png)
+![Suited Hole Cards Probability Chart](src/main/resources/suitedhcprob.png)
 
 These charts are simply simulating the probability of being dealt a certain kind of hand. For example, if we look at the ***Pocket Pair Probability Chart***, 
 the **x-axis** represents the number of simulations I ran while the **y-axis** represents the probability of being dealt a pocket pair. For instance, 
 one simulation means I dealt a hand of two cards and then using some predicate (in this case, card rank equality), I kept track of whether we got a pocket pair. 
-Then, probability is simply $\frac{\text{num pocket pairs}}{\text{num simulations}}$. This exact process was also used for the ***Suited Pair Probability Chart***.
+Then, probability is simply $\frac{\text{num pocket pairs}}{\text{num simulations}}$. This exact process was also used for the ***Suited Hole Cards Probability Chart***.
 
 Obviously, these are things we can prove mathematically without the use of simulations. It is, however, a pretty cool example of the central limit theorem and may be
 helpful to statistics students who like poker[^1]. Also, JFreeChart and my current structure for simulations has been working decent, so I am planning on following a similar
@@ -94,7 +92,7 @@ This data is somewhat useful if you are playing heads-up and want to know what t
 ## Advanced Bots and CFR
 
 
-[^1]: For reference, the true probability of pocket pairs is 0.0588 and the true probability of suited pairs is 0.2353.
+[^1]: For reference, the true probability of pocket pairs is 0.0588 and the true probability of Suited Hole Cardss is 0.2353.
 [^2]: Future additions includes the implementation of full game simulations as well as the implementation of counterfactual regret minimization among other useful metrics.
 [^3]: Equity refers to the probability you are to win at showdown (i.e., how often a hand wins after all five community cards are dealt). If you are trying to figure out your equity on the flop, you need to make an educated guess on the strength of your opponents hand, and then calculate how many outs you have. You will then need to estimate how often those outs will appear on the turn and/or river. This is understandably quite hard to do, which is why we have computers.
 [^4]: As some poker players may already know, this probability checks out. It is well known that aces have around 85% equity preflop against an unrestricted range, so this means that most likely my simulations are functioning correctly.
