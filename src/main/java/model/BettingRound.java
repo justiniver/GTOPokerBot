@@ -19,15 +19,16 @@ public class BettingRound {
   private final int smallBlindAmount;
   private final int bigBlindAmount;
   private Player currPlayer;
+  private PokerGame pokerGame;
 
-  public BettingRound(Player playerSB, Player playerBB, int pot, GameState state,
-                      int smallBlindAmount, int bigBlindAmount) {
-    this.playerSB = playerSB;
-    this.playerBB = playerBB;
-    this.pot = pot;
-    this.state = state;
-    this.smallBlindAmount = smallBlindAmount;
-    this.bigBlindAmount = bigBlindAmount;
+  public BettingRound(PokerGame pokerGame) {
+    this.pokerGame = pokerGame;
+    this.playerSB = pokerGame.getPlayerSB();
+    this.playerBB = pokerGame.getPlayerBB();
+    this.pot = pokerGame.getPot();
+    this.state = pokerGame.getState();
+    this.smallBlindAmount = pokerGame.getSmallBlindAmount();
+    this.bigBlindAmount = pokerGame.getBigBlindAmount();
     if (state == GameState.PREFLOP) {
       this.betSB = smallBlindAmount;
       this.betBB = bigBlindAmount;

@@ -26,21 +26,11 @@ public class TestFullGame {
     this.pokerGame = new PokerGame(true, 5, 10, playerSB, playerBB);
   }
 
-  private BettingRound getBR() {
-    return new BettingRound(
-            pokerGame.getPlayerSB(),
-            pokerGame.getPlayerBB(),
-            pokerGame.getPot(),
-            pokerGame.getState(),
-            pokerGame.getSmallBlindAmount(),
-            pokerGame.getBigBlindAmount()
-            );
-  }
-
   @Test
   public void testRaisingManualGame() {
     pokerGame.dealHoleCards();
-    BettingRound brPre =
+    BettingRound brPre = new BettingRound(pokerGame);
+
 
     pokerGame.dealFlop();
 

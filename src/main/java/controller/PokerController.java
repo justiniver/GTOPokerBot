@@ -24,9 +24,7 @@ public class PokerController implements Controller {
   public void playHand(PokerGame pokerGame) {
     System.out.println("\n----------Current state: " + GameState.PREFLOP + "----------");
     pokerGame.dealHoleCards();
-    BettingRound preflopBR = new BettingRound(pokerGame.getPlayerSB(), pokerGame.getPlayerBB(),
-            pokerGame.getPot(), GameState.PREFLOP, pokerGame.getSmallBlindAmount(),
-            pokerGame.getBigBlindAmount());
+    BettingRound preflopBR = new BettingRound(pokerGame);
 
     if (checkRoundCondition(pokerGame, preflopBR)) {
       return;
@@ -35,9 +33,7 @@ public class PokerController implements Controller {
     System.out.println("\n----------Current state: " + GameState.FLOP + "----------");
     pokerGame.dealFlop();
     System.out.println(pokerGame.getBoard());
-    BettingRound flopBR = new BettingRound(pokerGame.getPlayerSB(), pokerGame.getPlayerBB(),
-            pokerGame.getPot(), GameState.FLOP, pokerGame.getSmallBlindAmount(),
-            pokerGame.getBigBlindAmount());
+    BettingRound flopBR = new BettingRound(pokerGame);
 
     if (checkRoundCondition(pokerGame, flopBR)) {
       return;
@@ -46,9 +42,7 @@ public class PokerController implements Controller {
     System.out.println("\n----------Current state: " + GameState.TURN + "----------");
     pokerGame.dealTurn();
     System.out.println(pokerGame.getBoard());
-    BettingRound turnBR = new BettingRound(pokerGame.getPlayerSB(), pokerGame.getPlayerBB(),
-            pokerGame.getPot(), GameState.TURN, pokerGame.getSmallBlindAmount(),
-            pokerGame.getBigBlindAmount());
+    BettingRound turnBR = new BettingRound(pokerGame);
 
     if (checkRoundCondition(pokerGame, turnBR)) {
       return;
@@ -57,9 +51,7 @@ public class PokerController implements Controller {
     System.out.println("\n----------Current state: " + GameState.RIVER + "----------");
     pokerGame.dealRiver();
     System.out.println(pokerGame.getBoard());
-    BettingRound riverBR = new BettingRound(pokerGame.getPlayerSB(), pokerGame.getPlayerBB(),
-            pokerGame.getPot(), GameState.RIVER, pokerGame.getSmallBlindAmount(),
-            pokerGame.getBigBlindAmount());
+    BettingRound riverBR = new BettingRound(pokerGame);
 
     checkRoundCondition(pokerGame, riverBR);
   }
