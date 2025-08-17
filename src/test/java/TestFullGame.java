@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,10 +28,11 @@ public class TestFullGame {
   }
 
   @Test
-  public void testRaisingManualGame() {
+  public void testRunManualGame() {
     pokerGame.dealHoleCards();
     BettingRound brPre = new BettingRound(pokerGame);
-
+    Assert.assertEquals(brPre.getPot(), 15);
+    Assert.assertEquals(brPre.getCurrPlayer().getPosition(), Position.BIG_BLIND);
 
     pokerGame.dealFlop();
 

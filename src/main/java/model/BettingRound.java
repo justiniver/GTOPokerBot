@@ -246,9 +246,6 @@ public class BettingRound {
     return RoundCondition.CONTINUE;
   }
 
-
-
-
   private int getCurrentPlayerBet(Player currentPlayer) {
     if (currentPlayer == playerSB) {
       return betSB;
