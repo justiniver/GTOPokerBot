@@ -36,14 +36,12 @@ public class BettingRound {
       this.betBB = 0;
     }
 
-    Player currentPlayer;
-    Player otherPlayer;
     if (state == GameState.PREFLOP) {
-      this.currentPlayer = playerSB;
-      this.otherPlayer = playerBB;
-      currentBet = bigBlindAmount;
       playerBB.subtractStack(bigBlindAmount);
       playerSB.subtractStack(smallBlindAmount);
+      this.currentPlayer = playerBB;
+      this.otherPlayer = playerSB;
+      currentBet = bigBlindAmount;
     } else {
       currentBet = 0;
       this.currentPlayer = playerBB;
