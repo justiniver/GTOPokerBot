@@ -1,29 +1,87 @@
 import controller.PokerController
-import model.Player
-import model.PokerGame
-import model.Position
-import simulations.PokerEquitySim
+import model.*
+import simulations.*
 import util.CardStrings
+import org.jfree.chart.ChartFactory
+import org.jfree.chart.ChartPanel
+import org.jfree.chart.plot.PlotOrientation
+import org.jfree.data.xy.XYSeries
+import org.jfree.data.xy.XYSeriesCollection
+import java.awt.Dimension
+import javax.swing.JFrame
 
 fun main() {
-    val cardStrings = CardStrings()
-    val simulator = PokerEquitySim()
+    val simulationResults = mutableMapOf<Int, Double>()
 
-    simulator.runProgressiveSimulation(
-        startTrials = 50,
-        endTrials = 10000,
-        step = 10,
-        card1 = cardStrings.queenDiamond,
-        card2 = cardStrings.tenDiamond,
-        chartTitle = "Queen-Ten Suited Equity"
-    )
+    ////////////////////////////////////
+
+    var suitedHoleCardsCount = 0;
+    var suitedHoleCardsTrials = 0
+
+    fun simpleSimHelper(
+        trials: Int,
+        condition: (Card, Card) -> Boolean,
+        countUpdater: () -> Unit
+    ) {
+        val deck = PokerDeck()
+        for (i in 1..trials) {
+            deck.shuffle()
+            val card1 = deck.dealCard()
+            val card2 = deck.dealCard()
+            if (condition(card1, card2)) {
+                countUpdater()
+            }
+            deck.reset()
+        }
+    }
+
+    fun runSuitedHoleCardsSimulation(trials: Int) {
+        suitedHoleCardsCount = 0
+        suitedHoleCardsTrials = trials
+        simpleSimHelper(trials, { card1, card2 -> card1.suit == card2.suit }) {
+            suitedHoleCardsCount++
+        }
+    }
+
+    for (i in 50 .. 100000 step 50) {
+        runSuitedHoleCardsSimulation(i)
+        val prob = suitedHoleCardsCount.toDouble() / suitedHoleCardsTrials
+        simulationResults[i] = prob
+    }
+
+    fun displayChart(title: String = "Poker Hand Equity Simulation") {
+        val dataset = XYSeriesCollection()
+        val series = XYSeries("Win Probability")
+
+        for ((trials, probability) in simulationResults.entries.sortedBy { it.key }) {
+            series.add(trials.toDouble(), probability)
+        }
+        dataset.addSeries(series)
+
+        val chart = ChartFactory.createXYLineChart(
+            title,
+            "Number of Simulations",
+            "Probability",
+            dataset,
+            PlotOrientation.VERTICAL,
+            true,
+            true,
+            false
+        )
+
+        val plot = chart.xyPlot
+        val rangeAxis = plot.rangeAxis
+        rangeAxis.range = org.jfree.data.Range(0.0, 1.0)
+
+        val chartPanel = ChartPanel(chart)
+        chartPanel.preferredSize = Dimension(800, 500)
+
+        val frame = JFrame("Poker Simulation")
+        frame.contentPane.add(chartPanel)
+        frame.pack()
+        frame.isVisible = true
+        frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+    }
+
+    displayChart("Suited Hole Cards Probability Convergence")
 }
-
-
-var cs = CardStrings()
-//    var playerSB = Player(Position.SMALL_BLIND, 1000)
-//    var playerBB = Player(Position.BIG_BLIND, 1000)
-//    var pokerGame = PokerGame(true, 5, 10, playerSB, playerBB)
-//    var pokerController = PokerController()
-//
-//    pokerController.playHand(pokerGame)

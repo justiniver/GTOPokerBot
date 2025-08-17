@@ -2,7 +2,7 @@ package simulations
 
 import model.*;
 
-class PokerHandSim {
+class HoleCardCovergenceSim {
     private var pocketPairCount = 0;
     private var suitedHoleCardsCount = 0;
     private var pocketPairTrials = 0

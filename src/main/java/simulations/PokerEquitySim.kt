@@ -113,7 +113,7 @@ class PokerEquitySim {
 
         val chart = ChartFactory.createXYLineChart(
             title,
-            "Number of Trials",
+            "Number of Simulations",
             "Win Probability",
             dataset,
             PlotOrientation.VERTICAL,
