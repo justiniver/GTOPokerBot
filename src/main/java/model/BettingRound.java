@@ -18,11 +18,10 @@ public class BettingRound {
   private int lastRaiseIncrement;
   private final int smallBlindAmount;
   private final int bigBlindAmount;
-  private Player currPlayer;
-  private PokerGame pokerGame;
+  private Player currentPlayer;
+  private Player otherPlayer;
 
   public BettingRound(PokerGame pokerGame) {
-    this.pokerGame = pokerGame;
     this.playerSB = pokerGame.getPlayerSB();
     this.playerBB = pokerGame.getPlayerBB();
     this.pot = pokerGame.getPot();
@@ -36,6 +35,20 @@ public class BettingRound {
       this.betSB = 0;
       this.betBB = 0;
     }
+
+    Player currentPlayer;
+    Player otherPlayer;
+    if (state == GameState.PREFLOP) {
+      this.currentPlayer = playerSB;
+      this.otherPlayer = playerBB;
+      currentBet = bigBlindAmount;
+      playerBB.subtractStack(bigBlindAmount);
+      playerSB.subtractStack(smallBlindAmount);
+    } else {
+      currentBet = 0;
+      this.currentPlayer = playerBB;
+      this.otherPlayer = playerSB;
+    }
   }
 
   /**
@@ -43,20 +56,6 @@ public class BettingRound {
    * Does not terminate unless player actions indicate termination (e.g., a player folds).
    */
   public RoundCondition run() {
-    Player currentPlayer;
-    Player otherPlayer;
-    if (state == GameState.PREFLOP) {
-      currentPlayer = playerSB;
-      otherPlayer = playerBB;
-      currentBet = bigBlindAmount;
-      playerBB.subtractStack(bigBlindAmount);
-      playerSB.subtractStack(smallBlindAmount);
-    } else {
-      currentBet = 0;
-      currentPlayer = playerBB;
-      otherPlayer = playerSB;
-    }
-
 
     boolean bettingComplete = false;
 
@@ -90,7 +89,6 @@ public class BettingRound {
 
       if (roundCondition == RoundCondition.FOLD) {
         System.out.println("Betting round ended due to " + currentPlayer.getPosition() + " folding.");
-        this.currPlayer = currentPlayer;
         return roundCondition;
       } else if (roundCondition == RoundCondition.SHOWDOWN) {
         return roundCondition;
@@ -255,7 +253,7 @@ public class BettingRound {
   }
 
   public Player getCurrPlayer() {
-    return this.currPlayer;
+    return this.currentPlayer;
   }
 
   public int getPot() {

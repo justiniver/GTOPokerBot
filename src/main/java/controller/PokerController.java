@@ -108,14 +108,12 @@ public class PokerController implements Controller {
       System.out.println(pokerGame.getBoard());
     }
 
-
     HandEvaluation eval = new HandEvaluation();
     Player playerSB = pokerGame.getPlayerSB();
     Player playerBB = pokerGame.getPlayerBB();
     PokerBoard board = pokerGame.getBoard();
     PokerHand handSB = pokerGame.getBestFiveCardHand(playerSB, board);
     PokerHand handBB = pokerGame.getBestFiveCardHand(playerBB, board);
-
 
     System.out.println("\n----------SHOWDOWN----------\n");
     System.out.println(pokerGame.getBoard().toString());
