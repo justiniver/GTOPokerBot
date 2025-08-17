@@ -53,7 +53,7 @@ We see the opposite with **56 suited**. It seems like **56 suited** has **~47%**
 
 The code needed to create and run these equity convergence calculationns and create the graph is given below. You can run this in ````Main.kt```` and it should take ~5 minutes though you can modify this by running less or more simulations.
 
-````java
+````kotlin
     val cardStrings = CardStrings()
     val simulator = PokerEquitySim()
 

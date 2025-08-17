@@ -4,9 +4,9 @@ import model.*;
 
 class PokerHandSim {
     private var pocketPairCount = 0;
-    private var suitedPairCount = 0;
+    private var suitedHoleCardsCount = 0;
     private var pocketPairTrials = 0
-    private var suitedPairTrials = 0
+    private var suitedHoleCardsTrials = 0
 
     private fun simpleSimHelper(
         trials: Int,
@@ -33,11 +33,11 @@ class PokerHandSim {
         }
     }
 
-    fun runSuitedPairSimulation(trials: Int) {
-        this.suitedPairCount = 0
-        this.suitedPairTrials = trials
+    fun runSuitedHoleCardsSimulation(trials: Int) {
+        this.suitedHoleCardsCount = 0
+        this.suitedHoleCardsTrials = trials
         simpleSimHelper(trials, { card1, card2 -> card1.suit == card2.suit }) {
-            suitedPairCount++
+            suitedHoleCardsCount++
         }
     }
 
@@ -49,8 +49,8 @@ class PokerHandSim {
             pocketPairProb = pocketPairCount.toFloat() / pocketPairTrials
         }
 
-        if (suitedPairTrials > 0) {
-            suitedPairProb = suitedPairCount.toFloat() / suitedPairTrials
+        if (suitedHoleCardsTrials > 0) {
+            suitedPairProb = suitedHoleCardsCount.toFloat() / suitedHoleCardsTrials
         }
 
         println("Pocket Pair Probability: $pocketPairProb")
@@ -66,11 +66,11 @@ class PokerHandSim {
     }
 
     fun getSuitedPairCount(): Int {
-        return suitedPairCount;
+        return suitedHoleCardsCount;
     }
 
     fun getSuitedPairTrials(): Int {
-        return suitedPairTrials;
+        return suitedHoleCardsTrials;
     }
 
 }
