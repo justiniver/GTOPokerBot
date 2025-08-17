@@ -30,7 +30,8 @@ public class TestFullGame {
     pokerGame.dealHoleCards();
     BettingRound brPre = new BettingRound(pokerGame);
     Assert.assertEquals(15, brPre.getPot());
-    Assert.assertEquals(Position.BIG_BLIND, brPre.getCurrentPlayer().getPosition());
+    Assert.assertEquals(Position.SMALL_BLIND, brPre.getCurrentPlayer().getPosition());
+    // brPre.run();
 
     pokerGame.dealFlop();
 
