@@ -51,7 +51,7 @@ fun main() {
 
     fun displayChart(title: String = "Poker Hand Equity Simulation") {
         val dataset = XYSeriesCollection()
-        val series = XYSeries("Win Probability")
+        val series = XYSeries("Probability")
 
         for ((trials, probability) in simulationResults.entries.sortedBy { it.key }) {
             series.add(trials.toDouble(), probability)
