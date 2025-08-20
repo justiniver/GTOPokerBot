@@ -46,7 +46,7 @@ public class RuleBasedBot implements PlayerStrategy {
    */
   private Decision handleFacingBet(GameView view, double decisionScore) {
     double potOdds = PokerCalculations.potOdds(view.pot(), view.toCall());
-    int minRaise = view.minRaise();
+    int minRaise = view.bigBlindAmount();
     int stack = view.myStack();
 
     double raiseThreshold = 0.7 - (aggression * 0.2);
@@ -82,7 +82,7 @@ public class RuleBasedBot implements PlayerStrategy {
    * Determines what to do when checking or betting is an option
    */
   private Decision handleOpenAction(GameView view, double decisionScore) {
-    int minRaise = view.minRaise();
+    int minRaise = view.bigBlindAmount();
     int stack = view.myStack();
 
     if (decisionScore < 0.3 + (tightness * 0.1)) {
@@ -158,7 +158,7 @@ public class RuleBasedBot implements PlayerStrategy {
    */
   private double getPositionValue(GameView view) {
     if (view.street() == GameState.PREFLOP) {
-      return view.myStack() < view.minRaise() * 20 ? 0.4 : 0.6;
+      return view.myStack() < view.bigBlindAmount() * 20 ? 0.4 : 0.6;
     } else {
       return 0.5;
     }
@@ -170,7 +170,7 @@ public class RuleBasedBot implements PlayerStrategy {
   private double getStackLeverage(GameView view) {
     double effectiveStackInBB = PokerCalculations.effectiveStackInBB(
             view.myStack(),
-            view.minRaise()
+            view.bigBlindAmount()
     );
 
     if (effectiveStackInBB < 10) {

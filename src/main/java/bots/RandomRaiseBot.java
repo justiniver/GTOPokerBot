@@ -11,8 +11,16 @@ public class RandomRaiseBot implements PlayerStrategy {
       int amtCall = view.toCall();
       if (amtCall == 0) {
         int amtToBet = (int) (view.pot() * rand.nextDouble(0.30, 1.30));
-
+        if (amtToBet < view.bigBlindAmount()) {
+          amtToBet = view.bigBlindAmount(); // need to make sure that we can afford this as well.
+                                            // thinking that maybe I just create an all in amt which can always be shoved (regardless of minbet)
+        } else if (amtToBet > view.myStack()) {
+          amtToBet = view.myStack();
+        }
       }
     }
+
+    // logic to bet, raise, reraise randomly and safely
+
   }
 }

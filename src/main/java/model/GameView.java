@@ -7,7 +7,7 @@ public record GameView(
         int pot,
         int toCall,
         int currentBet,
-        int minRaise,
+        int bigBlindAmount,
         int myStack,
         List<Card> board,
         HoleCards myCards
