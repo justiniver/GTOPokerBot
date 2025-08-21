@@ -1,15 +1,21 @@
+import bots.RandomRaiseBot
+import bots.SimpleCheckCallBot
 import controller.PokerController
-import model.*
-import simulations.*
+import model.Player
+import model.PokerGame
+import model.Position
 import util.CardStrings
-import org.jfree.chart.ChartFactory
-import org.jfree.chart.ChartPanel
-import org.jfree.chart.plot.PlotOrientation
-import org.jfree.data.xy.XYSeries
-import org.jfree.data.xy.XYSeriesCollection
-import java.awt.Dimension
-import javax.swing.JFrame
 
 fun main() {
+    val playerSB = Player(Position.SMALL_BLIND, 1000)
+    val playerBB = Player(Position.BIG_BLIND, 1000)
+    val pokerGame = PokerGame(true, 5, 10, playerSB, playerBB)
+    val pokerController = PokerController()
+
+    playerSB.strategy = RandomRaiseBot()
+    playerBB.strategy = RandomRaiseBot()
+
+    pokerController.playHand(pokerGame)
+
 
 }
