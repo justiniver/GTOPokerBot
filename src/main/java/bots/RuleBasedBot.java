@@ -59,7 +59,7 @@ public class RuleBasedBot implements PlayerStrategy {
     if (decisionScore > potOdds - (random.nextDouble() * 0.1)) {
       consecutiveFolds = 0;
       if (stack >= view.toCall()) {
-        return Decision.call();
+        return new Decision(Action.CALL, view.toCall());
       } else {
         return Decision.fold();
       }
@@ -68,7 +68,7 @@ public class RuleBasedBot implements PlayerStrategy {
     if (random.nextDouble() < 0.1 - (tightness * 0.05)) {
       consecutiveFolds = 0;
       if (stack >= view.toCall()) {
-        return Decision.call();
+        return new Decision(Action.CALL, view.toCall());
       } else {
         return Decision.fold();
       }
