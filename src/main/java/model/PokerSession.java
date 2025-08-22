@@ -59,8 +59,12 @@ public class PokerSession {
         HandRank bestHandRank = c.getBestHandRank();
         winningRankMap.put(bestHandRank, winningRankMap.getOrDefault(bestHandRank, 0) + 1);
       }
+
+      // DELETE LATER (FOR TESTING)
+      System.out.print("####################################### " + currentGame.getDeck().getSize() + " ########################################");
     }
     concludedGameOutput();
+
   }
 
   public void runNumberOfGamesAutoRebuy(int numberOfGames) {

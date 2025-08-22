@@ -3,6 +3,7 @@ import bots.SimpleCheckCallBot
 import controller.PokerController
 import model.Player
 import model.PokerGame
+import model.PokerSession
 import model.Position
 import util.CardStrings
 
@@ -11,11 +12,11 @@ fun main() {
     val playerBB = Player(Position.BIG_BLIND, 1000)
     val pokerGame = PokerGame(true, 5, 10, playerSB, playerBB)
     val pokerController = PokerController()
+    val pokerSession = PokerSession(5, 10, playerSB, playerBB)
 
     playerSB.strategy = RandomRaiseBot()
     playerBB.strategy = RandomRaiseBot()
 
-    for (i in 1 .. 10) {
-        pokerController.playHand(pokerGame)
-    }
+    pokerSession.runNumberOfGamesAutoRebuy(40)
+
 }

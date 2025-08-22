@@ -26,41 +26,41 @@ public class TestPokerGameClass {
     Assert.assertNotNull(pokerGame.getBoard());
     Assert.assertEquals(Position.SMALL_BLIND, pokerGame.getPlayerSB().getPosition());
     Assert.assertEquals(Position.BIG_BLIND, pokerGame.getPlayerBB().getPosition());
-    Assert.assertEquals(52, pokerGame.getDeck().getDeckSize());
+    Assert.assertEquals(52, pokerGame.getDeck().getSize());
     Assert.assertEquals(GameState.PREFLOP, pokerGame.getState());
   }
 
   @Test
   public void testDealHoleCards() {
-    int initialDeckSize = pokerGame.getDeck().getDeckSize();
+    int initialDeckSize = pokerGame.getDeck().getSize();
     pokerGame.dealHoleCards();
     Assert.assertNotNull(pokerGame.getPlayerSB().getHoleCards().getCard1());
     Assert.assertNotNull(pokerGame.getPlayerSB().getHoleCards().getCard2());
     Assert.assertNotNull(pokerGame.getPlayerBB().getHoleCards().getCard1());
     Assert.assertNotNull(pokerGame.getPlayerBB().getHoleCards().getCard2());
     Assert.assertEquals(GameState.PREFLOP, pokerGame.getState());
-    Assert.assertEquals(initialDeckSize - 4, pokerGame.getDeck().getDeckSize());
+    Assert.assertEquals(initialDeckSize - 4, pokerGame.getDeck().getSize());
   }
 
   @Test
   public void testDealFlop() {
     pokerGame.dealHoleCards();
-    int deckSizeAfterHole = pokerGame.getDeck().getDeckSize();
+    int deckSizeAfterHole = pokerGame.getDeck().getSize();
     pokerGame.dealFlop();
     Assert.assertEquals(GameState.FLOP, pokerGame.getState());
     Assert.assertEquals(3, pokerGame.getBoard().getCommunityCards().size());
-    Assert.assertEquals(deckSizeAfterHole - 3, pokerGame.getDeck().getDeckSize());
+    Assert.assertEquals(deckSizeAfterHole - 3, pokerGame.getDeck().getSize());
   }
 
   @Test
   public void testDealTurn() {
     pokerGame.dealHoleCards();
     pokerGame.dealFlop();
-    int deckSizeAfterFlop = pokerGame.getDeck().getDeckSize();
+    int deckSizeAfterFlop = pokerGame.getDeck().getSize();
     pokerGame.dealTurn();
     Assert.assertEquals(GameState.TURN, pokerGame.getState());
     Assert.assertEquals(4, pokerGame.getBoard().getCommunityCards().size());
-    Assert.assertEquals(deckSizeAfterFlop - 1, pokerGame.getDeck().getDeckSize());
+    Assert.assertEquals(deckSizeAfterFlop - 1, pokerGame.getDeck().getSize());
   }
 
   @Test
@@ -68,11 +68,11 @@ public class TestPokerGameClass {
     pokerGame.dealHoleCards();
     pokerGame.dealFlop();
     pokerGame.dealTurn();
-    int deckSizeAfterTurn = pokerGame.getDeck().getDeckSize();
+    int deckSizeAfterTurn = pokerGame.getDeck().getSize();
     pokerGame.dealRiver();
     Assert.assertEquals(GameState.RIVER, pokerGame.getState());
     Assert.assertEquals(5, pokerGame.getBoard().getCommunityCards().size());
-    Assert.assertEquals(deckSizeAfterTurn - 1, pokerGame.getDeck().getDeckSize());
+    Assert.assertEquals(deckSizeAfterTurn - 1, pokerGame.getDeck().getSize());
   }
 
   @Test

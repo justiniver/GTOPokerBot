@@ -65,7 +65,7 @@ public class PokerDeck implements Deck {
   }
 
   @Override
-  public int getDeckSize() {
+  public int getSize() {
     return deck.size();
   }
 
