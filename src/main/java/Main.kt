@@ -15,7 +15,7 @@ fun main() {
     playerSB.strategy = RandomRaiseBot()
     playerBB.strategy = RandomRaiseBot()
 
-    pokerController.playHand(pokerGame)
-
-
+    for (i in 1 .. 10) {
+        pokerController.playHand(pokerGame)
+    }
 }
