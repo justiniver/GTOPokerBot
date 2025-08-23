@@ -11,6 +11,7 @@ public class RandomRaiseBot implements PlayerStrategy {
     int pot = view.pot();
     Random rand = new Random();
 
+    // WHEN NO CURRENT BET
     if (amtCall == 0) {
       if (rand.nextDouble() > 0.5) {
         int amtToBet = (int) (pot * rand.nextDouble(0.30, 1.30));
@@ -27,6 +28,14 @@ public class RandomRaiseBot implements PlayerStrategy {
       }
     }
 
+    // WHEN CURRENT BET
+    else if (amtCall > 0 && amtCall < myStack) {
+      if (rand.nextDouble() > 0.5) {
+        return new Decision(Action.RAISE, myStack);
+      }
+    }
+
+    // WHEN BET COVERS STACK
     else if (amtCall >= myStack) {
       if (rand.nextDouble() > 0.5) {
         return new Decision(Action.CALL, amtCall);
