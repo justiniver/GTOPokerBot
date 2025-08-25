@@ -17,6 +17,6 @@ fun main() {
     playerSB.strategy = RandomRaiseBot()
     playerBB.strategy = RandomRaiseBot()
 
-    pokerSession.runNumberOfGamesAutoRebuy(40) // AUTO REBUY NOT REBUYING? FIX
+    pokerSession.runNumberOfGamesAutoRebuy(10) // AUTO REBUY NOT REBUYING? FIX
 
 }
