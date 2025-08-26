@@ -87,7 +87,7 @@ I set up a simulation where two poker bots play 10 million hands against each ot
 
 ![10 Million Hands Winning Hand Rank Frequency Barchart](src/main/resources/handrankfreqbarchart10000000.png)
 
-This data is somewhat useful if you are playing heads-up and want to know what the winning hand rank looks like on average. So, for example, the winning hand rank for heads-up is less strong than multiway poker, and roughly **~75%** of hands are won with a two pair or worse. If you are playing against someone who seems to never fold, than this is a useful statistic to keep in mind.
+This data is somewhat useful if you are playing heads-up and want to know what the winning hand rank looks like on average. So, for example, the winning hand rank for heads-up is less strong than multiway poker, and roughly **~75%** of hands are won with a two pair or worse. If you are playing against someone who seems to never fold, then this is a useful statistic to keep in mind.
 
 ## Advanced Bots and CFR
 
