@@ -237,7 +237,13 @@ public class BettingRound {
       currentBet = betBB;
     }
     lastRaiseIncrement = raiseAmount;
-    System.out.println(currentPlayer.getPosition() + " raises to " + raiseToAmount);
+
+    if (raiseToAmount == currentPlayer.getStack()) {
+      System.out.println(currentPlayer.getPosition() + " goes all in " + raiseToAmount); // POTENTIALLY WE MAKE ALL-IN ONE OF THE ENUM OPTIONS
+    } else {
+      System.out.println(currentPlayer.getPosition() + " raises to " + raiseToAmount);
+    }
+
     return RoundCondition.CONTINUE;
   }
 
