@@ -240,6 +240,7 @@ public class BettingRound {
 
     if (raiseToAmount == currentPlayer.getStack()) {
       System.out.println(currentPlayer.getPosition() + " goes all in " + raiseToAmount); // POTENTIALLY WE MAKE ALL-IN ONE OF THE ENUM OPTIONS
+                                                                                         // actually, probably would be better to add a flag to decision or player class
     } else {
       System.out.println(currentPlayer.getPosition() + " raises to " + raiseToAmount);
     }
