@@ -28,19 +28,17 @@ public class RandomRaiseBot implements PlayerStrategy {
       }
     }
 
-
-
-    // WHEN CURRENT BET
-    else if (amtCall > 0 && amtCall < myStack) {
+    // WHEN OPPONENT HAS SHOVED OR BET COVERS STACK
+    else if (view.hasShoved()) {
       if (rand.nextDouble() > 0.5) {
-        return new Decision(Action.RAISE, myStack);
+        return new Decision(Action.CALL, amtCall);
       }
     }
 
-    // WHEN BET COVERS STACK
-    else if (amtCall >= myStack) {
+    // ANY OTHER BET
+    else {
       if (rand.nextDouble() > 0.5) {
-        return new Decision(Action.CALL, amtCall);
+        return new Decision(Action.RAISE, myStack);
       }
     }
 
