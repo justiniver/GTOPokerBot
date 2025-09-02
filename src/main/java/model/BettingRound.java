@@ -67,7 +67,8 @@ public class BettingRound {
               bigBlindAmount,
               currentPlayer.getStack(),
               List.of(),
-              currentPlayer.getHoleCards());
+              currentPlayer.getHoleCards(),
+              otherPlayer.getIsAllIn());
 
       Decision decision;
       RoundCondition roundCondition = null;
@@ -239,8 +240,8 @@ public class BettingRound {
     lastRaiseIncrement = raiseAmount;
 
     if (raiseToAmount == currentPlayer.getStack()) {
-      System.out.println(currentPlayer.getPosition() + " goes all in " + raiseToAmount); // POTENTIALLY WE MAKE ALL-IN ONE OF THE ENUM OPTIONS
-                                                                                         // actually, probably would be better to add a flag to decision or player class
+      currentPlayer.flagAllIn();
+      System.out.println(currentPlayer.getPosition() + " goes all in " + raiseToAmount);
     } else {
       System.out.println(currentPlayer.getPosition() + " raises to " + raiseToAmount);
     }

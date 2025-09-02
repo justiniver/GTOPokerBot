@@ -10,5 +10,6 @@ public record GameView(
         int bigBlindAmount,
         int myStack,
         List<Card> board,
-        HoleCards myCards
+        HoleCards myCards,
+        boolean hasShoved // bool to check whether opponent has shoved
 ) {}

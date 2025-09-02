@@ -28,6 +28,8 @@ public class RandomRaiseBot implements PlayerStrategy {
       }
     }
 
+
+
     // WHEN CURRENT BET
     else if (amtCall > 0 && amtCall < myStack) {
       if (rand.nextDouble() > 0.5) {
