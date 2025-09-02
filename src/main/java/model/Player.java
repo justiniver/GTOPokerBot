@@ -13,6 +13,7 @@ public class Player {
   private PlayerStrategy strategy = new ConsoleStrategy();
   private int buyIn;
   private int buyOut;
+  private boolean isAllIn;
 
   public Player(Position position) {
     this(position, 0);
@@ -24,6 +25,7 @@ public class Player {
     this.initialStack = stack;
     this.buyIn = stack;
     this.buyOut = 0;
+    this.isAllIn = false;
   }
 
   public void setStrategy(PlayerStrategy strategy) {
@@ -68,6 +70,10 @@ public class Player {
     this.buyOut += amount;
   }
 
+  public void flagAllIn() {
+    this.isAllIn = true;
+  }
+
   public int getInitialStack() {
     return this.initialStack;
   }
@@ -90,6 +96,10 @@ public class Player {
 
   public int getBuyOut() {
     return this.buyOut;
+  }
+
+  public boolean getIsAllIn() {
+    return this.isAllIn;
   }
 
 }
