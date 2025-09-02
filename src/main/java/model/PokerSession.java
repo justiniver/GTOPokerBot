@@ -59,9 +59,6 @@ public class PokerSession {
         HandRank bestHandRank = c.getBestHandRank();
         winningRankMap.put(bestHandRank, winningRankMap.getOrDefault(bestHandRank, 0) + 1);
       }
-
-      // DELETE LATER (FOR TESTING)
-      System.out.print("####################################### " + currentGame.getDeck().getSize() + " ########################################");
     }
     concludedGameOutput();
 
@@ -92,7 +89,6 @@ public class PokerSession {
     }
 
     concludedGameOutput();
-    // Remove the setBackToInitialStack calls from here since rebuy happens during the loop
   }
 
   private boolean promptContinueGame() {
@@ -117,7 +113,7 @@ public class PokerSession {
     if (endStackBB > 0) {
       playerBB.buyOut(endStackBB);
     }
-    System.out.println("BIG_BLIND net profit: " + (playerBB.getBuyOut() - playerBB.getBuyIn())); // FIX NET PROFIT
+    System.out.println("BIG_BLIND net profit: " + (playerBB.getBuyOut() - playerBB.getBuyIn()));
   }
 
 
