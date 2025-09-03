@@ -17,6 +17,5 @@ fun main() {
     playerSB.strategy = RandomRaiseBot()
     playerBB.strategy = RandomRaiseBot()
 
-    pokerSession.runNumberOfGamesAutoRebuy(10)
-
+    pokerSession.runNumberOfGamesAutoRebuy(10) // SEEMS LIKE ALL IN FLAG IS NOT WORKING CORRECTLY OR BOT NOT ALL-IN-ING CORRECTLY
 }
