@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 /**
  * Represents the betting round that occurs four times during a game of poker.
  * Prints relevant information to players.
@@ -10,6 +8,7 @@ public class BettingRound {
   private final GameState state;
   private final Player playerSB;
   private final Player playerBB;
+  private final PokerGame pokerGame;
   private int pot;
   private int betSB;
   private int betBB;
@@ -21,12 +20,15 @@ public class BettingRound {
   private Player otherPlayer; // "AKA in position"
 
   public BettingRound(PokerGame pokerGame) {
+    this.pokerGame = pokerGame;
     this.playerSB = pokerGame.getPlayerSB();
     this.playerBB = pokerGame.getPlayerBB();
     this.pot = pokerGame.getPot();
     this.state = pokerGame.getState();
     this.smallBlindAmount = pokerGame.getSmallBlindAmount();
     this.bigBlindAmount = pokerGame.getBigBlindAmount();
+    this.lastRaiseIncrement = bigBlindAmount;
+    
     if (state == GameState.PREFLOP) {
       this.betSB = smallBlindAmount;
       this.betBB = bigBlindAmount;
@@ -66,7 +68,7 @@ public class BettingRound {
               currentBet,
               bigBlindAmount,
               currentPlayer.getStack(),
-              List.of(),
+              pokerGame.getBoard().getCommunityCards(),
               currentPlayer.getHoleCards(),
               otherPlayer.getIsAllIn());
 
@@ -225,7 +227,7 @@ public class BettingRound {
     if (currentPlayer.getStack() < totalAmountRequired) {
       throw new IllegalStateException("Invalid action. Not enough chips to raise to " + raiseToAmount);
     }
-    if (raiseAmount < lastRaiseIncrement && totalAmountRequired < currentPlayer.getStack()) {
+    if (raiseAmount < lastRaiseIncrement && totalAmountRequired != currentPlayer.getStack()) {
       throw new IllegalStateException("Invalid action. You must raise by at least " + lastRaiseIncrement + ", unless you are going all-in.");
     }
     currentPlayer.subtractStack(totalAmountRequired);
@@ -239,7 +241,7 @@ public class BettingRound {
     }
     lastRaiseIncrement = raiseAmount;
 
-    if (raiseToAmount == currentPlayer.getStack()) {
+    if (totalAmountRequired == currentPlayer.getStack()) {
       currentPlayer.flagAllIn();
       System.out.println(currentPlayer.getPosition() + " goes all in " + raiseToAmount);
     } else {
