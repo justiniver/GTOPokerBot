@@ -183,19 +183,14 @@ public class CFRAlgorithm {
             int toCall = 0;
             
             // Simulate realistic betting scenarios
-            if (random.nextDouble() < 0.3) {
-                // No betting yet (preflop limped or checked)
-                currentBet = 0;
-                toCall = 0;
-            } else if (random.nextDouble() < 0.6) {
+            if (random.nextDouble() < 0.6) {
                 // Someone bet, we need to call
                 currentBet = bigBlind + random.nextInt(bigBlind * 3);
                 toCall = currentBet;
             } else {
                 // Someone raised, we need to call the raise
-                int previousBet = bigBlind;
-                currentBet = previousBet + bigBlind + random.nextInt(bigBlind * 2);
-                toCall = currentBet - previousBet;
+              currentBet = bigBlind + bigBlind + random.nextInt(bigBlind * 2);
+                toCall = currentBet - bigBlind;
             }
             
             GameView view = new GameView(street, pot, toCall, currentBet, bigBlind, myStack, board, holeCards, hasShoved);
