@@ -16,13 +16,11 @@ public class Main {
         System.out.println("Training completed!");
         System.out.println("Information sets learned: " + gtoBot.getInformationSetCount());
 
-        // Step 2: Set up human vs bot game
         System.out.println("\n=== Ready to Play! ===");
         System.out.println("You will play as Small Blind, GTO Bot as Big Blind");
         System.out.println("Starting stacks: 1000 chips each");
         System.out.println("Blinds: 5/10");
 
-        // Create players
         Player human = new Player(Position.SMALL_BLIND, 1000);
         Player bot = new Player(Position.BIG_BLIND, 1000);
 
