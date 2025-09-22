@@ -32,3 +32,12 @@ public class Main {
         System.out.println("Thanks for playing!");
     }
 }
+
+// FIX THIS BUG
+
+//Enter action (FOLD, CHECK, CALL, BET, RAISE): raise
+//Enter amount (total): 70
+//SMALL_BLIND raises to 70
+//Invalid action. You must raise by at least 50, unless you are going all-in.
+//BIG_BLIND calls for 50
+//Both players have matched bets. Betting round complete.
