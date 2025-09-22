@@ -55,11 +55,12 @@ public class BettingRound {
    * Does not terminate unless player actions indicate termination (e.g., a player folds).
    */
   public RoundCondition run() {
-
     boolean bettingComplete = false;
 
     while (!bettingComplete) {
-      printGameState(currentPlayer, otherPlayer);
+      if (currentPlayer.isHuman()) {
+        printGameState(currentPlayer, otherPlayer);
+      }
 
       GameView view = new GameView(
               state,

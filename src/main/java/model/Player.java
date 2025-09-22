@@ -36,6 +36,10 @@ public class Player {
     return strategy;
   }
 
+  public boolean isHuman() {
+    return strategy.toString().contains("ConsoleStrategy");
+  }
+
   public void addStack(int add) {
     if (add <= 0) {
       throw new IllegalArgumentException("Must add a non-zero positive number.");
