@@ -11,7 +11,7 @@ public class Main {
         System.out.println("This may take a few moments...");
 
         GTOPokerBot gtoBot = new GTOPokerBot();
-        gtoBot.train(10000);
+        gtoBot.train(100000);
 
         System.out.println("Training completed!");
         System.out.println("Information sets learned: " + gtoBot.getInformationSetCount());
@@ -41,3 +41,5 @@ public class Main {
 //Invalid action. You must raise by at least 50, unless you are going all-in.
 //BIG_BLIND calls for 50
 //Both players have matched bets. Betting round complete.
+
+// SMALL BLIND and BIG BLIND are not alternating
