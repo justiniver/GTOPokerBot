@@ -94,7 +94,8 @@ public class PokerSession {
   private boolean promptContinueGame() {
     Scanner scanner = new Scanner(System.in);
     System.out.println("\nWould you like to continue playing (YES or NO)? \n");
-    return scanner.next().trim().equalsIgnoreCase("YES");
+    String in = scanner.next().trim();
+    return in.equalsIgnoreCase("YES") || in.equalsIgnoreCase("y");
   }
 
   public void concludedGameOutput() {

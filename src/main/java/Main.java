@@ -11,7 +11,7 @@ public class Main {
         System.out.println("This may take a few moments...");
 
         GTOPokerBot gtoBot = new GTOPokerBot();
-        gtoBot.train(100000);
+        gtoBot.train(100);
 
         System.out.println("Training completed!");
         System.out.println("Information sets learned: " + gtoBot.getInformationSetCount());
