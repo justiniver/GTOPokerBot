@@ -35,7 +35,6 @@ The main bot class that implements the `PlayerStrategy` interface. This bot uses
 
 **Usage:**
 ```java
-// Create a GTO bot (no training mode needed)
 GTOPokerBot gtoBot = new GTOPokerBot();
 
 // Train the bot (optional - can be used untrained)
