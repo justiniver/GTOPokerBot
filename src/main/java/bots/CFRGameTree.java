@@ -85,7 +85,8 @@ public class CFRGameTree {
         HoleCards cards = view.myCards();
         Card card1 = cards.getCard1();
         Card card2 = cards.getCard2();
-        
+
+        // Treat cards same regardless of order (e.g., AKs and KAs is same)
         if (card1.getRank().ordinal() > card2.getRank().ordinal() ||
             (card1.getRank().ordinal() == card2.getRank().ordinal() && 
              card1.getSuit().ordinal() > card2.getSuit().ordinal())) {
