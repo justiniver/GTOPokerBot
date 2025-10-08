@@ -145,7 +145,7 @@ public class CFRTrainingManager {
         return Math.min(1.0, strength);
     }
     
-    private double evaluateActionQuality(Decision decision, GameView gameState) {
+    private double evaluateActionQuality(Decision decision, GameView gameState) { // don't think this needs to take in gameState
         switch (decision.action()) {
             case FOLD:
                 return -0.1;
