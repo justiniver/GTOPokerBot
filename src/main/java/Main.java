@@ -6,7 +6,9 @@ public class Main {
         Player human = new Player(Position.SMALL_BLIND, 1000);
         Player bot = new Player(Position.BIG_BLIND, 1000);
 
-        TrainedSession ts = new TrainedSession(5, 10, human, bot, 1000);
-        ts.run();
+        TrainedSession trainedSession =
+                new TrainedSession(5, 10, human, bot, 1000);
+
+        trainedSession.run();
     }
 }
