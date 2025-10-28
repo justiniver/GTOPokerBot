@@ -92,6 +92,7 @@ This data is somewhat useful if you are playing heads-up and want to know what t
 ## Advanced Bots and CFR
 
 
+
 [^1]: For reference, the true probability of pocket pairs is 0.0588 and the true probability of Suited Hole Cardss is 0.2353.
 [^2]: Future additions includes the implementation of full game simulations as well as the implementation of counterfactual regret minimization among other useful metrics.
 [^3]: Equity refers to the probability you are to win at showdown (i.e., how often a hand wins after all five community cards are dealt). If you are trying to figure out your equity on the flop, you need to make an educated guess on the strength of your opponents hand, and then calculate how many outs you have. You will then need to estimate how often those outs will appear on the turn and/or river. This is understandably quite hard to do, which is why we have computers.
