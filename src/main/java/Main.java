@@ -7,7 +7,7 @@ public class Main {
         Player bot = new Player(Position.BIG_BLIND, 1000);
 
         TrainedSession trainedSession =
-                new TrainedSession(5, 10, human, bot, 10000);
+                new TrainedSession(5, 10, human, bot, 10);
 
         trainedSession.run();
     }
