@@ -9,7 +9,6 @@ public class Main {
         TrainedSession trainedSession =
                 new TrainedSession(5, 10, human, bot, 10);
 
-
         trainedSession.run();
     }
 }

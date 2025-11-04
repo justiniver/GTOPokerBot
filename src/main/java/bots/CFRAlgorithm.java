@@ -14,7 +14,7 @@ public class CFRAlgorithm {
     private final Random random;
     private int iteration = 0;
     
-    private static final double EXPLORATION_PROBABILITY = 0.6;
+    private static final double EXPLORATION_PROBABILITY = 0.6; // test other consts
     private static final double EXPLORATION_DECAY = 0.999;
     
     public CFRAlgorithm() {
