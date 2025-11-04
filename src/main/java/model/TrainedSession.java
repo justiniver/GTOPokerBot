@@ -37,7 +37,6 @@ public class TrainedSession {
     System.out.println("Starting stacks: 1000 chips each");
     System.out.println("Blinds: 5/10");
 
-
     bot.setStrategy(gtoBot);
 
     PokerSession session = new PokerSession(smallBlindAmount, bigBlindAmount, human, bot);
