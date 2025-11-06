@@ -91,7 +91,7 @@ This data is somewhat useful if you are playing heads-up and want to know what t
 
 ## Advanced Bots and CFR
 
-
+I used a relatively simple approach to try and tackle Monte Carlo CFR.
 
 [^1]: For reference, the true probability of pocket pairs is 0.0588 and the true probability of Suited Hole Cardss is 0.2353.
 [^2]: Future additions includes the implementation of full game simulations as well as the implementation of counterfactual regret minimization among other useful metrics.
