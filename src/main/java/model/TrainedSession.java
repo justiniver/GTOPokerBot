@@ -24,7 +24,6 @@ public class TrainedSession {
     System.out.println("=== GTO Poker Bot Training & Play ===");
 
     System.out.println("Creating and training GTO Bot...");
-    System.out.println("This may take a few moments...");
 
     GTOPokerBot gtoBot = new GTOPokerBot();
     gtoBot.train(numIterations);
@@ -33,6 +32,7 @@ public class TrainedSession {
     System.out.println("Information sets learned: " + gtoBot.getInformationSetCount());
 
     System.out.println("\n=== Ready to Play! ===");
+    // Don't hardcode these comments, maybe take in the poker game details?
     System.out.println("You will play as Small Blind, GTO Bot as Big Blind");
     System.out.println("Starting stacks: 1000 chips each");
     System.out.println("Blinds: 5/10");
