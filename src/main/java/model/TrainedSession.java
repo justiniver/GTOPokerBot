@@ -22,9 +22,7 @@ public class TrainedSession {
 
   public void run() {
     System.out.println("=== GTO Poker Bot Training & Play ===");
-
     System.out.println("Creating and training GTO Bot...");
-
     GTOPokerBot gtoBot = new GTOPokerBot();
     gtoBot.train(numIterations);
 
@@ -42,6 +40,6 @@ public class TrainedSession {
     PokerSession session = new PokerSession(smallBlindAmount, bigBlindAmount, human, bot);
     session.runGames();
 
-    System.out.println("Thanks for playing!");
+    System.out.println("Games have ended.");
   }
 }
