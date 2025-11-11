@@ -119,7 +119,4 @@ public class TestPokerGameClass {
     Assert.assertEquals(HandRank.TWOPAIR, bestP1.getHandRank());
   }
 
-
-
-
 }
