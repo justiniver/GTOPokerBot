@@ -1,5 +1,7 @@
 package bots;
 
+import bots.cfr.CFRAlgorithm;
+import bots.cfr.CFRGameTree;
 import model.*;
 import java.util.*;
 
