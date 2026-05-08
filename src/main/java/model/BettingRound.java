@@ -1,9 +1,5 @@
 package model;
 
-/**
- * Represents the betting round that occurs four times during a game of poker.
- * Prints relevant information to players.
- */
 public class BettingRound {
   private final GameState state;
   private final Player playerSB;
@@ -16,8 +12,8 @@ public class BettingRound {
   private int lastRaiseIncrement;
   private final int smallBlindAmount;
   private final int bigBlindAmount;
-  private Player currentPlayer; // AKA "out of position"
-  private Player otherPlayer; // "AKA in position"
+  private Player currentPlayer;
+  private Player otherPlayer;
 
   public BettingRound(PokerGame pokerGame) {
     this.pokerGame = pokerGame;
@@ -28,7 +24,7 @@ public class BettingRound {
     this.smallBlindAmount = pokerGame.getSmallBlindAmount();
     this.bigBlindAmount = pokerGame.getBigBlindAmount();
     this.lastRaiseIncrement = bigBlindAmount;
-    
+
     if (state == GameState.PREFLOP) {
       this.betSB = smallBlindAmount;
       this.betBB = bigBlindAmount;
@@ -50,10 +46,6 @@ public class BettingRound {
     }
   }
 
-  /**
-   * Execution method to run the betting round.
-   * Does not terminate unless player actions indicate termination (e.g., a player folds).
-   */
   public RoundCondition run() {
     boolean bettingComplete = false;
 
@@ -89,25 +81,25 @@ public class BettingRound {
       }
 
       if (roundCondition == RoundCondition.FOLD) {
-        System.out.println("Betting round ended due to " + currentPlayer.getPosition() + " folding.");
+        System.out.println("Betting round ended due to " + currentPlayer.getName() + " folding.");
         return roundCondition;
       } else if (roundCondition == RoundCondition.SHOWDOWN) {
         return roundCondition;
       }
 
-      if (state == GameState.PREFLOP && pot == 2 * bigBlindAmount && currentPlayer == playerSB) { // limping logic
-        System.out.println(currentPlayer.getPosition() + " limps in, action on " +
-                otherPlayer.getPosition());
+      if (state == GameState.PREFLOP && pot == 2 * bigBlindAmount && currentPlayer == playerSB) {
+        System.out.println(currentPlayer.getName() + " limps in, action on " +
+                otherPlayer.getName());
         Player temp = currentPlayer;
         currentPlayer = otherPlayer;
         otherPlayer = temp;
-      } else if (betSB == betBB && currentBet != 0) { // Both have matched bets
+      } else if (betSB == betBB && currentBet != 0) {
         System.out.println("Both players have matched bets. Betting round complete.");
         if (currentPlayer.getStack() == 0 || otherPlayer.getStack() == 0 || state == GameState.RIVER) {
           return RoundCondition.SHOWDOWN;
         }
         return RoundCondition.CONTINUE;
-      } else if (betSB == 0 && betBB == 0 && currentPlayer == playerSB) { // Both players check
+      } else if (betSB == 0 && betBB == 0 && currentPlayer == playerSB) {
         System.out.println("Both players have checked. Betting round complete.");
         if (state == GameState.RIVER) {
           return RoundCondition.SHOWDOWN;
@@ -126,27 +118,17 @@ public class BettingRound {
 
   private void printGameState(Player currentPlayer, Player otherPlayer) {
     System.out.println("\nPot: " + pot);
-    System.out.println("Your (" + currentPlayer.getPosition() + ") " + currentPlayer.getHoleCards());
-    System.out.println("Your opponents (" + otherPlayer.getPosition() + ") current bet this round: " + currentBet);
-    System.out.println("Your current bet: "
-            + getCurrentPlayerBet(currentPlayer) +
-            " | Your stack: " + currentPlayer.getStack());
+    System.out.println("Your cards: " + currentPlayer.getHoleCards());
+    System.out.println(otherPlayer.getName() + "'s bet: " + currentBet);
+    System.out.println("Your bet: " + getCurrentPlayerBet(currentPlayer)
+            + " | Your stack: " + currentPlayer.getStack());
 
-    if (currentBet - getCurrentPlayerBet(currentPlayer) > 0) {
-      System.out.println("Amount to call is: " + (currentBet - getCurrentPlayerBet(currentPlayer)));
+    int toCall = currentBet - getCurrentPlayerBet(currentPlayer);
+    if (toCall > 0) {
+      System.out.println("Amount to call: " + toCall);
     }
   }
 
-  /**
-   * Processes the actions and prints out useful information to users regarding their action.
-   *
-   * @param action the current action (FOLD, CALL, CHECK, BET, RAISE)
-   * @param currentPlayer the current player (small blind or big blind)
-   * @return FOLD if someone folded, SHOWDOWN if someone calls for all their chips or action
-   * is checked/called down on river, CONTINUE if betting round is not over.
-   *
-   * @throws IllegalStateException if action violates poker rules (e.g., raise size too small)
-   */
   private RoundCondition processAction(Action action, int amount, Player currentPlayer) {
     return switch (action) {
       case FOLD -> RoundCondition.FOLD;
@@ -184,7 +166,7 @@ public class BettingRound {
     } else {
       betBB += chipsNeededToCall;
     }
-    System.out.println(currentPlayer.getPosition() + " calls for " + chipsNeededToCall);
+    System.out.println(currentPlayer.getName() + " calls for " + chipsNeededToCall);
     return RoundCondition.CONTINUE;
   }
 
@@ -196,7 +178,6 @@ public class BettingRound {
     if (currentPlayer.getStack() < amount) {
       throw new IllegalStateException("Invalid action. Not enough chips to bet " + amount);
     }
-    // Allow all-in bets below minimum
     if (amount < bigBlindAmount && amount < currentPlayer.getStack()) {
       throw new IllegalStateException("Invalid action. You must bet at least " + bigBlindAmount + ", unless you are going all-in.");
     }
@@ -209,7 +190,7 @@ public class BettingRound {
       betBB += amount;
       currentBet = betBB;
     }
-    System.out.println(currentPlayer.getPosition() + " bets " + amount);
+    System.out.println(currentPlayer.getName() + " bets " + amount);
     return RoundCondition.CONTINUE;
   }
 
@@ -244,9 +225,9 @@ public class BettingRound {
 
     if (totalAmountRequired == currentPlayer.getStack()) {
       currentPlayer.flagAllIn();
-      System.out.println(currentPlayer.getPosition() + " goes all in " + raiseToAmount);
+      System.out.println(currentPlayer.getName() + " goes all in " + raiseToAmount);
     } else {
-      System.out.println(currentPlayer.getPosition() + " raises to " + raiseToAmount);
+      System.out.println(currentPlayer.getName() + " raises to " + raiseToAmount);
     }
 
     return RoundCondition.CONTINUE;
@@ -269,5 +250,3 @@ public class BettingRound {
   }
 
 }
-
-

@@ -1,14 +1,13 @@
 package bots.cfr;
 
 import model.*;
+import java.io.Serializable;
 import java.util.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Implements the Counterfactual Regret Minimization (CFR) algorithm for poker.
- */
-public class CFRAlgorithm {
+public class CFRAlgorithm implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private final CFRGameTree gameTree;
     private final Random random;

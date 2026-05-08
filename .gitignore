@@ -30,3 +30,6 @@ bin/
 
 ### Ignore output files ###
 *.class
+
+### Trained bot serialization files ###
+trained_bots/

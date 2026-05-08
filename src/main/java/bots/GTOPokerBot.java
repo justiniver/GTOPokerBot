@@ -3,12 +3,11 @@ package bots;
 import bots.cfr.CFRAlgorithm;
 import bots.cfr.CFRGameTree;
 import model.*;
+import java.io.Serializable;
 import java.util.*;
 
-/**
- * GTO Poker Bot using Counterfactual Regret Minimization (CFR).
- */
-public class GTOPokerBot implements PlayerStrategy {
+public class GTOPokerBot implements PlayerStrategy, Serializable {
+    private static final long serialVersionUID = 1L;
     
     private final CFRAlgorithm cfrAlgorithm;
     private final CFRGameTree gameTree;

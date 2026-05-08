@@ -30,10 +30,8 @@ public class TrainedSession {
     System.out.println("Information sets learned: " + gtoBot.getInformationSetCount());
 
     System.out.println("\n=== Ready to Play! ===");
-    // Don't hardcode these comments, maybe take in the poker game details?
-    System.out.println("You will play as Small Blind, GTO Bot as Big Blind");
-    System.out.println("Starting stacks: 1000 chips each");
-    System.out.println("Blinds: 5/10");
+    System.out.println("Blinds: " + smallBlindAmount + "/" + bigBlindAmount);
+    System.out.println("Starting stacks: " + human.getStack() + " chips each");
 
     bot.setStrategy(gtoBot);
 

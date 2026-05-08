@@ -7,13 +7,9 @@ import model.Player;
 import model.PokerGame;
 import model.BettingRound;
 import model.PokerHand;
-import model.Position;
 import model.RoundCondition;
 import model.rules.HandEvaluation;
 
-/**
- * Controller to run through individual poker games.
- */
 public class PokerController implements Controller {
   PokerHand bestHand;
 
@@ -56,11 +52,6 @@ public class PokerController implements Controller {
     checkRoundCondition(pokerGame, riverBR);
   }
 
-  /**
-   * @param pokerGame the poker game
-   * @param bettingRound the current betting round
-   * @return true if hand is over, false otherwise
-   */
   private boolean checkRoundCondition(PokerGame pokerGame, BettingRound bettingRound) {
     RoundCondition flopRoundCondition = bettingRound.run();
     if (flopRoundCondition == RoundCondition.FOLD) {
@@ -79,15 +70,14 @@ public class PokerController implements Controller {
   private void playerFoldLogic(PokerGame pokerGame, BettingRound bettingRound) {
     Player playerSB = pokerGame.getPlayerSB();
     Player playerBB = pokerGame.getPlayerBB();
+    Player folder = bettingRound.getCurrentPlayer();
+    Player winner = (folder == playerSB) ? playerBB : playerSB;
 
-    if (bettingRound.getCurrentPlayer().getPosition() == Position.SMALL_BLIND) {
-      playerBB.addStack(pokerGame.getPot());
-    } else {
-      playerSB.addStack(pokerGame.getPot());
-    }
+    winner.addStack(pokerGame.getPot());
 
-    System.out.println("New SMALL_BLIND stack: " + playerSB.getStack());
-    System.out.println("New BIG_BLIND stack: " + playerBB.getStack());
+    System.out.println(folder.getName() + " folds. " + winner.getName() + " wins " + pokerGame.getPot() + " chips!");
+    System.out.println(playerSB.getName() + " stack: " + playerSB.getStack());
+    System.out.println(playerBB.getName() + " stack: " + playerBB.getStack());
   }
 
   private void showdownLogic(PokerGame pokerGame) {
@@ -117,25 +107,25 @@ public class PokerController implements Controller {
 
     System.out.println("\n----------SHOWDOWN----------\n");
     System.out.println(pokerGame.getBoard().toString());
-    System.out.println("SMALL_BLIND " + playerSB.getHoleCards().toString());
-    System.out.println("BIG_BLIND " + playerBB.getHoleCards().toString());
+    System.out.println(playerSB.getName() + ": " + playerSB.getHoleCards().toString());
+    System.out.println(playerBB.getName() + ": " + playerBB.getHoleCards().toString());
 
     if (eval.isHand1Better(handSB, handBB)) {
       bestHand = handSB;
-      System.out.println("SMALL_BLIND wins with: " + handSB.getHandRank()
-              + " (" + handSB+ ")");
+      System.out.println(playerSB.getName() + " wins with " + handSB.getHandRank()
+              + " (" + handSB + ")!");
       playerSB.addStack(pokerGame.getPot());
     } else if (!eval.isHand1Better(handSB, handBB)) {
       bestHand = handBB;
-      System.out.println("BIG_BLIND wins with: " + handBB.getHandRank()
-              + " (" + handBB + ")");
+      System.out.println(playerBB.getName() + " wins with " + handBB.getHandRank()
+              + " (" + handBB + ")!");
       playerBB.addStack(pokerGame.getPot());
     } else if (eval.isHand1Better(handSB, handBB) == null) {
       throw new IllegalStateException("IMPLEMENT LATER");
     }
 
-    System.out.println("New SMALL_BLIND stack: " + playerSB.getStack());
-    System.out.println("New BIG_BLIND stack: " + playerBB.getStack());
+    System.out.println(playerSB.getName() + " stack: " + playerSB.getStack());
+    System.out.println(playerBB.getName() + " stack: " + playerBB.getStack());
   }
 
   public PokerHand getBestHand() {

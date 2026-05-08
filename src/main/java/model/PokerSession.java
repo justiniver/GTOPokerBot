@@ -6,28 +6,23 @@ import java.util.TreeMap;
 
 import controller.PokerController;
 
-/**
- * Represents a poker session (i.e., multiple poker games).
- * Updates player stack sizes, tracks buy-ins and buy-outs, and calculates poker statistics.
- *
- * NOTE: SOLVE THE NON-ZERO-SUM MYSTERY WHEN RUNNING RULE BASED BOTS AGAINST EACH-OTHER
- */
 public class PokerSession {
   private final Map<HandRank, Integer> winningRankMap;
   private PokerGame currentGame;
   private final int smallBlindAmount;
   private final int bigBlindAmount;
-  private final Player playerSB;
-  private final Player playerBB;
+  private final Player player1;
+  private final Player player2;
+  private int handNumber = 0;
 
   private boolean trackWinningHands = false;
 
   public PokerSession(int smallBlindAmount, int bigBlindAmount,
-                      Player playerSB, Player playerBB) {
+                      Player player1, Player player2) {
     this.smallBlindAmount = smallBlindAmount;
     this.bigBlindAmount = bigBlindAmount;
-    this.playerSB = playerSB;
-    this.playerBB = playerBB;
+    this.player1 = player1;
+    this.player2 = player2;
     this.winningRankMap = new TreeMap<>();
   }
 
@@ -38,8 +33,7 @@ public class PokerSession {
   public void runGames() {
     boolean continuePlay = true;
     while (continuePlay) {
-      currentGame = new PokerGame(true, smallBlindAmount, bigBlindAmount,
-              playerSB, playerBB);
+      currentGame = createNextGame();
       PokerController controller = new PokerController();
       controller.playHand(currentGame);
       continuePlay = promptContinueGame();
@@ -50,8 +44,7 @@ public class PokerSession {
   public void runNumberOfGames(int numberOfGames) {
     for (int i = 0; i < numberOfGames; i++) {
       System.out.println("\n----------Game Number: " + (i + 1) + "----------");
-      currentGame = new PokerGame(true, smallBlindAmount, bigBlindAmount,
-              playerSB, playerBB);
+      currentGame = createNextGame();
       PokerController c = new PokerController();
       c.playHand(currentGame);
 
@@ -61,18 +54,16 @@ public class PokerSession {
       }
     }
     concludedGameOutput();
-
   }
 
   public void runNumberOfGamesAutoRebuy(int numberOfGames) {
     for (int i = 0; i < numberOfGames; i++) {
       System.out.println("\n----------Game Number: " + (i + 1) + "----------");
 
-      setBackToInitialStack(playerSB);
-      setBackToInitialStack(playerBB);
+      setBackToInitialStack(player1);
+      setBackToInitialStack(player2);
 
-      currentGame = new PokerGame(true, smallBlindAmount, bigBlindAmount,
-              playerSB, playerBB);
+      currentGame = createNextGame();
       PokerController c = new PokerController();
       c.playHand(currentGame);
 
@@ -91,6 +82,14 @@ public class PokerSession {
     concludedGameOutput();
   }
 
+  private PokerGame createNextGame() {
+    Player sb = (handNumber % 2 == 0) ? player1 : player2;
+    Player bb = (handNumber % 2 == 0) ? player2 : player1;
+    System.out.println("\n" + sb.getName() + ": SB | " + bb.getName() + ": BB");
+    handNumber++;
+    return new PokerGame(true, smallBlindAmount, bigBlindAmount, sb, bb);
+  }
+
   private boolean promptContinueGame() {
     Scanner scanner = new Scanner(System.in);
     System.out.println("\nWould you like to continue playing (YES or NO)? \n");
@@ -99,24 +98,19 @@ public class PokerSession {
   }
 
   public void concludedGameOutput() {
-    int endStackSB = playerSB.getStack();
-    int endStackBB = playerBB.getStack();
-
-    System.out.println("\n----------POKER SESSION HAS CONCLUDED----------\n");
-
-    System.out.println("SMALL_BLIND end stack: " + endStackSB);
-    if (endStackSB > 0) {
-      playerSB.buyOut(endStackSB);
-    }
-    System.out.println("SMALL_BLIND net profit: " + (playerSB.getBuyOut() - playerSB.getBuyIn()));
-
-    System.out.println("BIG_BLIND end stack: " + endStackBB);
-    if (endStackBB > 0) {
-      playerBB.buyOut(endStackBB);
-    }
-    System.out.println("BIG_BLIND net profit: " + (playerBB.getBuyOut() - playerBB.getBuyIn()));
+    System.out.println("\n----------SESSION RESULTS----------\n");
+    printPlayerResult(player1);
+    printPlayerResult(player2);
   }
 
+  private void printPlayerResult(Player player) {
+    int endStack = player.getStack();
+    System.out.println(player.getName() + " end stack: " + endStack);
+    if (endStack > 0) {
+      player.buyOut(endStack);
+    }
+    System.out.println(player.getName() + " net profit: " + (player.getBuyOut() - player.getBuyIn()));
+  }
 
   public Map getWinningRankMap() {
     return winningRankMap;

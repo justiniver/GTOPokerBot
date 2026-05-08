@@ -1,17 +1,17 @@
 package bots.cfr;
 
 import model.*;
+import java.io.Serializable;
 import java.util.*;
 
-/**
- * Represents the game tree for CFR algorithm in poker.
- */
-public class CFRGameTree {
+public class CFRGameTree implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private final Map<String, InformationSet> informationSets = new HashMap<>();
     private final Map<String, GameState> gameStates = new HashMap<>();
 
-    public static class InformationSet {
+    public static class InformationSet implements Serializable {
+        private static final long serialVersionUID = 1L;
         private final String id;
         private final List<Action> availableActions;
         private final double[] strategy;

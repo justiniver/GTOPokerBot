@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class Player {
   private final Position position;
+  private final String name;
   private HoleCards cards;
   private int stack;
   private final int initialStack;
@@ -20,12 +21,21 @@ public class Player {
   }
 
   public Player(Position position, int stack) {
+    this(position, stack, position.name());
+  }
+
+  public Player(Position position, int stack, String name) {
     this.position = position;
+    this.name = name;
     this.stack = stack;
     this.initialStack = stack;
     this.buyIn = stack;
     this.buyOut = 0;
     this.isAllIn = false;
+  }
+
+  public String getName() {
+    return name;
   }
 
   public void setStrategy(PlayerStrategy strategy) {
